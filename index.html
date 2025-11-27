@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fresh From The Future™ – Premium HoReCa Culinary Innovation Brand</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Fresh From The Future™ – India’s first premium HoReCa culinary innovation brand. Ultra-premium, chef-focused, AI-powered & traceable fresh produce grown under UAE/Singapore-grade precision using INNOFarms.AI."
+  />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --bg-main: #050608;
+      --bg-alt: #0e1115;
+      --bg-light: #f5f2ea;
+      --text-main: #f7f5f0;
+      --text-muted: #c4c0b5;
+      --accent-gold: #d3a15b;
+      --accent-gold-soft: #e0b977;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --card-bg: #12151a;
+      --max-width: 1120px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    h1, h2, h3 {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3vw, 2.4rem);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    p.lead {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-top: 18px;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 20;
+      background: linear-gradient(to bottom, rgba(5, 6, 8, 0.96), rgba(5, 6, 8, 0.7), transparent);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 12px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--accent-gold);
+    }
+
+    .logo-text {
+      font-family: "Playfair Display", serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-soft));
+      border-color: transparent;
+      color: #15110a;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* HERO */
+    .hero {
+      padding-top: 120px;
+      padding-bottom: 96px;
+      background: radial-gradient(circle at top, #151922 0, #050608 60%);
+      color: var(--text-main);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 52px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-gold-soft);
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      margin-top: 16px;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+
+    .hero-footnote {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero-image {
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .hero-image img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .hero-chip {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(5, 6, 8, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: var(--text-muted);
+    }
+
+    .hero-chip span {
+      color: var(--accent-gold-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-left: 6px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-heading p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 8px auto 0;
+      font-size: 0.98rem;
+    }
+
+    /* WHAT MAKES US DIFFERENT */
+    .section-different {
+      background: var(--bg-main);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 20px 18px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
+      min-height: 140px;
+    }
+
+    .feature-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-gold-soft);
+      margin-bottom: 6px;
+    }
+
+    .feature-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .feature-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* CHEF SIGNATURE MIXES */
+    .section-chef-mixes {
+      background: var(--bg-alt);
+    }
+
+    .chef-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .chef-image {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* PRODUCE CATEGORIES */
+    .section-categories {
+      background: var(--bg-main);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .category-card img {
+      height: 130px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .category-body {
+      padding: 12px 13px 14px;
+    }
+
+    .category-title {
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 4px;
+    }
+
+    .category-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* TRACEABILITY */
+    .section-trace {
+      background: var(--bg-light);
+      color: #171717;
+    }
+
+    .trace-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .trace-heading h2 {
+      color: #111111;
+    }
+
+    .trace-heading p {
+      color: #55514a;
+    }
+
+    .trace-box {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .trace-note {
+      margin-top: 10px;
+      font-size: 0.83rem;
+      color: #726b5f;
+    }
+
+    .btn-trace {
+      margin-top: 20px;
+    }
+
+    /* CHEF CIRCLE */
+    .section-chef-circle {
+      background: radial-gradient(circle at top, #181f27 0, #050608 60%);
+    }
+
+    .chef-circle-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.05fr);
+      gap: 36px;
+      align-items: center;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .chip span {
+      color: var(--accent-gold-soft);
+    }
+
+    .chef-circle-photo {
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* TESTIMONIALS */
+    .section-testimonials {
+      background: var(--bg-main);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .testimonial-card {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 26px 26px 24px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+    }
+
+    .testimonial-quote {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+    }
+
+    .testimonial-chef {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    /* FINAL CTA */
+    .section-final-cta {
+      background: linear-gradient(135deg, #161714, #262015);
+      text-align: center;
+    }
+
+    .section-final-cta h2 {
+      margin-bottom: 12px;
+    }
+
+    .section-final-cta p {
+      color: var(--text-muted);
+      margin-bottom: 26px;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 28px 0 40px;
+      background: #020304;
+      border-top: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-gold-soft);
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .hero-grid,
+      .chef-grid,
+      .trace-grid,
+      .chef-circle-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 110px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 56px 0;
+      }
+
+      .btn-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-grid {
+        gap: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- NAVIGATION -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">⟡</div>
+        <div class="logo-text">Fresh From The Future</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#produce">Produce</a>
+        <a href="#chef-mixes">Chef Mixes</a>
+        <a href="#traceability">Traceability</a>
+        <a href="#chef-circle">Chef Circle</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-tag">India • Premium HoReCa • Culinary Innovation</div>
+        <h1>Fresh From The Future™</h1>
+        <p class="hero-subtitle">
+          India’s first premium HoReCa culinary innovation brand. Ultra-premium, chef-focused, AI-powered & traceable
+          fresh produce — grown under UAE/Singapore-grade precision using INNOFarms.AI.
+        </p>
+        <p class="hero-footnote">
+          Designed for tasting-menu restaurants, luxury hotels, progressive bars & visionary chefs.
+        </p>
+        <div class="btn-row">
+          <a href="#contact" class="btn btn-primary">Book a Chef Tasting</a>
+          <a href="#produce" class="btn btn-outline">Explore Our Produce</a>
+          <a href="#subscription" class="btn btn-outline">Shop / Subscribe</a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80" alt="Plated dish with microgreens">
+        <div class="hero-chip">
+          Precision-grown for chefs <span>AI-Controlled</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 – WHAT MAKES US DIFFERENT -->
+  <section class="section-different">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Where Technology Cultivates Taste.</h2>
+        <p>Every leaf, every microgreen, every flower — grown with precision, data, and a chef’s vision.</p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-label">INNOFarmsXOS</div>
+          <div class="feature-title">AI-Powered Freshness</div>
+          <p class="feature-body">
+            Climate, nutrients, and light controlled to the micron — ensuring unwavering flavor, crunch & color.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-label">Global SOPs</div>
+          <div class="feature-title">UAE &amp; Singapore Model Farms</div>
+          <p class="feature-body">
+            Hygiene, bio-security & operations modeled on our UAE and Singapore facilities for world-class standards.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-label">Co-Created with Chefs</div>
+          <div class="feature-title">Exclusive Signature Mixes</div>
+          <p class="feature-body">
+            Monthly rotating blends designed in collaboration with India’s leading chefs — exclusive to your kitchen.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-label">R&amp;D Line</div>
+          <div class="feature-title">Reserve Crops</div>
+          <p class="feature-body">
+            Rare greens, specialty leaves & experimental botanicals grown in small batches for tasting menus.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-label">Bar Program</div>
+          <div class="feature-title">Bar Botanica Collection</div>
+          <p class="feature-body">
+            Botanicals, edible flowers & micro-herbs curated for progressive cocktails & bar programs.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-label">Zero-Waste</div>
+          <div class="feature-title">Pantry &amp; Preservation</div>
+          <p class="feature-body">
+            Dehydrated micro powders, herb salts & infused oils crafted from surplus crops for a zero-waste kitchen.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 – CHEF SIGNATURE MIXES -->
+  <section class="section-chef-mixes" id="chef-mixes">
+    <div class="container chef-grid">
+      <div>
+        <h2>Chef Signature Mixes</h2>
+        <p class="lead">
+          A rotating monthly collection co-created with India’s leading chefs. Curated flavor, texture & plating
+          brilliance in every box — designed for tasting menus, chef’s tables & special collaborations.
+        </p>
+        <div class="btn-row" style="margin-top: 24px;">
+          <a href="#produce" class="btn btn-primary">View Chef Mixes</a>
+        </div>
+      </div>
+      <div class="chef-image">
+        <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80" alt="Chef signature mix plated">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 – OUR PRODUCE CATEGORIES -->
+  <section class="section-categories" id="produce">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Our Produce Categories</h2>
+        <p>Clean. Consistent. Precision-grown ingredients for modern, ingredient-driven kitchens.</p>
+      </div>
+
+      <div class="category-grid">
+        <article class="category-card">
+          <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=80" alt="Premium greens">
+          <div class="category-body">
+            <div class="category-title">Premium Greens</div>
+            <div class="category-sub">Romaine, baby kale, sorrel & seasonal leaf blends.</div>
+          </div>
+        </article>
+
+        <article class="category-card">
+          <img src="https://images.unsplash.com/photo-1601000938259-9d51c0c0b190?auto=format&fit=crop&w=900&q=80" alt="Microgreens">
+          <div class="category-body">
+            <div class="category-title">Microgreens</div>
+            <div class="category-sub">Basil, amaranth, radish, shiso & more — intense flavor, delicate form.</div>
+          </div>
+        </article>
+
+        <article class="category-card">
+          <img src="https://images.unsplash.com/photo-1518843025960-d60217f226f7?auto=format&fit=crop&w=900&q=80" alt="Edible flowers">
+          <div class="category-body">
+            <div class="category-title">Edible Flowers</div>
+            <div class="category-sub">Nasturtium, viola, marigold & curated petal mixes.</div>
+          </div>
+        </article>
+
+        <article class="category-card">
+          <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=80" alt="Bar botanica">
+          <div class="category-body">
+            <div class="category-title">Bar Botanica</div>
+            <div class="category-sub">Mixology-ready herbs, garnishes & floral elements.</div>
+          </div>
+        </article>
+
+        <article class="category-card">
+          <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=900&q=80" alt="Chef mixes">
+          <div class="category-body">
+            <div class="category-title">Chef Mixes</div>
+            <div class="category-sub">Co-branded blends & limited-edition collaboration boxes.</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 – QR TRACEABILITY -->
+  <section class="section-trace" id="traceability">
+    <div class="container trace-grid">
+      <div class="trace-heading">
+        <h2>Trace Every&nbsp;Thing, Instantly.</h2>
+        <p>
+          Scan any box to see harvest date, growing conditions, and AI-driven quality checks. Every batch is logged
+          through the INNOFarmsXOS platform and certified to Fresh From The Future standards.
+        </p>
+        <a href="#traceability" class="btn btn-outline btn-trace">See Traceability</a>
+      </div>
+      <div class="trace-box">
+        <img src="https://images.unsplash.com/photo-1611077543837-0cb964de46d6?auto=format&fit=crop&w=900&q=80" alt="Fresh From The Future box with QR code">
+        <p class="trace-note">
+          Public QR shows FFF Farm Node ID, batch, harvest time & climate profile — never the partner farm identity.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 – CHEF CIRCLE -->
+  <section class="section-chef-circle" id="chef-circle">
+    <div class="container chef-circle-grid">
+      <div>
+        <div class="chip">
+          Chef Community <span>Invitation-Only</span>
+        </div>
+        <h2>Chef Circle</h2>
+        <p class="lead">
+          Exclusive tastings, farm-to-fork storytelling, and early access to R&amp;D crops. Chef Circle is where India’s
+          most curious kitchens experiment, collaborate & help shape the future of ingredients.
+        </p>
+        <div class="btn-row" style="margin-top: 24px;">
+          <a href="#contact" class="btn btn-primary">Join Chef Circle</a>
+        </div>
+      </div>
+      <div class="chef-circle-photo">
+        <img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=80" alt="Chefs tasting session">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 – TESTIMONIALS -->
+  <section class="section-testimonials">
+    <div class="container">
+      <div class="section-heading">
+        <h2>What Chefs Are Saying</h2>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">
+          “Consistent quality and flavor. The best microgreens we’ve used — they hold beautifully on plate and on
+          palate.”
+        </p>
+        <div class="testimonial-chef">
+          Leading Chefs, Delhi NCR
+        </div>
+        <div class="btn-row" style="justify-content: center; margin-top: 18px;">
+          <a href="#contact" class="btn btn-outline">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 – FINAL CTA -->
+  <section class="section-final-cta" id="subscription">
+    <div class="container">
+      <h2>Ready to Elevate Your Ingredients?</h2>
+      <p>
+        Book a tasting, join the Chef Circle, or start a weekly subscription tailored to your menu and service style.
+      </p>
+      <div class="btn-row" style="justify-content: center;">
+        <a href="#contact" class="btn btn-primary">Start Now</a>
+        <a href="#contact" class="btn btn-outline">Book a Chef Tasting</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER / CONTACT -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+      <div>
+        © <span id="year"></span> Fresh From The Future™. All rights reserved.
+        <br>
+        India’s first premium HoReCa culinary innovation brand — powered by INNOFarms.AI.
+      </div>
+      <div class="footer-links">
+        <a href="mailto:chefs@freshfromthefuture.com">chefs@freshfromthefuture.com</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
