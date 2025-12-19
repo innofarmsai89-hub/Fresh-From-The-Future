@@ -328,7 +328,7 @@ export default function HomePage() {
                   {item.title}
                 </h3>
 
-                <Link href={item.link}>
+                {/* <Link href={item.link}>
                   <button className="bg-[#DCBC88] hover:bg-[#cbb082] transition-colors rounded-[10px] px-6 py-2.5 flex items-center gap-2">
                     <span className="font-bold text-[15px] text-[#404A3D]">
                       Peek Inside
@@ -337,7 +337,7 @@ export default function HomePage() {
                       <path d="M1 11L11 1M11 1H3M11 1V9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </button>
-                </Link>
+                </Link> */}
               </div>
             </div>
           ))}
