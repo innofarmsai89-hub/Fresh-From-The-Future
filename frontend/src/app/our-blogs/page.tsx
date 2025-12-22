@@ -152,6 +152,7 @@ const BlogPage = () => {
   return (
     <main className={`w-full min-h-screen bg-white ${spartan.variable} font-spartan`}>
       
+<<<<<<< HEAD
       {/* --- Section 1: Banner (Height Reduced) --- */}
 <div className="relative w-full h-[350px] md:h-[450px] flex items-center justify-center overflow-hidden">
   
@@ -191,6 +192,46 @@ const BlogPage = () => {
   </div>
 
 </div>
+=======
+      {/* --- Section 1: Banner --- */}
+      <div className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+        
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/blog/blog-bg.png" // Path kept unchanged
+            alt="Red lettuce background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        {/* Glassmorphism Card */}
+        <div className="relative z-10 w-[95%] max-w-[1280px] rounded-[20px] overflow-hidden shadow-xl">
+          
+          {/* Blur/Gradient Layer - Reddish/Brown tones */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2b1d1d]/85 via-[#452b2b]/75 to-[#2b1d1d]/85 backdrop-blur-md"></div>
+
+          {/* Content */}
+          <div className="relative z-20 flex flex-col items-center justify-center text-center py-16 md:py-20 px-4">
+            <h1 className="text-white text-4xl md:text-[64px] font-bold leading-tight mb-2 drop-shadow-md">
+              Our Blogs
+            </h1>
+            <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mt-2">
+              Read the latest culinary stories from experts
+            </p>
+          </div>
+        </div>
+
+        {/* Floating CTA Button */}
+        <div className="absolute z-30 bottom-[15%] md:bottom-[20%]">
+          <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-4 px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
+            Explore Our Produce
+          </button>
+        </div>
+      </div>
+>>>>>>> origin/main
 
       {/* --- Section 2: Latest Feature (Watering Can) --- */}
       <LatestFeatureSection />

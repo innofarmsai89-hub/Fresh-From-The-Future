@@ -105,6 +105,10 @@ function TechCard({ feature }: { feature: any }) {
       <div className="flex items-center gap-4 mb-4">
         <div className="w-[54px] h-[54px] bg-[#3D550C] rounded-full flex items-center justify-center shrink-0 shadow-sm">
           <div className="relative w-[30px] h-[30px]">
+<<<<<<< HEAD
+=======
+             {/* Using simple img tag for icons if Next Image causes issues with SVGs/local files without width/height */}
+>>>>>>> origin/main
              <img 
                 src={feature.icon} 
                 alt={feature.title} 
@@ -153,6 +157,7 @@ export default function HomePage() {
   return (
     <main className={`${spartan.variable} font-spartan w-full overflow-x-hidden bg-white`}>
     
+<<<<<<< HEAD
      <section className="relative w-full h-[720px] md:h-[860px] flex items-center overflow-hidden">
 
       {/* --- LAYER 1: Background Image & Overlay --- */}
@@ -315,6 +320,146 @@ export default function HomePage() {
     <h2 className="font-bold text-[40px] text-[#3D550C]">Join Us Today!</h2>
   </div>
 </section>  
+=======
+      {/* --- Hero Section --- */}
+      <section className="relative w-full h-[700px] md:h-[850px] flex items-center overflow-hidden">
+        
+        {/* --- LAYER 1: Background Image & Gradient --- */}
+        <div className="absolute inset-0 z-0">
+             <Image 
+                src="/images/home/hero-bg.png" 
+                alt="Background Texture" 
+                fill 
+                className="object-cover" 
+                priority
+            />
+            {/* Dark Overlay for text readability */}
+            <div className="absolute inset-0 bg-black/40 z-10"></div>
+        </div>
+
+        {/* --- LAYER 2: Content Container --- */}
+        <div className="relative z-20 max-w-[1440px] mx-auto px-6 xl:px-0 w-full h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between pt-20 lg:pt-0">
+          
+          {/* Left Side: Text Content */}
+          <div className="max-w-[800px] flex flex-col text-center lg:text-left items-center lg:items-start">
+              <span className="text-[#DCBC88] font-bold tracking-widest text-sm md:text-base mb-4 uppercase">
+                Beyond Organic • Traceable • Hyper-Local
+              </span>
+              <h1 className="font-bold text-[40px] md:text-[64px] leading-[1.1] text-white mb-6">
+                India’s First Premium Culinary Innovation Brand.
+              </h1>
+              
+              <p className="font-medium text-[16px] md:text-[20px] leading-[160%] text-white/90 mb-10 max-w-2xl">
+                Ultra-premium, chef-focused, AI-powered & traceable fresh produce — grown under UAE/Singapore-grade precision farming technology by INNOFarms.AI.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <button className="border-2 border-[#DCBC88] text-[#DCBC88] px-8 py-3 rounded-full text-[16px] font-bold hover:bg-[#DCBC88] hover:text-[#3D550C] transition-all">
+                  Book A Chef Tasting
+                </button>
+                <button className="border-2 border-[#DCBC88] text-[#DCBC88] px-8 py-3 rounded-full text-[16px] font-bold hover:bg-[#DCBC88] hover:text-[#3D550C] transition-all">
+                  Explore Our Produce
+                </button>
+              </div>
+              
+              <h3 className="font-bold text-[24px] md:text-[32px] text-white">
+                Ready to Elevate Your Ingredients?
+              </h3>
+          </div>
+
+          {/* Right Side: Hero Image (Chef Hand) */}
+          <div className="hidden lg:block w-[400px] h-[550px] relative shrink-0 rounded-[40px] overflow-hidden ml-10 shadow-2xl border-4 border-white/10">
+             <Image 
+                src="/images/home/heroImage.png" 
+                alt="Chef Sprinkling Greens" 
+                fill 
+                className="object-cover"
+                priority
+             />
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- Why Are We Different? --- */}
+      <section className="py-20 max-w-[1440px] mx-auto px-6">
+        <div className="text-center mb-16">
+            <h2 className="font-bold text-[40px] md:text-[54px] text-[#3D550C] mb-4">Why are we different?</h2>
+            <p className="text-xl text-[#1E1E1E] font-medium">Engineered freshness for culinary excellence.</p>
+        </div>
+
+        {/* ROW 1 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            {/* Card 1 - Highlighted */}
+            <div className="bg-[#DCBC88]/30 rounded-[30px] p-8 flex flex-col items-center text-center h-[280px] justify-center border border-[#DCBC88]/50">
+                <div className="w-[80px] h-[80px] mb-4 relative">
+                   <Image src="/images/home/coffee-beans.png" alt="Non GMO" fill className="object-contain" />
+                </div>
+                <h3 className="font-bold text-[22px] text-[#3D550C] mb-2 leading-tight">Non GMO & <br/>Pesticide Free</h3>
+                <p className="text-[14px] text-[#1E1E1E] leading-relaxed">Only the best-quality seeds were sown, promising a rich harvest.</p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center h-[280px] justify-center hover:shadow-md transition-shadow">
+                 <div className="w-[80px] h-[80px] mb-4 relative">
+                   <Image src="/images/home/badge.png" alt="Standard" fill className="object-contain" />
+                </div>
+                <h3 className="font-bold text-[22px] text-[#3D550C] mb-2 leading-tight">UAE & Singapore<br/>Grade Farming</h3>
+                <p className="text-[14px] text-[#1E1E1E] leading-relaxed">Used AI & IOT SAAS technology by award winning INNOFarms Platform</p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center h-[280px] justify-center hover:shadow-md transition-shadow">
+                <div className="w-[80px] h-[80px] mb-4 relative">
+                   <Image src="/images/home/hyper-local.png" alt="Hyper Local" fill className="object-contain" />
+                </div>
+                <h3 className="font-bold text-[22px] text-[#3D550C] mb-2 leading-tight">Hyper-Local</h3>
+                <p className="text-[14px] text-[#1E1E1E] leading-relaxed">From harvest-to-kitchen in under 24 hours for unmatched freshness.</p>
+            </div>
+
+            {/* Card 4 */}
+             <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center h-[280px] justify-center hover:shadow-md transition-shadow">
+                <div className="w-[80px] h-[80px] mb-4 relative">
+                   <Image src="/images/home/con-qual.png" alt="Quality" fill className="object-contain" />
+                </div>
+                <h3 className="font-bold text-[22px] text-[#3D550C] mb-2 leading-tight">Consistent Quality</h3>
+                <p className="text-[14px] text-[#1E1E1E] leading-relaxed">Uniform taste, texture, and appearance 365 days a year</p>
+            </div>
+        </div>
+
+        {/* ROW 2 - Centered 3 Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+             <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center h-[280px] justify-center hover:shadow-md transition-shadow">
+                <div className="mb-4 w-[80px] h-[80px] relative">
+                    <Image src="/images/home/traceability.png" alt="Traceability" fill className="object-contain" />
+                </div>
+                <h3 className="font-bold text-[22px] text-[#3D550C] mb-2 leading-tight">Traceability</h3>
+                <p className="text-[14px] text-[#1E1E1E] leading-relaxed">Full crop traceability from seed to harvest via QR code.</p>
+            </div>
+
+            <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center h-[280px] justify-center hover:shadow-md transition-shadow">
+                <div className="mb-4 w-[80px] h-[80px] relative">
+                    <Image src="/images/home/custom-crop.png" alt="Custom Crop" fill className="object-contain" />
+                </div>
+                <h3 className="font-bold text-[22px] text-[#3D550C] mb-2 leading-tight">Custom Crop<br/>Requests</h3>
+                <p className="text-[14px] text-[#1E1E1E] leading-relaxed">Grown specifically to match your menu and seasonal needs.</p>
+            </div>
+
+            <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center h-[280px] justify-center hover:shadow-md transition-shadow">
+                <div className="mb-4 w-[80px] h-[80px] relative">
+                    <Image src="/images/home/no-middlemen.png" alt="No Middlemen" fill className="object-contain" />
+                </div>
+                <h3 className="font-bold text-[22px] text-[#3D550C] mb-2 leading-tight">No Middlemen</h3>
+                <p className="text-[14px] text-[#1E1E1E] leading-relaxed">Direct from our controlled environment farm to your kitchen.</p>
+            </div>
+        </div>
+
+        <div className="mt-16 text-center max-w-4xl mx-auto">
+             <p className="text-xl text-[#1E1E1E] font-medium mb-2">Where technology meets taste, every leaf perfected.</p>
+             <h2 className="font-bold text-[36px] text-[#3D550C]">Join Us Today!</h2>
+        </div>
+      </section>
+>>>>>>> origin/main
 
       {/* --- The Greens Leading the Trend --- */}
       <section className="py-20 max-w-[1440px] mx-auto px-6 bg-white">
@@ -350,6 +495,20 @@ export default function HomePage() {
                 <h3 className="font-bold text-[24px] text-[#3D550C] mb-4 leading-tight">
                   {item.title}
                 </h3>
+<<<<<<< HEAD
+=======
+
+                {/* <Link href={item.link}>
+                  <button className="bg-[#DCBC88] hover:bg-[#cbb082] transition-colors rounded-[10px] px-6 py-2.5 flex items-center gap-2">
+                    <span className="font-bold text-[15px] text-[#404A3D]">
+                      Peek Inside
+                    </span>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="stroke-[#404A3D] mt-0.5">
+                      <path d="M1 11L11 1M11 1H3M11 1V9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </Link> */}
+>>>>>>> origin/main
               </div>
             </div>
           ))}
