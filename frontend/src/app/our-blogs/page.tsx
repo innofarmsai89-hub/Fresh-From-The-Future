@@ -15,7 +15,7 @@ const spartan = League_Spartan({
 const blogPosts = [
     {
       id: 1,
-      image: '/images/blog/exp.png', // Path kept unchanged
+      image: '/images/blog/exp.png', 
       category: 'FOOD CROPS',
       date: 'MARCH 28, 2024',
       title: 'What technology is used in vertical farming?',
@@ -39,7 +39,6 @@ const blogPosts = [
 // --- Component: Latest Feature Section (Watering Can) ---
 const LatestFeatureSection = () => {
   return (
-    // Added mt-12 md:mt-20 for top margin
     <section className="w-full bg-white py-16 md:py-20 px-6 mt-12 md:mt-20">
       <div className="max-w-[1280px] mx-auto">
         
@@ -59,7 +58,7 @@ const LatestFeatureSection = () => {
           {/* Left: Image */}
           <div className="relative w-full h-[350px] md:h-[500px] rounded-[30px] overflow-hidden shadow-lg">
             <Image
-              src="/images/blog/blog-ut.png" // Path kept unchanged
+              src="/images/blog/blog-ut.png"
               alt="Watering plants"
               fill
               className="object-cover"
@@ -91,7 +90,6 @@ const LatestFeatureSection = () => {
 // --- Component: Blog Grid (Updated Style) ---
 const BlogGridSection = () => {
   return (
-    // CHANGED: 'mrgin-top-12' -> 'mt-24' (matches pb-24 for balanced spacing)
     <section className="w-full bg-white pb-24 px-6 mt-24">
       <div className="max-w-[1280px] mx-auto">
         
@@ -158,7 +156,7 @@ const BlogPage = () => {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/blog/blog-bg.png" // Path kept unchanged
+            src="/images/blog/blog-bg.png"
             alt="Red lettuce background"
             fill
             className="object-cover"
@@ -166,28 +164,26 @@ const BlogPage = () => {
           />
         </div>
 
-        {/* Glassmorphism Card */}
-        <div className="relative z-10 w-[95%] max-w-[1280px] rounded-[20px] overflow-hidden shadow-xl">
+        {/* Glassmorphism Card 
+            Styles applied: bg-[#1e3a1e]/30, backdrop-blur-md, border-white/20, rounded-[30px]
+        */}
+        <div className="relative z-10 w-[95%] max-w-7xl bg-[#1e3a1e]/30 backdrop-blur-md rounded-[30px] flex flex-col items-center justify-center text-center px-6 py-12 md:py-16 shadow-2xl border border-white/20">
           
-          {/* Blur/Gradient Layer - Reddish/Brown tones */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2b1d1d]/85 via-[#452b2b]/75 to-[#2b1d1d]/85 backdrop-blur-md"></div>
+          <h1 className="text-white text-3xl md:text-[50px] font-bold leading-tight mb-4 drop-shadow-md">
+            Our Blogs
+          </h1>
+          
+          <p className="text-[#d4c596] text-base md:text-[24px] font-bold tracking-wide drop-shadow-md mb-8 md:mb-10">
+            Read the latest culinary stories from experts
+          </p>
 
-          {/* Content */}
-          <div className="relative z-20 flex flex-col items-center justify-center text-center py-16 md:py-20 px-4">
-            <h1 className="text-white text-4xl md:text-[64px] font-bold leading-tight mb-2 drop-shadow-md">
-              Our Blogs
-            </h1>
-            <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mt-2">
-              Read the latest culinary stories from experts
-            </p>
-          </div>
-        </div>
+          {/* Button - Moved Inside the Card */}
+          <Link href="/our-produces">
+            <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-lg py-3 px-8 md:px-10 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
+              Explore Our Produce
+            </button>
+          </Link>
 
-        {/* Floating CTA Button */}
-        <div className="absolute z-30 bottom-[15%] md:bottom-[20%]">
-          <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-4 px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
-            Explore Our Produce
-          </button>
         </div>
       </div>
 

@@ -15,13 +15,38 @@ export default function AboutUs() {
   };
 
   // --- Data Constants ---
+  // --- Data Constants ---
   const feedbacks = [
-    { name: "Bricks and Beans", image: "/images/about/feedback-1.png" },
-    { name: "The Big Tree", image: "/images/about/feedback-2.png" },
-    { name: "Wine Company", image: "/images/about/feedback-3.png" },
-    { name: "Cafe Soul Garden", image: "/images/about/feedback-4.png" },
-    { name: "Laidback Cafe", image: "/images/about/feedback-5.png" },
-    { name: "Le Meridien", image: "/images/about/feedback-6.png" },
+    { 
+      name: "Bricks and Beans", 
+      image: "/images/about/feedback-1.png",
+      review: "Exceptional greens! Noticeably fresher, brighter, and better textured than whatever we’ve used before."
+    },
+    { 
+      name: "The Big Tree", 
+      image: "/images/about/feedback-2.png", 
+      review: "The leaf quality is outstanding. Stays crisp longer, plates beautifully, and tastes incredibly clean."
+    },
+    { 
+      name: "Wine Company", 
+      image: "/images/about/feedback-3.png", 
+      review: "These are the freshest, best-tasting greens I’ve ever received. The traceability is next-level — it shows the whole crop journey and even the environmental impact."
+    },
+    { 
+      name: "Cafe Soul Garden", 
+      image: "/images/about/feedback-4.png", 
+      review: "These greens elevate our pizzas, visually stunning and full of freshness that stands out even after baking."
+    },
+    { 
+      name: "Laidback Cafe", 
+      image: "/images/about/feedback-5.png", 
+      review: "Excellent freshness and quality - these greens clearly stand above regular suppliers."
+    },
+    { 
+      name: "Le Meridien", 
+      image: "/images/about/feedback-6.png", 
+      review: "Consistently superior quality that meets our high standards. Visual appeal and texture that delights our guests." 
+    },
   ];
 
   const faqs = [
@@ -189,7 +214,7 @@ export default function AboutUs() {
         </div>
       </section> 
 
-      {/* --- 4. Feedback Section --- */}
+   {/* --- 4. Feedback Section --- */}
       <section className="w-full bg-white py-20 lg:py-24">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-[100px]">
           <div className="text-center mb-16">
@@ -204,14 +229,29 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
               {feedbacks.map((item, index) => (
                   <div key={index} className="flex flex-col items-center">
-                      <div className="relative w-full aspect-[393/208] rounded-[10px] overflow-hidden mb-6 shadow-sm group">
+                      {/* Image Container with Hover Effect */}
+                      <div className="relative w-full aspect-[393/208] rounded-[10px] overflow-hidden mb-6 shadow-md group cursor-default">
+                          
+                          {/* Background Image - Slower Zoom (1000ms) */}
                           <Image 
                               src={item.image}
                               alt={`${item.name} Feedback`}
                               fill
-                              className="object-cover transition-transform duration-500 group-hover:scale-105"
+                              className="object-cover transition-transform duration-1000 ease-in-out group-hover:scale-110"
                           />
+
+                          {/* Hover Overlay - Slower Fade (700ms) */}
+                          <div className="absolute inset-0 bg-[#DCBC88] bg-opacity-95 flex items-center justify-center p-6 
+                                          opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out">
+                              
+                              {/* Review Text - Updated to exact design specs */}
+                              <p className="font-spartan font-normal text-[18px] leading-[34px] tracking-normal text-[#1E1E1E] text-center 
+                                            translate-y-4 group-hover:translate-y-0 transition-transform duration-700 ease-out delay-100">
+                                  {item.review}
+                              </p>
+                          </div>
                       </div>
+
                       <h3 className="font-spartan font-bold text-[24px] lg:text-[30px] leading-[34px] text-[#3D550C] text-center">
                           {item.name}
                       </h3>
