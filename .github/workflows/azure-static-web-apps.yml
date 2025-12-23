@@ -31,6 +31,7 @@ jobs:
           api_location: ""
           output_location: ".next/static"
           app_artifact_location: ".next"
+          is_static_export: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
