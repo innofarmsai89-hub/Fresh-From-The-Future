@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { League_Spartan } from 'next/font/google';
+import Link from "next/link";
 
 // --- Font Configuration ---
 const spartan = League_Spartan({
@@ -242,39 +243,48 @@ const RecipesPage = () => {
     <main className={`w-full min-h-screen bg-white ${spartan.variable} font-spartan`}>
       
       {/* --- Section 1: Hero Banner --- */}
-      <div className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
-        
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/recipes/r-bg.png"
-            alt="Recipes Background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+<div className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+  
+  {/* Background Image */}
+  <div className="absolute inset-0 z-0">
+    <Image
+      src="/images/recipes/r-bg.png"
+      alt="Recipes Background"
+      fill
+      className="object-cover"
+      priority
+    />
+  </div>
 
-        {/* Glassmorphism Card */}
-        <div className="relative z-10 w-[95%] max-w-[1280px] rounded-[20px] overflow-hidden shadow-xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c1a]/85 via-[#2f4f2f]/75 to-[#1a3c1a]/85 backdrop-blur-md"></div>
-          <div className="relative z-20 flex flex-col items-center justify-center text-center py-16 md:py-20 px-4">
-            <h1 className="text-white text-4xl md:text-[64px] font-bold leading-tight mb-2 drop-shadow-md">
-              Top 6 Must-Try Recipes
-            </h1>
-            <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mt-2">
-              Flavors you'll love
-            </p>
-          </div>
-        </div>
+  {/* Glassmorphism Card */}
+  <div 
+    className="relative z-10 w-[95%] max-w-[1280px] rounded-[30px] flex flex-col items-center justify-center text-center py-16 md:py-20 px-4 shadow-xl"
+    style={{
+      background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
+      backdropFilter: 'blur(40px)',
+      WebkitBackdropFilter: 'blur(40px)',
+      backgroundBlendMode: 'overlay, normal',
+      border: '1px solid rgba(255, 255, 255, 0.2)'
+    }}
+  >
+    <h1 className="text-white text-4xl md:text-[64px] font-bold leading-tight mb-2 drop-shadow-md">
+      Top 6 Must-Try Recipes
+    </h1>
+    <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mt-2">
+      Flavors you'll love
+    </p>
+  </div>
 
-        {/* Floating CTA Button */}
-        <div className="absolute z-30 bottom-[15%] md:bottom-[20%]">
-          <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-4 px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
-            Explore Our Produce
-          </button>
-        </div>
-      </div>
+ {/* Floating CTA Button */}
+  <div className="absolute z-30 bottom-[15%] md:bottom-[20%]">
+    <Link 
+      href="/our-produces"
+      className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-4 px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95 flex items-center justify-center"
+    >
+      Explore Our Produce
+    </Link>
+  </div>
+</div>
 
       {/* --- Section 2: Recipe Grid Section --- */}
       <RecipeGridSection />

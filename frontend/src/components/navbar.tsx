@@ -28,10 +28,14 @@ const spartan = League_Spartan({
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  // NEW: State to track which mobile submenu is open
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
+  
   const pathname = usePathname();
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setMobileSubmenuOpen(null); // Reset submenus on page change
   }, [pathname]);
 
   const navLinks: NavLink[] = [
@@ -56,6 +60,17 @@ export default function Navbar() {
   
   const isParentActive = (items?: DropdownItem[]) => {
     return items ? items.some(item => pathname === item.href) : false;
+  };
+
+  // NEW: Handler for mobile link clicks
+  const handleMobileLinkClick = (e: React.MouseEvent, link: NavLink) => {
+    if (link.hasDropdown) {
+      e.preventDefault(); // Prevent navigation for dropdown parents
+      // Toggle the submenu: if it's already open, close it (set to null), otherwise open it
+      setMobileSubmenuOpen(prev => prev === link.name ? null : link.name);
+    } else {
+      setIsMobileMenuOpen(false); // Close entire menu for regular links
+    }
   };
 
   return (
@@ -87,7 +102,7 @@ export default function Navbar() {
            />
         </Link>
 
-        {/* --- 2. CENTER: Navigation --- */}
+        {/* --- 2. CENTER: Navigation (Desktop) --- */}
         <div className="hidden md:flex flex-1 items-center justify-center 
           gap-2 min-[900px]:gap-4 lg:gap-5 min-[1100px]:gap-6 xl:gap-9 2xl:gap-12 min-[1750px]:gap-16
           px-0 lg:px-2 min-[1100px]:px-2
@@ -96,8 +111,6 @@ export default function Navbar() {
                 const isCurrent = isActiveLink(link.href);
                 const isCurrentParent = link.dropdownItems ? isParentActive(link.dropdownItems) : false;
                 
-                // ADDED: Underline effect using 'after:' pseudo-element
-                // The underline is red (#E3572B), 1.5px high, and transitions width from 0 to full on hover.
                 const linkClasses = `
                   relative flex items-center gap-0.5 lg:gap-1 font-normal leading-[100%] tracking-normal transition-colors whitespace-nowrap
                   text-[10px] min-[900px]:text-[11px] lg:text-[13px] min-[1100px]:text-[15px] xl:text-[17px] 2xl:text-[19px] min-[1750px]:text-[22px]
@@ -109,8 +122,8 @@ export default function Navbar() {
 
                 if (link.dropdownItems) {
                   return (
-                    <div key={index} className="relative group h-full flex items-center py-4">
-                        <Link href={link.href} className={linkClasses}>
+                    <div key={index} className="relative group h-full flex items-center py-4 cursor-pointer">
+                        <Link href={link.href} className={linkClasses} onClick={(e) => e.preventDefault()}>
                             {link.name}
                             <FiChevronDown 
                               className={`
@@ -118,8 +131,9 @@ export default function Navbar() {
                                 lg:w-4 lg:h-4 
                                 min-[1100px]:w-[18px] min-[1100px]:h-[18px]
                                 xl:w-5 xl:h-5 
-                                stroke-[2] transition-colors 
+                                stroke-[2] transition-transform duration-300
                                 ${(isCurrent || isCurrentParent) ? 'text-[#E3572B]' : 'text-[#1E1E1E] group-hover:text-[#E3572B]'}
+                                group-hover:rotate-180
                               `} 
                             />
                         </Link>
@@ -210,29 +224,42 @@ export default function Navbar() {
         <div className="p-6 flex flex-col gap-6 overflow-y-auto h-full pb-24">
              {navLinks.map((link: NavLink, index: number) => {
                 const isCurrent = isActiveLink(link.href) || (link.dropdownItems ? isParentActive(link.dropdownItems) : false);
+                const isSubmenuOpen = mobileSubmenuOpen === link.name;
                 
                 return (
                   <div key={index} className="flex flex-col border-b border-gray-100 pb-4">
+                      {/* Parent Link / Button */}
                       <Link 
                           href={link.href}
                           className={`flex items-center justify-between text-[20px] font-normal leading-[100%] py-2 transition-colors
                             ${isCurrent ? 'text-[#E3572B]' : 'text-[#1E1E1E] hover:text-[#E3572B]'}
                           `}
-                          onClick={() => !link.hasDropdown && setIsMobileMenuOpen(false)}
+                          onClick={(e) => handleMobileLinkClick(e, link)}
                       >
                           {link.name}
-                          {link.hasDropdown && <FiChevronDown className={`w-9 h-9 transition-colors ${isCurrent ? 'text-[#E3572B]' : 'text-[#1E1E1E]'}`} />}
+                          {link.hasDropdown && (
+                             <FiChevronDown 
+                                className={`w-9 h-9 transition-transform duration-300 
+                                  ${isCurrent ? 'text-[#E3572B]' : 'text-[#1E1E1E]'} 
+                                  ${isSubmenuOpen ? 'rotate-180' : 'rotate-0'}
+                                `} 
+                             />
+                          )}
                       </Link>
                       
+                      {/* Submenu Items (Conditionally Rendered) */}
                       {link.dropdownItems && (
-                          <div className="flex flex-col pl-6 gap-4 mt-4 border-l-2 border-gray-100 ml-1">
+                          <div className={`
+                              flex flex-col pl-6 gap-4 border-l-2 border-gray-100 ml-1 overflow-hidden transition-all duration-300 ease-in-out
+                              ${isSubmenuOpen ? 'max-h-[500px] mt-4 opacity-100' : 'max-h-0 mt-0 opacity-0'}
+                          `}>
                               {link.dropdownItems.map((subLink, subIndex) => {
                                   const isChildActive = isActiveLink(subLink.href);
                                   return (
                                     <Link
                                         key={subIndex}
                                         href={subLink.href}
-                                        className={`text-[17px] font-normal transition-colors
+                                        className={`text-[17px] font-normal transition-colors py-1
                                           ${isChildActive ? 'text-[#E3572B]' : 'text-[#555] hover:text-[#E3572B]'}
                                         `}
                                         onClick={() => setIsMobileMenuOpen(false)}

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import Link from "next/link";
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 
@@ -103,9 +104,12 @@ export default function AboutUs() {
           <h2 className="font-spartan font-bold text-[20px] md:text-[32px] leading-[1.4] text-[#DCBC88] mb-8 drop-shadow-sm">
             The Future of Farming, Delivered Fresh
           </h2>
-          <button className="bg-white text-[#3D550C] font-outfit font-medium text-[16px] md:text-[18px] px-8 py-3 rounded-full hover:bg-gray-100 transition-colors shadow-lg">
-            Explore Our Produce
-          </button>
+         <Link 
+  href="/our-produces"
+  className="bg-white text-[#3D550C] font-outfit font-medium text-[16px] md:text-[18px] px-8 py-3 rounded-full hover:bg-gray-100 transition-colors shadow-lg"
+>
+  Explore Our Produce
+</Link>
         </div>
       </section>
 
