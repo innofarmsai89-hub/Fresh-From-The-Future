@@ -1,26 +1,31 @@
-"use client";
-
-import React, { use } from 'react';
+import React from 'react';
 import { notFound } from 'next/navigation';
 import { League_Spartan } from 'next/font/google';
 import Link from 'next/link';
-import { 
-  Star, 
-  Utensils, 
-  Activity, 
-  Leaf, 
-  Droplet, 
-  Zap, 
+import {
+  Star,
+  Utensils,
+  Activity,
+  Leaf,
+  Droplet,
+  Zap,
   Heart,
   ArrowLeft
 } from 'lucide-react';
-import { produceData } from '@/data/produceData'; 
+import { produceData } from '@/data/produceData';
 
 const spartan = League_Spartan({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
+
+// Generate static params for all produce items
+export async function generateStaticParams() {
+  return produceData.map((product) => ({
+    slug: product.slug,
+  }));
+}
 
 // Helper to get random related products
 const getRelatedProducts = (currentId: number) => {
@@ -47,8 +52,8 @@ const NutritionCard = ({ icon: Icon, value, label }: { icon: any, value: string,
   </div>
 );
 
-export default function NutrientDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+export default async function NutrientDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const product = produceData.find((p) => p.slug === slug);
 
   if (!product) {
