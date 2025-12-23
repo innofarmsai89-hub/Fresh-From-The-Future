@@ -161,11 +161,16 @@ export default function Footer() {
                         Useful Link
                     </h3>
                     <ul className="space-y-3 sm:space-y-4 flex flex-col items-center sm:items-start">
-                        <li><Link href="#" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
+                        {/* Mapped to /our-produces */}
+                        <li><Link href="/our-produces" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
                           text-[15px] xs:text-[16px] sm:text-[17px] lg:text-[18px]">Our Produce</Link></li>
-                        <li><Link href="#" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
+                        
+                        {/* Mapped to /chef-Mixes (Note the Capital M in your folder) */}
+                        <li><Link href="/chef-Mixes" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
                           text-[15px] xs:text-[16px] sm:text-[17px] lg:text-[18px]">Chef Mixes</Link></li>
-                        <li><Link href="#" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
+                        
+                        {/* Mapped to /trace */}
+                        <li><Link href="/trace" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
                           text-[15px] xs:text-[16px] sm:text-[17px] lg:text-[18px]">Traceability</Link></li>
                     </ul>
                 </div>
@@ -177,11 +182,16 @@ export default function Footer() {
                         Home
                     </h3>
                     <ul className="space-y-3 sm:space-y-4 flex flex-col items-center sm:items-start">
-                        <li><Link href="#" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
+                        {/* Mapped to /about-us */}
+                        <li><Link href="/about-us" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
                           text-[15px] xs:text-[16px] sm:text-[17px] lg:text-[18px]">About Us</Link></li>
-                        <li><Link href="#" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
+                        
+                        {/* Mapped to /chef-adv */}
+                        <li><Link href="/chef-adv" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
                           text-[15px] xs:text-[16px] sm:text-[17px] lg:text-[18px]">Chef Advisory Council</Link></li>
-                        <li><Link href="#" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
+                        
+                        {/* Mapped to /our-blogs (You also have /upcom-events available if you prefer that) */}
+                        <li><Link href="/our-blogs" className="font-medium text-[#1E1E1E] hover:text-[#3D550C] active:text-[#3D550C] transition-colors
                           text-[15px] xs:text-[16px] sm:text-[17px] lg:text-[18px]">Events & Blogs</Link></li>
                     </ul>
                 </div>
