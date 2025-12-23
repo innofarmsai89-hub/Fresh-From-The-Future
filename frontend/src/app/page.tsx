@@ -2,15 +2,15 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { League_Spartan, Signika } from 'next/font/google';
-import SubscriptionBanner from '@/components/SubscriptionBanner';
+// Ensure this path is correct based on your project structure
+import SubscriptionBanner from '@/components/SubscriptionBanner'; 
 
 const spartan = League_Spartan({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
+  variable: '--font-spartan',
 });
-
-
 
 // 2. Configure Signika
 const signika = Signika({
@@ -125,49 +125,46 @@ function ProductCard({ title, image }: { title: string, image: string }) {
     )
 }
 
-// Helper to get random related products
-const getRelatedProducts = (currentId: number) => {
-  const otherProducts = produceData.filter((p) => p.id !== currentId);
-  return otherProducts.sort(() => 0.5 - Math.random()).slice(0, 3);
-};
+function StepCard({ number, text, image }: { number: string, text: string, image: string }) {
+    return (
+        <div className="relative h-full">
+            {/* Badge */}
+            <div className="absolute -top-[35px] left-1/2 -translate-x-1/2 w-[70px] h-[70px] bg-[#E3572B] rounded-full flex items-center justify-center z-10 shadow-lg">
+                <span className="font-bold text-white text-[32px] font-spartan">{number}</span>
+            </div>
 
-// ==========================================
-// NUTRITION CARD COMPONENT
-// ==========================================
-const NutritionCard = ({ icon: Icon, value, label }: { icon: any, value: string, label: string }) => (
-  <div className="flex items-center gap-5 bg-[#dbe9c2] border border-[#a8b88d] rounded-2xl px-6 py-5 shadow-sm w-full transition-transform hover:scale-[1.01]">
-    <div className="w-12 h-12 rounded-full bg-[#4a5e30] flex items-center justify-center text-white flex-shrink-0 shadow-sm">
-      <Icon size={22} strokeWidth={2.5} />
-    </div>
-    <div className="flex flex-col">
-      <span className="text-[#3f5f26] font-extrabold text-[11px] md:text-xs uppercase tracking-widest opacity-80 mb-0.5">
-        {label}
-      </span>
-      <span className="text-[#1a2e12] font-bold text-xl md:text-2xl leading-none">
-        {value}
-      </span>
-    </div>
-  </div>
-);
+            <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[20px] overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow duration-300">
+                {/* Image Area */}
+                <div className="w-full h-[220px] relative shrink-0">
+                    <Image 
+                        src={image} 
+                        alt={`Step ${number}`} 
+                        fill 
+                        className="object-cover" 
+                    />
+                </div>
 
-// ✅ Server Component - No "use client"
-export default function NutrientDetailPage({ params }: { params: { slug: string } }) {
-  const product = produceData.find((p) => p.slug === params.slug);
+                {/* Text Area */}
+                <div className="px-6 pt-6 pb-8 flex-grow">
+                   <p className="font-spartan font-medium text-[18px] leading-[100%] tracking-normal text-[#3D550C] text-left">
+                        {text}
+                    </p>
+                </div>
+            </div>
+        </div>
+    )
+}
 
-  if (!product) {
-    return notFound();
-  }
-
-  const relatedProducts = getRelatedProducts(product.id);
-
+// Added missing TechCard component based on usage in HomePage
+function TechCard({ feature }: { feature: { icon: string, title: string, subtitle: string, desc: string } }) {
   return (
     <div className="bg-[#EFE6D5] rounded-[20px] p-8 min-h-[240px] flex flex-col items-start text-left hover:shadow-lg transition-shadow duration-300 font-spartan">
-      
       {/* Header: Icon + Title */}
       <div className="flex items-center gap-4 mb-5">
         <div className="w-[54px] h-[54px] bg-[#3D550C] rounded-full flex items-center justify-center shrink-0 shadow-sm">
           <div className="relative w-[28px] h-[28px]">
              {/* Using standard img for icons to allow filter inversion easily */}
+             {/* eslint-disable-next-line @next/next/no-img-element */}
              <img 
                 src={feature.icon} 
                 alt={feature.title} 
@@ -182,7 +179,6 @@ export default function NutrientDetailPage({ params }: { params: { slug: string 
 
       {/* Content Block */}
       <div className="flex flex-col gap-2">
-          {/* Subtitle is now part of the text flow, bold and dark */}
           <h4 className="font-bold text-[18px] text-[#1E1E1E] leading-tight">
             {feature.subtitle}
           </h4>
@@ -191,49 +187,8 @@ export default function NutrientDetailPage({ params }: { params: { slug: string 
             {feature.desc}
           </p>
       </div>
-
     </div>
   );
-}
-
-function StepCard({ number, text, image }: { number: string, text: string, image: string }) {
-    return (
-        <div className="relative h-full">
-            {/* Badge */}
-            <div className="absolute -top-[35px] left-1/2 -translate-x-1/2 w-[70px] h-[70px] bg-[#E3572B] rounded-full flex items-center justify-center z-10 shadow-lg">
-                <span className="font-bold text-white text-[32px] font-spartan">{number}</span>
-            </div>
-
-            {/* Card Content 
-                - h-full: Ensures the card background fills the grid area (same size).
-            */}
-            <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[20px] overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow duration-300">
-                
-                {/* Image Area */}
-                <div className="w-full h-[220px] relative shrink-0">
-                    <Image 
-                        src={image} 
-                        alt={`Step ${number}`} 
-                        fill 
-                        className="object-cover" 
-                    />
-                </div>
-
-                {/* Text Area 
-                    - Font settings applied as requested: 
-                    - font-medium (500)
-                    - text-[14px]
-                    - leading-[100%]
-                    - tracking-normal (0%)
-                */}
-                <div className="px-6 pt-6 pb-8 flex-grow">
-                   <p className="font-spartan font-medium text-[18px] leading-[100%] tracking-normal text-[#3D550C] text-left">
-                        {text}
-                    </p>
-                </div>
-            </div>
-        </div>
-    )
 }
 
 // --- Main Page Component ---
@@ -319,7 +274,6 @@ export default function HomePage() {
     <section className="py-24 max-w-[1440px] mx-auto px-6 font-spartan">
       
       <div className="text-center mb-20">
-        {/* UPDATED FONT SIZE */}
         <h2 className="font-bold text-[40px] md:text-[54px] text-[#3D550C] mb-6 leading-none">
           Why are we different?
         </h2>
@@ -467,7 +421,7 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </div>
+      </section> {/* FIXED: Was </div>, changed to </section> */}
 
      
       {/* --- Testimonials Section --- */}
@@ -488,7 +442,7 @@ export default function HomePage() {
                   {/* Image Container */}
                   <div className="w-full max-w-[393px] h-[220px] bg-gray-200 rounded-[16px] mb-6 relative overflow-hidden shadow-md">
                     
-                    {/* Image: Zooms in slowly on hover, stays visible behind the overlay */}
+                    {/* Image */}
                     <Image 
                       src={item.image} 
                       alt={item.name} 
@@ -496,7 +450,7 @@ export default function HomePage() {
                       className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
                     />
 
-                    {/* Review Card: Slides up from the bottom like a curtain */}
+                    {/* Review Card */}
                     <div className="absolute inset-0 bg-[#dfc490] flex items-center justify-center p-6 
                                     translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100
                                     transition-all duration-500 ease-in-out">
@@ -507,7 +461,7 @@ export default function HomePage() {
 
                   </div>
 
-                  {/* Name: Changes color on hover */}
+                  {/* Name */}
                   <h3 className="font-bold text-[24px] text-[#3D550C] group-hover:text-[#dfc490] transition-colors duration-300">
                     {item.name}
                   </h3>
@@ -516,9 +470,7 @@ export default function HomePage() {
           </div>
       </section>
 
-```
-
-      {/* --- Technology Cultivates Taste (UPDATED) --- */}
+      {/* --- Technology Cultivates Taste --- */}
       <section className="py-24 max-w-[1440px] mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-bold text-[40px] md:text-[54px] text-[#3D550C] mb-4">
@@ -626,41 +578,40 @@ export default function HomePage() {
       </section>
 
 
-{/* --- How You Get Our Greens --- */}
-<section className="py-20 max-w-[1440px] mx-auto px-6">
-    <div className="text-center mb-4">
-        <h2 className="font-bold text-[40px] md:text-[54px] text-[#3D550C] mb-4">
-            How You Get Our Greens
-        </h2>
-        <p className="text-xl text-[#1E1E1E] font-medium opacity-80">
-            Grown smart. Picked fresh. Delivered green.
-        </p>
-    </div>
+      {/* --- How You Get Our Greens --- */}
+      <section className="py-20 max-w-[1440px] mx-auto px-6">
+          <div className="text-center mb-4">
+              <h2 className="font-bold text-[40px] md:text-[54px] text-[#3D550C] mb-4">
+                  How You Get Our Greens
+              </h2>
+              <p className="text-xl text-[#1E1E1E] font-medium opacity-80">
+                  Grown smart. Picked fresh. Delivered green.
+              </p>
+          </div>
 
-    {/* Grid defaults to 'stretch', ensuring all cards are the same height */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
-        <StepCard 
-            number="1" 
-            text="Choose the product that best fits your needs." 
-            image="/images/home/getGreens1.png" 
-        />
-        <StepCard 
-            number="2" 
-            text="Contact us directly or via WhatsApp for selecting the subscription plan." 
-            image="/images/home/getGreens2.png" 
-        />
-        <StepCard 
-            number="3" 
-            text="Fill the subscription form after discussing with our executive to proceed with shopping." 
-            image="/images/home/getGreens3.png" 
-        />
-        <StepCard 
-            number="4" 
-            text="Our team will harvest your order in the same day and deliver to ensure the products arrive fresh." 
-            image="/images/home/getGreens4.png" 
-        />
-    </div>
-</section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+              <StepCard 
+                  number="1" 
+                  text="Choose the product that best fits your needs." 
+                  image="/images/home/getGreens1.png" 
+              />
+              <StepCard 
+                  number="2" 
+                  text="Contact us directly or via WhatsApp for selecting the subscription plan." 
+                  image="/images/home/getGreens2.png" 
+              />
+              <StepCard 
+                  number="3" 
+                  text="Fill the subscription form after discussing with our executive to proceed with shopping." 
+                  image="/images/home/getGreens3.png" 
+              />
+              <StepCard 
+                  number="4" 
+                  text="Our team will harvest your order in the same day and deliver to ensure the products arrive fresh." 
+                  image="/images/home/getGreens4.png" 
+              />
+          </div>
+      </section>
 
       {/* --- Contact Form Section --- */}
       <section className="py-20 max-w-[1440px] mx-auto px-6 mb-20">

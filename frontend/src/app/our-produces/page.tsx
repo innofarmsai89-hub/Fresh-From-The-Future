@@ -36,7 +36,8 @@ interface ProduceItem {
 // ==========================================
 const ProduceSection = () => {
   return (
-   <section className="relative w-full h-[600px] flex items-center justify-center overflow-hidden">
+  <section className="relative w-full h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8">
+  {/* Background Image */}
   <div className="absolute inset-0 w-full h-full">
     <img
       src="/images/ourProduce/Op-bg.png"
@@ -45,8 +46,9 @@ const ProduceSection = () => {
     />
   </div>
 
-  <div 
-    className="relative z-10 w-[90%] max-w-5xl rounded-[30px] px-6 py-16 md:py-20 text-center shadow-lg"
+  {/* Glass Container (Button Removed) */}
+  <div
+    className="relative z-10 w-[90%] max-w-5xl rounded-[30px] px-6 py-16 text-center shadow-lg"
     style={{
       background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
       backdropFilter: 'blur(40px)',
@@ -58,13 +60,21 @@ const ProduceSection = () => {
     <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md">
       Our Produces
     </h2>
-    <p className="text-[#e8e0b5] text-lg md:text-2xl font-medium tracking-wide mb-12 drop-shadow-sm">
+    {/* Removed large bottom margin (mb-12) since button is gone */}
+    <p className="text-[#e8e0b5] text-lg md:text-2xl font-medium tracking-wide drop-shadow-sm">
       Every crop cultivated with care, freshness, and precision.
     </p>
-    <button className="bg-white text-[#1a3c1e] hover:bg-gray-100 transition-colors duration-300 font-semibold py-3 px-8 rounded-full shadow-md text-lg">
-      Get Samples
-    </button>
   </div>
+
+  {/* Button (Moved Outside & WhatsApp Logic Added) */}
+  <a
+    href="https://wa.me/919220309252?text=Hello%2C%20I%20would%20like%20to%20request%20samples."
+    target="_blank"
+    rel="noopener noreferrer"
+    className="relative z-10 bg-white text-[#1a3c1e] hover:bg-gray-100 transition-colors duration-300 font-semibold py-3 px-8 rounded-full shadow-md text-lg cursor-pointer"
+  >
+    Get Samples
+  </a>
 </section>
   );
 };
