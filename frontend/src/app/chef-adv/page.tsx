@@ -113,7 +113,6 @@ const ChefAdvisoryCouncilPage = () => {
           />
         </div>
 
-<<<<<<< HEAD
         {/* Glassmorphism Card 
            Updates to match "Traceability" & "Chef Mixes":
            1. bg-[#1e3a1e]/30 with backdrop-blur-md
@@ -132,31 +131,10 @@ const ChefAdvisoryCouncilPage = () => {
           </p>
 
           {/* CTA Button moved INSIDE the glass container */}
-=======
-        {/* Glassmorphism Card */}
-        <div className="relative z-10 w-[95%] max-w-[1280px] rounded-[20px] overflow-hidden shadow-xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c1a]/85 via-[#3A5A30]/75 to-[#1a3c1a]/85 backdrop-blur-md"></div>
-          <div className="relative z-20 flex flex-col items-center justify-center text-center py-16 md:py-20 px-4">
-            <h1 className="text-white text-4xl md:text-[64px] font-bold leading-tight mb-2 drop-shadow-md">
-              Chef Advisory Council
-            </h1>
-            <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mt-2">
-              Expert Guidance, Inspiring Culinary Excellence
-            </p>
-          </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="absolute z-30 bottom-[12%] md:bottom-[18%]">
->>>>>>> origin/main
           <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-4 px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
             Explore Our Produce
           </button>
         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
       </div>
 
       {/* --- Section 2: Join Council Content --- */}

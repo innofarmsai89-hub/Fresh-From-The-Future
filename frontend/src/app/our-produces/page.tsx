@@ -47,7 +47,6 @@ const ProduceSection = () => {
         />
       </div>
 
-<<<<<<< HEAD
       {/* DIMENSION CHANGES:
          1. w-[95%] max-w-7xl -> Significantly wider (was w-[90%] max-w-5xl)
          2. py-10 md:py-14 -> Reduced vertical height (was py-16 md:py-20)
@@ -60,16 +59,6 @@ const ProduceSection = () => {
           Every crop cultivated with care, freshness, and precision.
         </p>
         <button className="bg-white text-[#1a3c1e] hover:bg-gray-100 transition-colors duration-300 font-semibold py-3 px-8 rounded-full shadow-lg text-lg">
-=======
-      <div className="relative z-10 w-[90%] max-w-5xl bg-[#1e3a1e]/80 backdrop-blur-sm rounded-[30px] px-6 py-16 md:py-20 text-center shadow-lg border border-white/10">
-        <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md">
-          Our Produces
-        </h2>
-        <p className="text-[#e8e0b5] text-lg md:text-2xl font-medium tracking-wide mb-12 drop-shadow-sm">
-          Every crop cultivated with care, freshness, and precision.
-        </p>
-        <button className="bg-white text-[#1a3c1e] hover:bg-gray-100 transition-colors duration-300 font-semibold py-3 px-8 rounded-full shadow-md text-lg">
->>>>>>> origin/main
           Get Samples
         </button>
       </div>

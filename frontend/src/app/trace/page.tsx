@@ -31,7 +31,6 @@ const TraceabilityBanner = () => {
         />
       </div>
 
-<<<<<<< HEAD
       {/* Glassmorphism Card 
          Updates to match previous sections:
          1. bg-[#1e3a1e]/30 with backdrop-blur-md (Consistent glass effect)
@@ -50,36 +49,12 @@ const TraceabilityBanner = () => {
         </p>
 
         {/* Button moved INSIDE the glass container */}
-=======
-      {/* Glassmorphism Card */}
-      <div className="relative z-10 w-[95%] max-w-[1280px] rounded-[20px] overflow-hidden shadow-xl">
-        {/* Blur/Gradient Layer */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c1a]/85 via-[#3A5A30]/75 to-[#1a3c1a]/85 backdrop-blur-md"></div>
-
-        {/* Content */}
-        <div className="relative z-20 flex flex-col items-center justify-center text-center py-12 md:py-14 px-4">
-          <h1 className="text-white text-4xl md:text-[54px] font-bold leading-tight mb-2 drop-shadow-md">
-            Traceability
-          </h1>
-          <p className="text-[#d4c596] text-lg md:text-[26px] font-bold tracking-wide drop-shadow-md">
-            Instant access to crop data in one scan
-          </p>
-        </div>
-      </div>
-
-      {/* Floating CTA Button */}
-      <div className="absolute z-30 bottom-[15%] md:bottom-[20%]">
->>>>>>> origin/main
         <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-lg py-3 px-10 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
           Explore Our Produce
         </button>
       </div>
-<<<<<<< HEAD
 
 </div>
-=======
-    </div>
->>>>>>> origin/main
   );
 };
 
