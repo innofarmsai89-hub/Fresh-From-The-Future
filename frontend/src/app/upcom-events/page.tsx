@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { League_Spartan } from 'next/font/google';
 
 // --- Font Configuration ---
@@ -20,8 +21,8 @@ const UpcomingEventsPage = () => {
   return (
     <main className={`w-full min-h-screen bg-white ${spartan.variable} font-spartan`}>
       
-      {/* --- Section 1: Hero Banner --- */}
-      <div className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+      {/* --- Section 1: Hero Banner (Glassmorphism Applied) --- */}
+      <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -34,29 +35,26 @@ const UpcomingEventsPage = () => {
           />
         </div>
 
-        {/* Glassmorphism Card */}
-        <div className="relative z-10 w-[95%] max-w-[1280px] rounded-[20px] overflow-hidden shadow-xl">
+        {/* Glassmorphism Card 
+            Styles: bg-[#1e3a1e]/30, backdrop-blur-md, border border-white/20
+        */}
+        <div className="relative z-10 w-[95%] max-w-7xl bg-[#1e3a1e]/30 backdrop-blur-md rounded-[30px] flex flex-col items-center justify-center text-center px-6 py-12 md:py-16 shadow-2xl border border-white/20">
           
-          {/* Blur/Gradient Layer */}
-          {/* Using a dark green/neutral gradient to ensure text readability over the colorful background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c1a]/85 via-[#2f4f2f]/75 to-[#1a3c1a]/85 backdrop-blur-md"></div>
+          <h1 className="text-white text-3xl md:text-[64px] font-bold leading-tight mb-4 drop-shadow-md">
+            Upcoming Events
+          </h1>
+          
+          <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mb-8 md:mb-10">
+            Stay Inspired, Join the Experience
+          </p>
 
-          {/* Content */}
-          <div className="relative z-20 flex flex-col items-center justify-center text-center py-16 md:py-20 px-4">
-            <h1 className="text-white text-4xl md:text-[64px] font-bold leading-tight mb-2 drop-shadow-md">
-              Upcoming Events
-            </h1>
-            <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mt-2">
-              Stay Inspired, Join the Experience
-            </p>
-          </div>
-        </div>
-
-        {/* Floating CTA Button */}
-        <div className="absolute z-30 bottom-[15%] md:bottom-[20%]">
-          <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-4 px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
-            Explore Our Produce
-          </button>
+          {/* Button moved INSIDE the card */}
+          <Link href="/our-produces">
+            <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-3 px-8 md:px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
+              Explore Our Produce
+            </button>
+          </Link>
+          
         </div>
       </div>
 

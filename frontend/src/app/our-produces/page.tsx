@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { League_Spartan } from 'next/font/google';
@@ -9,14 +9,12 @@ import { League_Spartan } from 'next/font/google';
 // 0. CONFIGURATION & HELPERS
 // ==========================================
 
-// Initialize the Spartan font
 const spartan = League_Spartan({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 
-// Helper to generate slugs (Matches the logic in your data/produceData.ts)
 const generateSlug = (title: string) => 
   title.toLowerCase()
     .replace(/’/g, '')
@@ -38,42 +36,50 @@ interface ProduceItem {
 // ==========================================
 const ProduceSection = () => {
   return (
-    <section className="relative w-full h-[600px] flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 w-full h-full">
-        <img
-          src="/images/ourProduce/Op-bg.png"
-          alt="Fresh produce background"
-          className="w-full h-full object-cover"
-        />
-      </div>
+   <section className="relative w-full h-[600px] flex items-center justify-center overflow-hidden">
+  <div className="absolute inset-0 w-full h-full">
+    <img
+      src="/images/ourProduce/Op-bg.png"
+      alt="Fresh produce background"
+      className="w-full h-full object-cover"
+    />
+  </div>
 
-      {/* DIMENSION CHANGES:
-         1. w-[95%] max-w-7xl -> Significantly wider (was w-[90%] max-w-5xl)
-         2. py-10 md:py-14 -> Reduced vertical height (was py-16 md:py-20)
-      */}
-      <div className="relative z-10 w-[95%] max-w-7xl bg-[#1e3a1e]/30 backdrop-blur-md rounded-[30px] px-6 py-10 md:py-14 text-center shadow-2xl border border-white/20">
-        <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md">
-          Our Produces
-        </h2>
-        <p className="text-[#e8e0b5] text-lg md:text-2xl font-medium tracking-wide mb-8 drop-shadow-md">
-          Every crop cultivated with care, freshness, and precision.
-        </p>
-        <button className="bg-white text-[#1a3c1e] hover:bg-gray-100 transition-colors duration-300 font-semibold py-3 px-8 rounded-full shadow-lg text-lg">
-          Get Samples
-        </button>
-      </div>
-    </section>
+  <div 
+    className="relative z-10 w-[90%] max-w-5xl rounded-[30px] px-6 py-16 md:py-20 text-center shadow-lg"
+    style={{
+      background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
+      backdropFilter: 'blur(40px)',
+      WebkitBackdropFilter: 'blur(40px)',
+      backgroundBlendMode: 'overlay, normal',
+      border: '1px solid rgba(255, 255, 255, 0.2)'
+    }}
+  >
+    <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md">
+      Our Produces
+    </h2>
+    <p className="text-[#e8e0b5] text-lg md:text-2xl font-medium tracking-wide mb-12 drop-shadow-sm">
+      Every crop cultivated with care, freshness, and precision.
+    </p>
+    <button className="bg-white text-[#1a3c1e] hover:bg-gray-100 transition-colors duration-300 font-semibold py-3 px-8 rounded-full shadow-md text-lg">
+      Get Samples
+    </button>
+  </div>
+</section>
   );
 };
 
 // ==========================================
-// 2. SHARED CARD COMPONENT
+// 2. SHARED CARD COMPONENT (UPDATED)
 // ==========================================
 const ProduceCard = ({ item }: { item: ProduceItem }) => {
   const slug = generateSlug(item.title);
+  
+  // Logic: Check if the item is the "Specialty Chef’s Mix"
+  const isCustomMix = item.title.includes("Specialty Chef’s Mix");
 
   return (
-    <div className="flex-shrink-0 w-[290px] md:w-[320px] h-[500px] relative group select-none">
+    <div className="flex-shrink-0 w-[290px] md:w-[320px] h-[500px] relative group select-none snap-start">
       <div className="w-full bg-[#ede4d3] rounded-[30px] p-5 pb-8 relative h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
         
         {/* Image */}
@@ -101,38 +107,130 @@ const ProduceCard = ({ item }: { item: ProduceItem }) => {
           </p>
         </div>
 
-        {/* Nutrition Button (Hanging) */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-20">
-            <Link href={`/nutrients/${slug}`}>
-              <button className="bg-[#e06836] text-white text-sm font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-[#c95b2e] transition-colors whitespace-nowrap">
-                  Nutrition Info
-              </button>
-            </Link>
-        </div>
-      </div>
-
-      {/* The Scoop Cutout Mask */}
-      <div className="absolute bottom-0 right-0 w-[4.5rem] h-[4.5rem] pointer-events-none z-10">
-          <div className="absolute bottom-0 right-0 w-full h-full bg-[#ede4d3] rounded-br-[30px] [mask:radial-gradient(circle_at_100%_100%,transparent_1.8rem,black_1.8rem)]"></div>
-      </div>
-
-      {/* Arrow Button */}
-      <div className="absolute bottom-[-8px] right-[-8px] z-20">
-         <Link href={`/nutrients/${slug}`}>
-           <button className="w-14 h-14 bg-[#3f5f26] rounded-full flex items-center justify-center text-white hover:bg-[#2f471d] transition-colors shadow-lg">
-              <ArrowUpRight size={24} />
-           </button>
-         </Link>
+        {/* Nutrition Button - HIDDEN for Custom Mix */}
+        {!isCustomMix && (
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-20">
+              <Link href={`/nutrients/${slug}`}>
+                <button className="bg-[#e06836] text-white text-sm font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-[#c95b2e] transition-colors whitespace-nowrap">
+                    Nutrition Info
+                </button>
+              </Link>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 // ==========================================
-// 3. SECTIONS & DATA
+// 3. REUSABLE CAROUSEL COMPONENT
 // ==========================================
 
-// --- LEAFY GREENS ---
+interface CarouselSectionProps {
+  title: string;
+  subtitle: string;
+  items: ProduceItem[];
+  hasTopBorder?: boolean;
+}
+
+const CarouselSection = ({ title, subtitle, items, hasTopBorder = false }: CarouselSectionProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activePage, setActivePage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
+  // Calculate pages on mount and resize
+  useEffect(() => {
+    const calculatePages = () => {
+      if (scrollRef.current) {
+        const containerWidth = scrollRef.current.clientWidth;
+        // Card width (320) + gap (24) = 344px approximately
+        const itemWidth = 344;
+        const itemsPerPage = Math.floor(containerWidth / itemWidth) || 1;
+        const pages = Math.ceil(items.length / itemsPerPage);
+        setTotalPages(pages);
+      }
+    };
+
+    calculatePages();
+    window.addEventListener('resize', calculatePages);
+    return () => window.removeEventListener('resize', calculatePages);
+  }, [items.length]);
+
+  // Handle scroll event to update active dot based on scroll position
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const scrollLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
+      
+      const pageIndex = Math.round(scrollLeft / containerWidth);
+      setActivePage(pageIndex);
+    }
+  };
+
+  // Scroll to specific page window when dot is clicked
+  const scrollToPage = (pageIndex: number) => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const targetScroll = pageIndex * container.clientWidth;
+
+      container.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+      setActivePage(pageIndex);
+    }
+  };
+
+  return (
+    <section className={`w-full ${hasTopBorder ? 'border-t border-gray-100 pt-20' : ''} pb-12`}>
+      <div className="container mx-auto px-4 mb-12 text-center">
+        <h2 className="text-[#3f5f26] text-5xl md:text-6xl font-bold mb-4">
+          {title}
+        </h2>
+        <p className="text-[#6b6b6b] text-xl font-light">
+          {subtitle}
+        </p>
+      </div>
+
+      {/* Scroll Container */}
+      <div 
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex overflow-x-auto gap-6 px-8 md:px-16 pb-12 pt-4 snap-x snap-mandatory scrollbar-none"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        {items.map((item) => (
+          <ProduceCard key={item.id} item={item} />
+        ))}
+        <div className="w-8 flex-shrink-0" />
+      </div>
+
+      {/* Dots Navigation (Pages) */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-3 mt-4">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToPage(index)}
+              className={`transition-all duration-300 rounded-full ${
+                activePage === index 
+                  ? 'w-4 h-4 bg-[#3f5f26]' // Active: Dark Green
+                  : 'w-4 h-4 bg-[#e0e0e0] hover:bg-[#c0c0c0]' // Inactive: Light Gray
+              }`}
+              aria-label={`Go to page ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  );
+};
+
+// ==========================================
+// 4. DATA
+// ==========================================
+
 const leafyGreensData: ProduceItem[] = [
   { id: 1, category: "LEAFY GREENS", title: "Specialty Chef’s Mix (Custom)", description: "A wholesome mix of leafy greens combining crunch, color, and refreshing aroma.", image: "/images/ourProduce/Lg-mix.png" },
   { id: 2, category: "LEAFY GREENS", title: "Romaine Lettuce", description: "Crisp, sturdy leaves with a mild, refreshing flavor.", image: "/images/ourProduce/Lg-romlet.png" },
@@ -141,33 +239,11 @@ const leafyGreensData: ProduceItem[] = [
   { id: 5, category: "LEAFY GREENS", title: "Green Leaf Lettuce", description: "Soft, leafy texture with a mild and fresh taste.", image: "/images/ourProduce/Lg-greenleaf.png" },
   { id: 6, category: "LEAFY GREENS", title: "Basil", description: "Aromatic herb with a sweet, peppery fragrance and vibrant flavor.", image: "/images/ourProduce/Lg-basil.png" },
   { id: 7, category: "LEAFY GREENS", title: "Butter Head Lettuce", description: "A soft, tender leafy green with a mild, buttery flavor, perfect for fresh salads and wraps.", image: "/images/ourProduce/Lg-butterhead.png" },
-  { id: 8, category: "LEAFY GREENS", title: "Bok Choy", description: "A crisp, nutritious leafy green with juicy stalks and tender leaves, commonly used in stir-fries and soups.", image: "/images/ourProduce/Lg-bokChoy.png" }
+  { id: 8, category: "LEAFY GREENS", title: "Bok Choy", description: "A crisp, nutritious leafy green with juicy stalks and tender leaves, commonly used in stir-fries and soups.", image: "/images/ourProduce/Lg-bokChoy.png" },
+  { id: 9, category: "LEAFY GREENS", title: "Arugula", description: "Peppery, distinctive leaves that add a spicy kick to salads.", image: "/images/ourProduce/Lg-mix.png" },
+  { id: 10, category: "LEAFY GREENS", title: "Swiss Chard", description: "Large, tender leaves with colorful stalks and a mild, sweet flavor.", image: "/images/ourProduce/Lg-kale.png" }
 ];
 
-const LeafyGreensSection = () => {
-  return (
-    <section className="w-full">
-      <div className="container mx-auto px-4 mb-12 text-center">
-        <h2 className="text-[#3f5f26] text-5xl md:text-6xl font-bold mb-4">
-          Leafy Greens
-        </h2>
-        <p className="text-[#6b6b6b] text-xl font-light">
-          Grown with precision for unmatched flavor and quality.
-        </p>
-      </div>
-      <div className="flex overflow-x-auto gap-6 px-8 md:px-16 pb-24 pt-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-[#3f5f26] scrollbar-track-gray-100 hover:scrollbar-thumb-[#2f471d]">
-        {leafyGreensData.map((item) => (
-          <div key={item.id} className="snap-center">
-            <ProduceCard item={item} />
-          </div>
-        ))}
-        <div className="w-8 flex-shrink-0" />
-      </div>
-    </section>
-  );
-};
-
-// --- BABY GREENS ---
 const babyGreensData: ProduceItem[] = [
   { id: 1, category: "LEAFY GREENS", title: "Specialty Chef’s Mix (Custom)", description: "A wholesome mix combining earthy spinach, hearty kale, and zesty sorrel vein leaf.", image: "/images/ourProduce/Bg-mix.png" },
   { id: 2, category: "LEAFY GREENS", title: "Spinach", description: "Soft, nutrient-rich leaves with a mild, earthy flavor.", image: "/images/ourProduce/Bg-Spinach.png" },
@@ -175,30 +251,6 @@ const babyGreensData: ProduceItem[] = [
   { id: 4, category: "LEAFY GREENS", title: "Sorrel Vein Leaf", description: "Bright, tangy leaves with a refreshing, lemony bite.", image: "/images/ourProduce/Bg-sorrel.png" }
 ];
 
-const BabyGreensSection = () => {
-  return (
-    <section className="w-full border-t border-gray-100 pt-20">
-      <div className="container mx-auto px-4 mb-12 text-center">
-        <h2 className="text-[#3f5f26] text-5xl md:text-6xl font-bold mb-4">
-          Baby Greens
-        </h2>
-        <p className="text-[#6b6b6b] text-xl font-light">
-          Grown with precision for unmatched flavor and quality.
-        </p>
-      </div>
-      <div className="flex overflow-x-auto gap-6 px-8 md:px-16 pb-24 pt-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-[#3f5f26] scrollbar-track-gray-100 hover:scrollbar-thumb-[#2f471d]">
-        {babyGreensData.map((item) => (
-          <div key={item.id} className="snap-center">
-            <ProduceCard item={item} />
-          </div>
-        ))}
-        <div className="w-8 flex-shrink-0" />
-      </div>
-    </section>
-  );
-};
-
-// --- SPECIALTY HERBS ---
 const specialtyHerbsData: ProduceItem[] = [
   { id: 1, category: "SPECIALTY HERBS", title: "Specialty Chef’s Mix (Custom)", description: "Aromatic leafy and specialty herbs with fresh, tangy, and fragrant flavors.", image: "/images/ourProduce/Sp-mix.png" },
   { id: 2, category: "SPECIALTY HERBS", title: "Thai Basil", description: "A fragrant specialty herb with a spicy, anise-like flavor, widely used in Southeast Asian cuisine.", image: "/images/ourProduce/Sp-thaibasil.png" },
@@ -208,30 +260,6 @@ const specialtyHerbsData: ProduceItem[] = [
   { id: 6, category: "SPECIALTY HERBS", title: "Italian Basil", description: "A classic specialty herb with sweet, aromatic leaves, essential in Italian and Mediterranean dishes.", image: "/images/ourProduce/Sp-italian.png" },
 ];
 
-const SpecialtyHerbsSection = () => {
-  return (
-    <section className="w-full border-t border-gray-100 pt-20">
-      <div className="container mx-auto px-4 mb-12 text-center">
-        <h2 className="text-[#3f5f26] text-5xl md:text-6xl font-bold mb-4">
-          Specialty Herbs & Rare Crops
-        </h2>
-        <p className="text-[#6b6b6b] text-xl font-light">
-          Grown with precision for unmatched flavor and quality.
-        </p>
-      </div>
-      <div className="flex overflow-x-auto gap-6 px-8 md:px-16 pb-24 pt-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-[#3f5f26] scrollbar-track-gray-100 hover:scrollbar-thumb-[#2f471d]">
-        {specialtyHerbsData.map((item) => (
-          <div key={item.id} className="snap-center">
-            <ProduceCard item={item} />
-          </div>
-        ))}
-        <div className="w-8 flex-shrink-0" />
-      </div>
-    </section>
-  );
-};
-
-// --- EDIBLE FLOWERS ---
 const edibleFlowersData: ProduceItem[] = [
   { id: 1, category: "EDIBLE FLOWERS", title: "Specialty Chef’s Mix (Custom)", description: "Vibrant edible flowers with delicate, tangy, and slightly sweet flavors.", image: "/images/ourProduce/Ef-mix.png" },
   { id: 2, category: "EDIBLE FLOWERS", title: "Nasturtium", description: "Bright, peppery edible flowers with a spicy, tangy taste, perfect for salads and garnishes.", image: "/images/ourProduce/Ef-nasturtium.png" },
@@ -239,30 +267,10 @@ const edibleFlowersData: ProduceItem[] = [
   { id: 4, category: "EDIBLE FLOWERS", title: "Marigold Petals", description: "Colorful edible petals with a slightly citrusy, mildly bitter flavor, ideal for decoration and flavoring dishes.", image: "/images/ourProduce/Ef-mari.png" }
 ];
 
-const EdibleFlowersSection = () => {
-  return (
-    <section className="w-full border-t border-gray-100 pt-20 pb-24">
-      <div className="container mx-auto px-4 mb-12 text-center">
-        <h2 className="text-[#3f5f26] text-5xl md:text-6xl font-bold mb-4">
-          Edible Flowers
-        </h2>
-        <p className="text-[#6b6b6b] text-xl font-light">
-          Grown with precision for unmatched flavor and quality.
-        </p>
-      </div>
-      <div className="flex overflow-x-auto gap-6 px-8 md:px-16 pb-24 pt-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-[#3f5f26] scrollbar-track-gray-100 hover:scrollbar-thumb-[#2f471d]">
-        {edibleFlowersData.map((item) => (
-          <div key={item.id} className="snap-center">
-            <ProduceCard item={item} />
-          </div>
-        ))}
-        <div className="w-8 flex-shrink-0" />
-      </div>
-    </section>
-  );
-};
+// ==========================================
+// 5. STATIC SECTIONS
+// ==========================================
 
-// --- CUSTOM ORDER SECTION ---
 const CustomOrderSection = () => {
   return (
     <section className="w-full border-t border-gray-100 pt-24 pb-12">
@@ -281,7 +289,6 @@ const CustomOrderSection = () => {
   );
 };
 
-// --- GET IN TOUCH SECTION ---
 const GetInTouchSection = () => {
   return (
     <section className="w-full border-t border-gray-100 pt-24 pb-32">
@@ -324,17 +331,47 @@ const GetInTouchSection = () => {
 };
 
 // ==========================================
-// 4. MAIN PAGE EXPORT
+// 6. MAIN PAGE EXPORT
 // ==========================================
 export default function OurProducePage() {
   return (
     <div className={`flex flex-col w-full bg-white gap-24 ${spartan.className}`}>
       <ProduceSection />
-      <LeafyGreensSection />
-      <BabyGreensSection />
+      
+      {/* 1. Leafy Greens */}
+      <CarouselSection 
+        title="Leafy Greens"
+        subtitle="Grown with precision for unmatched flavor and quality."
+        items={leafyGreensData}
+        hasTopBorder={false}
+      />
+
+      {/* 2. Baby Greens */}
+      <CarouselSection 
+        title="Baby Greens"
+        subtitle="Grown with precision for unmatched flavor and quality."
+        items={babyGreensData}
+        hasTopBorder={true}
+      />
+
       <CustomOrderSection />
-      <SpecialtyHerbsSection />
-      <EdibleFlowersSection />
+
+      {/* 3. Specialty Herbs */}
+      <CarouselSection 
+        title="Specialty Herbs & Rare Crops"
+        subtitle="Grown with precision for unmatched flavor and quality."
+        items={specialtyHerbsData}
+        hasTopBorder={true}
+      />
+
+      {/* 4. Edible Flowers */}
+      <CarouselSection 
+        title="Edible Flowers"
+        subtitle="Grown with precision for unmatched flavor and quality."
+        items={edibleFlowersData}
+        hasTopBorder={true}
+      />
+
       <GetInTouchSection />
     </div>
   );
