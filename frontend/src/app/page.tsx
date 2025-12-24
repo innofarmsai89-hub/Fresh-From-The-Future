@@ -1,7 +1,15 @@
-import React from 'react';
+'use client'
+import React, { useState, useEffect, useRef } from 'react'; // Imported hooks
 import Image from 'next/image';
 import Link from 'next/link';
 import { League_Spartan, Signika } from 'next/font/google';
+import Slider1 from '@/components/slider/slider1';
+import Slider2 from '@/components/slider/slider2';
+import Slider3 from '@/components/slider/slider3';
+import Slider4 from '@/components/slider/slider4';
+import Slider5 from '@/components/slider/slider5';
+
+
 // Ensure this path is correct based on your project structure
 import SubscriptionBanner from '@/components/SubscriptionBanner'; 
 
@@ -20,6 +28,7 @@ const signika = Signika({
 });
 
 // --- Data Constants ---
+// ... (trends, features, testimonials arrays remain the same)
 const trends = [
   {
     category: "LEAFY GREENS",
@@ -98,8 +107,7 @@ const testimonials = [
     }
 ];
 
-// --- Helper Components ---
-
+// --- Helper Components (ProductCard, StepCard, TechCard remain the same) ---
 function ProductCard({ title, image }: { title: string, image: string }) {
     return (
         <div className="relative w-[280px] h-[388px] group">
@@ -155,7 +163,6 @@ function StepCard({ number, text, image }: { number: string, text: string, image
     )
 }
 
-// Added missing TechCard component based on usage in HomePage
 function TechCard({ feature }: { feature: { icon: string, title: string, subtitle: string, desc: string } }) {
   return (
     <div className="bg-[#EFE6D5] rounded-[20px] p-8 min-h-[240px] flex flex-col items-start text-left hover:shadow-lg transition-shadow duration-300 font-spartan">
@@ -194,83 +201,62 @@ function TechCard({ feature }: { feature: { icon: string, title: string, subtitl
 // --- Main Page Component ---
 
 export default function HomePage() {
+  // --- Slider State & Logic ---
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [Slider1, Slider2, Slider3, Slider4, Slider5];
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const delay = 5000; // 5 seconds
+
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
+  useEffect(() => {
+    resetTimeout();
+    // Set timer to auto-advance slide
+    timeoutRef.current = setTimeout(() => {
+      setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));
+    }, delay);
+
+    return () => {
+      resetTimeout();
+    };
+  }, [currentSlide, slides.length]);
+
+  // Function to handle manual click on dots
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
   return (
     <main className={`${spartan.variable} font-spartan w-full overflow-x-hidden bg-white`}>
     
-     {/* --- HERO SECTION --- */}
-     <section className="relative w-full h-[720px] md:h-[860px] flex items-center overflow-hidden">
+     {/* --- HERO SECTION WITH SLIDER & PAGINATION --- */}
+     <section className="relative w-full h-auto">
+        {/* Render the current slide component dynamically */}
+        {React.createElement(slides[currentSlide])}
 
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/home/hero-bg.png"
-          alt="Background Texture"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/25 z-10" />
-      </div>
-
-      <div className="relative z-20 w-full max-w-[95%] 2xl:max-w-[1800px] mx-auto h-full flex items-center justify-between px-6 md:px-10 lg:px-16">
-
-        <div className="w-full lg:w-[60%] flex flex-col justify-center">
-
-          <span className="block text-[#DCBC88] font-bold tracking-[0.18em] text-[28px] md:text-[30px] mb-6 uppercase">
-            Beyond Organic•Traceable•Hyper-Local
-          </span>
-
-          <h1 className="font-bold text-[44px] md:text-[56px] lg:text-[64px] leading-[1.15] text-white mb-8">
-            India’s First Premium Culinary Innovation Brand.
-          </h1>
-
-          <p className="font-spartan font-medium text-[18px] md:text-[20px] lg:text-[22px] leading-[170%] text-white/90 mb-10 max-w-[800px]">
-            Ultra-premium, chef-focused, AI-powered & traceable fresh produce — grown under
-            UAE/Singapore-grade precision farming technology by{" "}
-            <span className="font-bold text-white">INNOFarms.AI</span>.
-            Perfect for chefs, hoteliers, restaurateurs, and premium buyers who demand
-            uncompromising quality and refined culinary excellence.
-          </p>
-
-          <div className="flex flex-wrap gap-6 mb-12">
-            <a 
-              href="https://wa.me/919220309252?text=Hello,%20I%20would%20like%20to%20book%20a%20chef%20tasting."
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="border border-[#DCBC88] text-[#DCBC88] px-10 py-4 rounded-full text-[22px] font-medium hover:bg-[#DCBC88] hover:text-[#2b3d09] transition-all">
-                Book A Chef Tasting
-              </button>
-            </a>
-
-            <Link href="/our-produces">
-              <button className="border border-[#DCBC88] text-[#DCBC88] px-10 py-4 rounded-full text-[22px] font-medium hover:bg-[#DCBC88] hover:text-[#2b3d09] transition-all">
-                Explore Our Produce
-              </button>
-            </Link>
-          </div>
-
-          <h3 className="font-semibold text-[33px] md:text-[40px] text-white">
-            Ready to Elevate Your Ingredients?
-          </h3>
-
+        {/* Pagination Dots (Button Slider Component) */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              className={`rounded-full transition-all duration-300 ease-in-out ${
+                index === currentSlide
+                  ? 'w-4 h-4 bg-[#3D550C] scale-110' // Active dot style (dark green, slightly larger)
+                  : 'w-4 h-4 bg-[#EAEAEA] hover:bg-[#d1d1d1]' // Inactive dot style (light gray)
+              }`}
+            ></button>
+          ))}
         </div>
-
-        <div className="hidden lg:flex w-[40%] justify-end">
-          <div className="relative w-[420px] h-[580px] rounded-[36px] overflow-hidden shadow-2xl border border-white/20">
-            <Image
-              src="/images/home/heroImage.png"
-              alt="Chef Sprinkling Greens"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        </div>
-
-      </div>
-    </section>
+      </section>
 
     {/* --- Why Are We Different Section --- */}
+    {/* ... (Rest of the page content remains exactly the same) ... */}
     <section className="py-24 max-w-[1440px] mx-auto px-6 font-spartan">
       
       <div className="text-center mb-20">
@@ -421,7 +407,7 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </section> {/* FIXED: Was </div>, changed to </section> */}
+      </section> 
 
      
       {/* --- Testimonials Section --- */}

@@ -20,14 +20,17 @@ const openSans = Open_Sans({
 // --- Component 1: Subscription Banner (Hero) ---
 const Subscription = () => {
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden font-spartan">
+    // Added flex-col and gap-8 to stack card and button
+    <div className="relative w-full h-[400px] md:h-[500px] flex flex-col items-center justify-center overflow-hidden font-spartan gap-8">
       
-      {/* Background Image */}
+      {/* Background Image - Converted to Next/Image with 'fill' */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="images/subscription/subs-bg.png"
+        <Image
+          src="/images/subscription/subs-bg.png" // Added leading slash
           alt="Fresh arugula leaves background"
-          className="w-full h-full object-cover"
+          fill
+          priority // Loads this image immediately as it's above the fold
+          className="object-cover"
         />
       </div>
 
@@ -38,18 +41,21 @@ const Subscription = () => {
           Subscription
         </h1>
         
-        <p className="text-[#d4c596] text-lg md:text-3xl font-bold tracking-wide drop-shadow-sm mb-8 md:mb-10">
+        <p className="text-[#d4c596] text-lg md:text-3xl font-bold tracking-wide drop-shadow-sm">
           Be part of something exciting.
         </p>
+        
+      </div>
 
-        {/* Added Link to /our-produces */}
+      {/* Button - MOVED OUTSIDE THE CARD */}
+      <div className="relative z-10">
         <Link href="/our-produces">
           <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-base py-3 px-8 md:px-10 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
             Explore Our Produce
           </button>
         </Link>
-        
       </div>
+
     </div>
   );
 };
@@ -136,9 +142,12 @@ const SubscriptionForm = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="flex justify-center md:justify-end">
-            <img 
-              src="images/subscription/laptop.png" 
+            {/* Converted to Next/Image for better handling */}
+            <Image 
+              src="/images/subscription/laptop.png" // Added leading slash
               alt="Laptop displaying subscription form" 
+              width={600} // Provide rough dimensions for aspect ratio
+              height={450} 
               className="w-full max-w-md md:max-w-lg object-contain drop-shadow-xl"
             />
           </div>
@@ -152,14 +161,13 @@ const SubscriptionForm = () => {
               Fill in your details, submit, and your journey with us begins.
             </p>
             <div className="pt-2">
-              {/* Changed URL text to "Fill the form" */}
               <Link 
                 href="https://forms.gle/m85z2D9wJxeB7b9N6" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-black font-bold text-base md:text-lg underline decoration-2 underline-offset-4 hover:text-[#3c5922] transition-colors"
+                className="inline-flex items-center justify-center bg-[#3c5922] hover:bg-[#2e4a1a] text-white font-bold text-base md:text-lg py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                Fill the form
+                Fill the Form
               </Link>
             </div>
           </div>
@@ -176,7 +184,7 @@ const SubscriptionBanner = () => {
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <Image 
-            src="/images/contact/subscribe-bg.png" 
+            src="/images/contact/subscribe-bg.png" // Ensure this exists in public/images/contact/
             alt="Subscription Background" 
             fill 
             className="object-cover" 
@@ -191,7 +199,7 @@ const SubscriptionBanner = () => {
         <div className="w-[64px] h-[64px] md:w-[120px] md:h-[120px] bg-[#d8bc8f] rounded-full flex items-center justify-center shrink-0 shadow-md border border-[#c5a675]">
             <div className="relative w-[40px] h-[40px] md:w-[64px] md:h-[64px]">
                 <Image 
-                    src="/images/home/Vector.png" 
+                    src="/images/home/Vector.png" // Ensure this exists in public/images/home/
                     alt="Hand with plant icon" 
                     fill 
                     className="object-contain"

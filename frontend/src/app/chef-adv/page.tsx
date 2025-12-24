@@ -49,7 +49,6 @@ const JoinCouncilContent = () => {
           </div>
 
           {/* Right Column: Chefs Image */}
-          {/* Adjusted height to be more substantial relative to text */}
           <div className="relative w-full h-[400px] md:h-[600px] rounded-[30px] overflow-hidden shadow-xl">
             <Image
               src="/images/chef-adv/comm.png" 
@@ -77,15 +76,15 @@ const JoinCouncilContent = () => {
              
              {/* Link */}
              <div className="pt-6">
-    <Link 
-        href="https://forms.gle/Mu3SSRhR8trpMGxQ6" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="inline-block bg-[#3D550C] hover:bg-[#2a3b08] text-white font-bold text-lg md:text-xl px-8 py-3 rounded-full shadow-lg transition-all transform hover:scale-105"
-    >
-        Chef Feedback Form
-    </Link>
-</div>
+                <Link 
+                    href="https://forms.gle/Mu3SSRhR8trpMGxQ6" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block bg-[#3D550C] hover:bg-[#2a3b08] text-white font-bold text-lg md:text-xl px-8 py-3 rounded-full shadow-lg transition-all transform hover:scale-105"
+                >
+                    Chef Feedback Form
+                </Link>
+            </div>
           </div>
         </div>
 
@@ -100,49 +99,52 @@ const ChefAdvisoryCouncilPage = () => {
     <main className={`w-full min-h-screen bg-white ${spartan.variable} font-spartan`}>
       
      {/* --- Section 1: Banner --- */}
-<div className="relative w-full h-[500px] md:h-[650px] flex items-center justify-center overflow-hidden">
-  
-  {/* Background Image */}
-  <div className="absolute inset-0 z-0">
-    <Image
-      src="/images/chef-adv/chef-adv-bg.png"
-      alt="Chef Advisory Council Background"
-      fill
-      className="object-cover"
-      priority
-    />
-  </div>
+     {/* Updated: flex-col, gap-8 to stack elements */}
+    <div className="relative w-full h-[500px] md:h-[650px] flex flex-col items-center justify-center overflow-hidden gap-8">
+      
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/chef-adv/chef-adv-bg.png"
+          alt="Chef Advisory Council Background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
 
-  {/* Glassmorphism Card */}
-  <div 
-    className="relative z-10 w-[95%] max-w-[1280px] rounded-[30px] flex flex-col items-center justify-center text-center py-16 md:py-20 px-4"
-    style={{
-      background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
-      backdropFilter: 'blur(40px)',
-      WebkitBackdropFilter: 'blur(40px)',
-      backgroundBlendMode: 'overlay, normal',
-      border: '1px solid rgba(255, 255, 255, 0.2)'
-    }}
-  >
-    {/* Content */}
-    <h1 className="text-white text-4xl md:text-[64px] font-bold leading-tight mb-2 drop-shadow-md">
-      Chef Advisory Council
-    </h1>
-    <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mt-2">
-      Expert Guidance, Inspiring Culinary Excellence
-    </p>
-  </div>
+      {/* Glassmorphism Card */}
+      {/* Updated: Reduced padding (py-10 md:py-14) to reduce height */}
+      <div 
+        className="relative z-10 w-[95%] max-w-[1280px] rounded-[30px] flex flex-col items-center justify-center text-center py-10 md:py-14 px-4"
+        style={{
+          background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
+          backdropFilter: 'blur(40px)',
+          WebkitBackdropFilter: 'blur(40px)',
+          backgroundBlendMode: 'overlay, normal',
+          border: '1px solid rgba(255, 255, 255, 0.2)'
+        }}
+      >
+        {/* Content */}
+        <h1 className="text-white text-4xl md:text-[64px] font-bold leading-tight mb-2 drop-shadow-md">
+          Chef Advisory Council
+        </h1>
+        <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mt-2">
+          Expert Guidance, Inspiring Culinary Excellence
+        </p>
+      </div>
 
-  {/* CTA Button */}
-  <div className="absolute z-30 bottom-[12%] md:bottom-[18%]">
-  <Link 
-    href="/our-produces"
-    className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-4 px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95 flex items-center justify-center"
-  >
-    Explore Our Produce
-  </Link>
-</div>
-</div>
+      {/* CTA Button - Moved outside and stacked relatively */}
+      <div className="relative z-30">
+        <Link 
+          href="/our-produces"
+          className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-4 px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95 flex items-center justify-center"
+        >
+          Explore Our Produce
+        </Link>
+      </div>
+
+    </div>
 
       {/* --- Section 2: Join Council Content --- */}
       <JoinCouncilContent />

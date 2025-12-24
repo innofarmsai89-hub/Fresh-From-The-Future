@@ -22,7 +22,8 @@ const UpcomingEventsPage = () => {
     <main className={`w-full min-h-screen bg-white ${spartan.variable} font-spartan`}>
       
       {/* --- Section 1: Hero Banner (Glassmorphism Applied) --- */}
-      <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden">
+      {/* Update: Added flex-col and gap-8 to stack card and button */}
+      <div className="relative w-full h-[400px] md:h-[500px] flex flex-col items-center justify-center overflow-hidden gap-8">
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -44,18 +45,21 @@ const UpcomingEventsPage = () => {
             Upcoming Events
           </h1>
           
-          <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md mb-8 md:mb-10">
+          <p className="text-[#d4c596] text-lg md:text-[32px] font-bold tracking-wide drop-shadow-md">
             Stay Inspired, Join the Experience
           </p>
 
-          {/* Button moved INSIDE the card */}
+        </div>
+
+        {/* Button - MOVED OUTSIDE THE CARD */}
+        <div className="relative z-10">
           <Link href="/our-produces">
             <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-xl py-3 px-8 md:px-12 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
               Explore Our Produce
             </button>
           </Link>
-          
         </div>
+        
       </div>
 
       {/* --- Section 2: Content Body --- */}

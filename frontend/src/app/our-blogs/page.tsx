@@ -151,7 +151,8 @@ const BlogPage = () => {
     <main className={`w-full min-h-screen bg-white ${spartan.variable} font-spartan`}>
       
       {/* --- Section 1: Banner --- */}
-      <div className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+      {/* Added flex-col and gap-8 to stack card and button */}
+      <div className="relative w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8">
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -164,27 +165,27 @@ const BlogPage = () => {
           />
         </div>
 
-        {/* Glassmorphism Card 
-            Styles applied: bg-[#1e3a1e]/30, backdrop-blur-md, border-white/20, rounded-[30px]
-        */}
+        {/* Glassmorphism Card */}
         <div className="relative z-10 w-[95%] max-w-7xl bg-[#1e3a1e]/30 backdrop-blur-md rounded-[30px] flex flex-col items-center justify-center text-center px-6 py-12 md:py-16 shadow-2xl border border-white/20">
           
           <h1 className="text-white text-3xl md:text-[50px] font-bold leading-tight mb-4 drop-shadow-md">
             Our Blogs
           </h1>
           
-          <p className="text-[#d4c596] text-base md:text-[24px] font-bold tracking-wide drop-shadow-md mb-8 md:mb-10">
+          <p className="text-[#d4c596] text-base md:text-[24px] font-bold tracking-wide drop-shadow-md">
             Read the latest culinary stories from experts
           </p>
+        </div>
 
-          {/* Button - Moved Inside the Card */}
+        {/* Button - MOVED OUTSIDE THE CARD */}
+        <div className="relative z-10">
           <Link href="/our-produces">
             <button className="bg-white hover:bg-gray-100 text-[#1a3c1a] font-bold text-sm md:text-lg py-3 px-8 md:px-10 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
               Explore Our Produce
             </button>
           </Link>
-
         </div>
+
       </div>
 
       {/* --- Section 2: Latest Feature (Watering Can) --- */}

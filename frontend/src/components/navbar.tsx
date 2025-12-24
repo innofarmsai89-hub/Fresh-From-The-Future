@@ -28,14 +28,14 @@ const spartan = League_Spartan({
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
-  // NEW: State to track which mobile submenu is open
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
   
+  // 1. Get current path
   const pathname = usePathname();
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setMobileSubmenuOpen(null); // Reset submenus on page change
+    setMobileSubmenuOpen(null); 
   }, [pathname]);
 
   const navLinks: NavLink[] = [
@@ -56,20 +56,42 @@ export default function Navbar() {
     },
   ];
 
-  const isActiveLink = (href: string) => pathname === href;
+  // 2. LOGIC: Check if link is active
+  const isActiveLink = (href: string) => {
+    if (!pathname) return false;
+    // Exact match (e.g. /about-us)
+    if (pathname === href) return true;
+    // Sub-path match (e.g. /about-us/team), avoiding false positives like /about-us-more
+    if (href !== '/' && pathname.startsWith(href)) {
+       const charAfter = pathname.charAt(href.length);
+       if (charAfter === '/' || charAfter === '') return true;
+    }
+    return false;
+  };
   
   const isParentActive = (items?: DropdownItem[]) => {
-    return items ? items.some(item => pathname === item.href) : false;
+    return items ? items.some(item => isActiveLink(item.href)) : false;
   };
 
-  // NEW: Handler for mobile link clicks
+  // Mobile UX: Automatically expand submenu if on child page
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      const activeParent = navLinks.find(link => link.dropdownItems && isParentActive(link.dropdownItems));
+      if (activeParent) {
+        setMobileSubmenuOpen(activeParent.name);
+      }
+    } else {
+      setMobileSubmenuOpen(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMobileMenuOpen, pathname]);
+
   const handleMobileLinkClick = (e: React.MouseEvent, link: NavLink) => {
     if (link.hasDropdown) {
-      e.preventDefault(); // Prevent navigation for dropdown parents
-      // Toggle the submenu: if it's already open, close it (set to null), otherwise open it
+      e.preventDefault(); 
       setMobileSubmenuOpen(prev => prev === link.name ? null : link.name);
     } else {
-      setIsMobileMenuOpen(false); // Close entire menu for regular links
+      setIsMobileMenuOpen(false); 
     }
   };
 
@@ -110,14 +132,16 @@ export default function Navbar() {
             {navLinks.map((link: NavLink, index: number) => {
                 const isCurrent = isActiveLink(link.href);
                 const isCurrentParent = link.dropdownItems ? isParentActive(link.dropdownItems) : false;
+                const isActive = isCurrent || isCurrentParent;
                 
+                // 3. STYLING: UPDATED FONT SIZES (+10%)
                 const linkClasses = `
-                  relative flex items-center gap-0.5 lg:gap-1 font-normal leading-[100%] tracking-normal transition-colors whitespace-nowrap
-                  text-[10px] min-[900px]:text-[11px] lg:text-[13px] min-[1100px]:text-[15px] xl:text-[17px] 2xl:text-[19px] min-[1750px]:text-[22px]
-                  ${(isCurrent || isCurrentParent) ? 'text-[#E3572B]' : 'text-[#1E1E1E] hover:text-[#E3572B]'}
+                  relative flex items-center gap-0.5 lg:gap-1 leading-[100%] tracking-normal transition-colors whitespace-nowrap
+                  text-[10px] min-[900px]:text-[11px] lg:text-[12.5px] min-[1100px]:text-[14.5px] xl:text-[16.5px] 2xl:text-[19px] min-[1750px]:text-[21px]
+                  ${isActive ? 'text-[#E3572B] font-semibold' : 'text-[#1E1E1E] font-normal hover:text-[#E3572B]'}
                   
                   after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:bg-[#E3572B] after:transition-all after:duration-300
-                  ${(isCurrent || isCurrentParent) ? 'after:w-full' : 'after:w-0 hover:after:w-full'}
+                  ${isActive ? 'after:w-full' : 'after:w-0 hover:after:w-full'}
                 `;
 
                 if (link.dropdownItems) {
@@ -127,27 +151,29 @@ export default function Navbar() {
                             {link.name}
                             <FiChevronDown 
                               className={`
-                                w-[14px] h-[14px] 
-                                lg:w-4 lg:h-4 
-                                min-[1100px]:w-[18px] min-[1100px]:h-[18px]
-                                xl:w-5 xl:h-5 
+                                w-[12px] h-[12px] 
+                                lg:w-[14px] lg:h-[14px] 
+                                min-[1100px]:w-[16px] min-[1100px]:h-[16px]
+                                xl:w-[18px] xl:h-[18px] 
                                 stroke-[2] transition-transform duration-300
-                                ${(isCurrent || isCurrentParent) ? 'text-[#E3572B]' : 'text-[#1E1E1E] group-hover:text-[#E3572B]'}
+                                ${isActive ? 'text-[#E3572B]' : 'text-[#1E1E1E] group-hover:text-[#E3572B]'}
                                 group-hover:rotate-180
                               `} 
                             />
                         </Link>
                         
-                        <div className="absolute top-[75%] left-1/2 -translate-x-1/2 w-[180px] lg:w-[200px] xl:w-[240px] bg-white shadow-xl rounded-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden flex flex-col text-left">
+                        {/* Dropdown Menu */}
+                        <div className="absolute top-[75%] left-1/2 -translate-x-1/2 w-[160px] lg:w-[180px] xl:w-[210px] bg-white shadow-xl rounded-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 overflow-hidden flex flex-col text-left py-2">
                             {link.dropdownItems.map((subLink, subIndex) => {
                                 const isChildActive = isActiveLink(subLink.href);
                                 return (
                                   <Link
                                       key={subIndex}
                                       href={subLink.href}
-                                      className={`block px-4 py-3 lg:px-5 lg:py-3 xl:px-6 xl:py-4 transition-colors font-normal border-b border-gray-50 last:border-0 hover:bg-[#F9F9F9] hover:text-[#E3572B]
-                                        text-[13px] lg:text-[14px] xl:text-[16px]
-                                        ${isChildActive ? 'text-[#E3572B]' : 'text-[#1E1E1E]'}
+                                      // UPDATED DROPDOWN FONT SIZES
+                                      className={`block px-4 py-3 lg:px-5 lg:py-3 xl:px-6 xl:py-3.5 transition-colors border-b border-gray-50 last:border-0 hover:bg-[#FFF6F2] hover:text-[#E3572B]
+                                        text-[12px] lg:text-[13.5px] xl:text-[15.5px]
+                                        ${isChildActive ? 'text-[#E3572B] bg-[#FFF6F2] font-semibold' : 'text-[#1E1E1E] font-normal'}
                                       `}
                                   >
                                       {subLink.name}
@@ -171,16 +197,16 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2 lg:gap-2 min-[1100px]:gap-3 xl:gap-6 shrink-0">
             <Link href="/subscription">
               <button className={`
-                  rounded-[40px] border-[1.5px] font-medium transition-all whitespace-nowrap leading-[100%]
+                  rounded-[40px] border-[1.5px] transition-all whitespace-nowrap leading-[100%]
                   px-3 py-2 text-[9px] 
-                  min-[900px]:px-4 min-[900px]:py-3 min-[900px]:text-[11px]    
-                  lg:px-4 lg:py-2 lg:text-[12px] min-[1100px]:px-5 min-[1100px]:py-3 min-[1100px]:text-[14px]
-                  xl:px-8 xl:py-4 xl:text-[16px] 
-                  2xl:px-8 2xl:py-4 2xl:text-[18px] 
-                  min-[1750px]:px-10 min-[1750px]:py-5 min-[1750px]:text-[20px]
+                  min-[900px]:px-4 min-[900px]:py-2.5 min-[900px]:text-[10px]    
+                  lg:px-4 lg:py-2 lg:text-[11px] min-[1100px]:px-5 min-[1100px]:py-2.5 min-[1100px]:text-[13.5px]
+                  xl:px-6 xl:py-3 xl:text-[15.5px] 
+                  2xl:px-7 2xl:py-3.5 2xl:text-[18px] 
+                  min-[1750px]:px-9 min-[1750px]:py-4 min-[1750px]:text-[19px]
                   ${isActiveLink('/subscription') 
-                    ? 'bg-[#E3572B] text-white border-[#E3572B]' 
-                    : 'border-[#E3572B] text-[#E3572B] hover:bg-[#E3572B] hover:text-white'}
+                    ? 'bg-[#E3572B] text-white border-[#E3572B] font-semibold' 
+                    : 'border-[#E3572B] text-[#E3572B] hover:bg-[#E3572B] hover:text-white font-medium'}
               `}>
                   Subscription Plan
               </button>
@@ -188,16 +214,16 @@ export default function Navbar() {
 
             <Link href="/contact-us">
               <button className={`
-                  rounded-[40px] border-[1.5px] font-medium transition-all whitespace-nowrap leading-[100%]
+                  rounded-[40px] border-[1.5px] transition-all whitespace-nowrap leading-[100%]
                   px-3 py-2 text-[9px]
-                  min-[900px]:px-4 min-[900px]:py-3 min-[900px]:text-[11px]
-                  lg:px-4 lg:py-2 lg:text-[12px] min-[1100px]:px-5 min-[1100px]:py-3 min-[1100px]:text-[14px]
-                  xl:px-8 xl:py-4 xl:text-[16px] 
-                  2xl:px-8 2xl:py-4 2xl:text-[18px]
-                  min-[1750px]:px-10 min-[1750px]:py-5 min-[1750px]:text-[20px]
+                  min-[900px]:px-4 min-[900px]:py-2.5 min-[900px]:text-[10px]
+                  lg:px-4 lg:py-2 lg:text-[11px] min-[1100px]:px-5 min-[1100px]:py-2.5 min-[1100px]:text-[13.5px]
+                  xl:px-6 xl:py-3 xl:text-[15.5px] 
+                  2xl:px-7 2xl:py-3.5 2xl:text-[18px]
+                  min-[1750px]:px-9 min-[1750px]:py-4 min-[1750px]:text-[19px]
                   ${isActiveLink('/contact-us') 
-                    ? 'bg-[#3D550C] text-white border-[#3D550C]' 
-                    : 'border-[#3D550C] text-[#3D550C] hover:bg-[#3D550C] hover:text-white'}
+                    ? 'bg-[#3D550C] text-white border-[#3D550C] font-semibold' 
+                    : 'border-[#3D550C] text-[#3D550C] hover:bg-[#3D550C] hover:text-white font-medium'}
               `}>
                   Contact us
               </button>
@@ -206,7 +232,7 @@ export default function Navbar() {
 
         {/* --- Mobile Menu Toggle --- */}
         <button 
-            className="md:hidden text-[#3D550C] text-[45px] p-2"
+            className="md:hidden text-[#3D550C] text-[40px] p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
         >
@@ -221,37 +247,40 @@ export default function Navbar() {
           ${isMobileMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-5'}
           top-[90px] bottom-0
       `}>
-        <div className="p-6 flex flex-col gap-6 overflow-y-auto h-full pb-24">
+        <div className="p-6 flex flex-col gap-5 overflow-y-auto h-full pb-24">
              {navLinks.map((link: NavLink, index: number) => {
-                const isCurrent = isActiveLink(link.href) || (link.dropdownItems ? isParentActive(link.dropdownItems) : false);
+                const isCurrent = isActiveLink(link.href);
+                const isParent = link.dropdownItems ? isParentActive(link.dropdownItems) : false;
+                const isHighlighted = isCurrent || isParent;
                 const isSubmenuOpen = mobileSubmenuOpen === link.name;
                 
                 return (
-                  <div key={index} className="flex flex-col border-b border-gray-100 pb-4">
-                      {/* Parent Link / Button */}
+                  <div key={index} className="flex flex-col border-b border-gray-100 pb-3">
+                      {/* Parent Link / Button - Font Increased from 17px to 19px */}
                       <Link 
                           href={link.href}
-                          className={`flex items-center justify-between text-[20px] font-normal leading-[100%] py-2 transition-colors
-                            ${isCurrent ? 'text-[#E3572B]' : 'text-[#1E1E1E] hover:text-[#E3572B]'}
+                          className={`flex items-center justify-between text-[19px] leading-[100%] py-2 transition-colors
+                            ${isHighlighted ? 'text-[#E3572B] font-semibold' : 'text-[#1E1E1E] font-normal hover:text-[#E3572B]'}
                           `}
                           onClick={(e) => handleMobileLinkClick(e, link)}
                       >
                           {link.name}
                           {link.hasDropdown && (
                              <FiChevronDown 
-                                className={`w-9 h-9 transition-transform duration-300 
-                                  ${isCurrent ? 'text-[#E3572B]' : 'text-[#1E1E1E]'} 
+                                className={`w-7 h-7 transition-transform duration-300 
+                                  ${isHighlighted ? 'text-[#E3572B]' : 'text-[#1E1E1E]'} 
                                   ${isSubmenuOpen ? 'rotate-180' : 'rotate-0'}
                                 `} 
                              />
                           )}
                       </Link>
                       
-                      {/* Submenu Items (Conditionally Rendered) */}
+                      {/* Submenu Items - Font Increased from 15px to 17px */}
                       {link.dropdownItems && (
                           <div className={`
-                              flex flex-col pl-6 gap-4 border-l-2 border-gray-100 ml-1 overflow-hidden transition-all duration-300 ease-in-out
-                              ${isSubmenuOpen ? 'max-h-[500px] mt-4 opacity-100' : 'max-h-0 mt-0 opacity-0'}
+                              flex flex-col pl-6 gap-3 border-l-2 ml-1 overflow-hidden transition-all duration-300 ease-in-out
+                              ${isSubmenuOpen ? 'max-h-[500px] mt-3 opacity-100' : 'max-h-0 mt-0 opacity-0'}
+                              ${isHighlighted ? 'border-[#E3572B]/30' : 'border-gray-100'}
                           `}>
                               {link.dropdownItems.map((subLink, subIndex) => {
                                   const isChildActive = isActiveLink(subLink.href);
@@ -259,8 +288,10 @@ export default function Navbar() {
                                     <Link
                                         key={subIndex}
                                         href={subLink.href}
-                                        className={`text-[17px] font-normal transition-colors py-1
-                                          ${isChildActive ? 'text-[#E3572B]' : 'text-[#555] hover:text-[#E3572B]'}
+                                        className={`text-[17px] transition-colors py-1
+                                          ${isChildActive 
+                                            ? 'text-[#E3572B] font-semibold' 
+                                            : 'text-[#555] font-normal hover:text-[#E3572B]'}
                                         `}
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
@@ -275,20 +306,21 @@ export default function Navbar() {
             })}
             
             <div className="flex flex-col gap-4 mt-4">
+                {/* Mobile Buttons - Font Increased from 15px to 17px */}
                 <Link href="/subscription" onClick={() => setIsMobileMenuOpen(false)}>
-                    <button className={`w-full px-5 py-4 rounded-[40px] border-[1.5px] font-medium text-[18px] leading-[100%] transition-all
+                    <button className={`w-full px-5 py-3.5 rounded-[40px] border-[1.5px] text-[17px] leading-[100%] transition-all
                         ${isActiveLink('/subscription') 
-                          ? 'bg-[#E3572B] text-white border-[#E3572B]' 
-                          : 'border-[#E3572B] text-[#E3572B] hover:bg-[#E3572B] hover:text-white'}
+                          ? 'bg-[#E3572B] text-white border-[#E3572B] font-semibold' 
+                          : 'border-[#E3572B] text-[#E3572B] hover:bg-[#E3572B] hover:text-white font-medium'}
                     `}>
                         Subscription Plan
                     </button>
                 </Link>
                 <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)}>
-                    <button className={`w-full px-5 py-4 rounded-[40px] border-[1.5px] font-medium text-[18px] leading-[100%] transition-all
+                    <button className={`w-full px-5 py-3.5 rounded-[40px] border-[1.5px] text-[17px] leading-[100%] transition-all
                         ${isActiveLink('/contact-us') 
-                          ? 'bg-[#3D550C] text-white border-[#3D550C]' 
-                          : 'border-[#3D550C] text-[#3D550C] hover:bg-[#3D550C] hover:text-white'}
+                          ? 'bg-[#3D550C] text-white border-[#3D550C] font-semibold' 
+                          : 'border-[#3D550C] text-[#3D550C] hover:bg-[#3D550C] hover:text-white font-medium'}
                     `}>
                         Contact us
                     </button>

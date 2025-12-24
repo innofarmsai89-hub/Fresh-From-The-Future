@@ -46,9 +46,9 @@ const ProduceSection = () => {
     />
   </div>
 
-  {/* Glass Container (Button Removed) */}
+  {/* Glass Container (Width Increased) */}
   <div
-    className="relative z-10 w-[90%] max-w-5xl rounded-[30px] px-6 py-16 text-center shadow-lg"
+    className="relative z-10 w-[95%] max-w-7xl rounded-[30px] px-6 py-16 text-center shadow-lg"
     style={{
       background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
       backdropFilter: 'blur(40px)',
@@ -60,7 +60,6 @@ const ProduceSection = () => {
     <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md">
       Our Produces
     </h2>
-    {/* Removed large bottom margin (mb-12) since button is gone */}
     <p className="text-[#e8e0b5] text-lg md:text-2xl font-medium tracking-wide drop-shadow-sm">
       Every crop cultivated with care, freshness, and precision.
     </p>

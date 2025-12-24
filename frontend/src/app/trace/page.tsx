@@ -76,6 +76,7 @@ const ScanToExplore = () => {
     <section className="w-full bg-white py-16 md:py-24 px-4 font-spartan">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         
+        {/* Header Section */}
         <div className="text-center mb-12 max-w-4xl">
           <h2 className="text-[#3c5922] text-3xl md:text-5xl font-bold mb-4 leading-tight">
             Scan to Explore the Crop Journey
@@ -85,7 +86,8 @@ const ScanToExplore = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12 w-full px-2 md:px-0">
+        {/* Image Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10 w-full px-2 md:px-0">
           {images.map((src, index) => (
             <div 
               key={index} 
@@ -101,8 +103,10 @@ const ScanToExplore = () => {
           ))}
         </div>
 
-        <div className="max-w-5xl text-center">
-          <p className="text-gray-700 text-base md:text-[19px] leading-relaxed md:leading-loose">
+        {/* --- Description Section --- */}
+        {/* Changed: w-full (to match grid width), removed max-w-5xl, increased font size */}
+        <div className="w-full text-left px-2 md:px-0">
+          <p className="text-gray-700 text-sm md:text-lg leading-relaxed md:leading-relaxed font-medium">
             Transparency is at the heart of Fresh From The Future. Each pack carries a Traceability QR Code that unlocks the full story of your greens; where they were grown, the seed used, when they were planted, transplanted, and harvested, how their health improved over time, and the positive environmental impact along the way.
           </p>
         </div>
