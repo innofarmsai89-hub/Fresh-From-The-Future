@@ -112,7 +112,8 @@ export default function Footer() {
       >
         {/* Left Column: Brand Info */}
         <div className="lg:w-[30%] xl:w-[35%] flex flex-col items-center lg:items-start text-center lg:text-left">
-          {/* Logo */}
+          
+          {/* Logo Container */}
           <div
             className="relative 
               w-[150px] h-[128px]
@@ -121,7 +122,7 @@ export default function Footer() {
               md:w-[210px] md:h-[179px]
               lg:w-[200px] lg:h-[170px]
               xl:w-[240px] xl:h-[204px]
-              mb-4 sm:mb-5 md:mb-6"
+              mb-1 sm:mb-2" // CHANGED: Reduced margin from mb-4/6 to mb-1/2
           >
             <Image
               src="/images/home/company-logo.png"

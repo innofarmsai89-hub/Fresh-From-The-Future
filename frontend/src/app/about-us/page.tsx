@@ -16,22 +16,21 @@ export default function AboutUs() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-
   const glassStyle = {
-  background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.045) 77.08%, rgba(70, 144, 213, 0) 100%)`,
-  backdropFilter: "blur(40px)",
-  WebkitBackdropFilter: "blur(40px)", // Safari support
-  backgroundBlendMode: "overlay, normal",
-  border: "1px solid rgba(255, 255, 255, 0.2)",
-};
-  // --- Data Constants ---
+    background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.045) 77.08%, rgba(70, 144, 213, 0) 100%)`,
+    backdropFilter: "blur(40px)",
+    WebkitBackdropFilter: "blur(40px)",
+    backgroundBlendMode: "overlay, normal",
+    border: "1px solid rgba(255, 255, 255, 0.2)",
+  };
+
   // --- Data Constants ---
   const feedbacks = [
     {
       name: "Bricks and Beans",
       image: "/images/about/feedback-1.png",
       review:
-        "Exceptional greens! Noticeably fresher, brighter, and better textured than whatever we’ve used before.",
+        "Exceptional greens! Noticeably fresher, brighter, and better textured than whatever we've used before.",
     },
     {
       name: "The Big Tree",
@@ -43,7 +42,7 @@ export default function AboutUs() {
       name: "Wine Company",
       image: "/images/about/feedback-3.png",
       review:
-        "These are the freshest, best-tasting greens I’ve ever received. The traceability is next-level — it shows the whole crop journey and even the environmental impact.",
+        "These are the freshest, best-tasting greens I've ever received. The traceability is next-level — it shows the whole crop journey and even the environmental impact.",
     },
     {
       name: "Cafe Soul Garden",
@@ -89,7 +88,7 @@ export default function AboutUs() {
     },
     {
       question:
-        "What makes Fresh From The Future’s produce different from regular?",
+        "What makes Fresh From The Future's produce different from regular?",
       answer:
         "Unlike regular produce, ours is AI-optimized for flavor and nutrition. It is cleaner, fresher (harvested same-day), and offers unique chef-curated varieties not found in traditional markets.",
     },
@@ -97,52 +96,54 @@ export default function AboutUs() {
 
   return (
     <main className="w-full overflow-x-hidden bg-white">
-     {/* --- 1. Hero Section (Glassmorphism) --- */}
-<section className="relative w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8">
-  <div className="absolute inset-0 z-0">
-    <Image
-      src="/images/about/about-bg.png"
-      alt="About Us Leafy Background"
-      fill
-      className="object-cover"
-      priority
-    />
-  </div>
+      {/* --- 1. Hero Section --- */}
+      <section className="relative w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/about/about-bg.png"
+            alt="About Us Leafy Background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
 
-  {/* Glass Container (Button Removed) */}
-  <div
-    className="relative z-10 w-[90%] max-w-[1277px] min-h-[180px] rounded-[30px] flex flex-col items-center justify-center text-center px-6 py-10"
-    style={{
-      background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
-      backdropFilter: "blur(40px)",
-      WebkitBackdropFilter: "blur(40px)",
-      backgroundBlendMode: "overlay, normal",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-    }}
-  >
-    <h1 className="font-spartan font-bold text-[36px] md:text-[48px] leading-[54px] text-white mb-2 drop-shadow-md">
-      About Us
-    </h1>
-    {/* Removed mb-8 to reduce empty space at bottom of glass since button is gone */}
-    <h2 className="font-spartan font-bold text-[20px] md:text-[32px] leading-[1.4] text-[#DCBC88] drop-shadow-sm">
-      The Future of Farming, Delivered Fresh
-    </h2>
-  </div>
+        {/* Glass Container */}
+        <div
+          className="relative z-10 w-[90%] max-w-[1277px] min-h-[180px] rounded-[30px] flex flex-col items-center justify-center text-center px-6 py-10"
+          style={{
+            background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
+            backdropFilter: "blur(40px)",
+            WebkitBackdropFilter: "blur(40px)",
+            backgroundBlendMode: "overlay, normal",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+          }}
+        >
+          <h1 className="font-spartan font-bold text-[36px] md:text-[48px] leading-[54px] text-white mb-2 drop-shadow-md">
+            About Us
+          </h1>
+          <h2 className="font-spartan font-bold text-[20px] md:text-[32px] leading-[1.4] text-[#DCBC88] drop-shadow-sm">
+            The Future of Farming, Delivered Fresh
+          </h2>
+        </div>
 
-  {/* Button (Moved Outside) */}
-  <Link
-    href="/our-produces"
-    className="relative z-10 bg-white text-[#3D550C] font-outfit font-medium text-[16px] md:text-[18px] px-8 py-3 rounded-full hover:bg-gray-100 transition-colors shadow-lg"
-  >
-    Explore Our Produce
-  </Link>
-</section>
+        {/* Button */}
+        <Link
+          href="/our-produces"
+          className="relative z-10 bg-white text-[#3D550C] font-outfit font-medium text-[16px] md:text-[18px] px-8 py-3 rounded-full hover:bg-gray-100 transition-colors shadow-lg"
+        >
+          Explore Our Produce
+        </Link>
+      </section>
 
       {/* --- 2. Main Content (About & Pod) --- */}
-      <section className="w-full bg-white py-20 lg:py-32">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-[100px] flex flex-col gap-32">
+      {/* --- 2. Main Content (About & Pod) --- */}
+      <section className="w-full bg-white py-16 lg:py-24">
+        {/* Container for Part A and Part B */}
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-[100px] flex flex-col gap-12 lg:gap-0">
+          
           {/* Part A: About Fresh From The Future */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="flex flex-col order-2 lg:order-1 max-w-[654px]">
               <h2 className="font-spartan font-bold text-[40px] lg:text-[54px] leading-[1.1] lg:leading-[60px] text-[#3D550C] mb-8">
                 About <br className="hidden lg:block" />
@@ -170,7 +171,8 @@ export default function AboutUs() {
                 </p>
               </div>
             </div>
-            <div className="relative w-full h-[500px] lg:h-[700px] rounded-[30px] overflow-hidden shadow-xl order-1 lg:order-2">
+            {/* UPDATED: Height reduced to 600px to tighten space */}
+            <div className="relative w-full h-[400px] lg:h-[600px] rounded-[30px] overflow-hidden shadow-xl order-1 lg:order-2">
               <Image
                 src="/images/about/about-2.png"
                 alt="Chef Plating Fresh Greens"
@@ -181,17 +183,23 @@ export default function AboutUs() {
           </div>
 
           {/* Part B: The INNOGrowPod */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+         {/* Part B: The INNOGrowPod */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Image & Caption */}
             <div className="flex flex-col order-1">
-              <div className="relative w-full h-[400px] lg:h-[550px] rounded-[30px] overflow-hidden mb-6 bg-gray-50">
+              {/* UPDATED: Height reduced from 1000px to 750px to remove top whitespace */}
+              <div className="relative w-full h-[500px] lg:h-[750px]">
                 <Image
                   src="/images/about/about-3.png"
                   alt="INNOGrowPod AI Farming Unit"
                   fill
-                  className="object-contain p-8"
+                  className="object-contain scale-125" 
+                  priority
                 />
               </div>
-              <div className="pl-4">
+              {/* Adjusted caption position slightly */}
+              <div className="text-center w-full px-4 mt-8">
                 <h4 className="font-spartan font-bold text-[20px] leading-[34px] text-[#1E1E1E] mb-1">
                   Nespresso of Vertical Farming
                 </h4>
@@ -200,6 +208,8 @@ export default function AboutUs() {
                 </p>
               </div>
             </div>
+
+            {/* Right Column: Text Content */}
             <div className="flex flex-col order-2 max-w-[621px]">
               <h2 className="font-spartan font-bold text-[40px] lg:text-[54px] leading-[1.1] lg:leading-[60px] text-[#3D550C] mb-8">
                 The INNOGrowPod™
@@ -218,6 +228,7 @@ export default function AboutUs() {
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -295,22 +306,17 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {feedbacks.map((item, index) => (
               <div key={index} className="flex flex-col items-center">
-                {/* Image Container with Hover Effect */}
                 <div className="relative w-full aspect-[393/208] rounded-[10px] overflow-hidden mb-6 shadow-md group cursor-default">
-                  {/* Background Image - Slower Zoom (1000ms) */}
                   <Image
                     src={item.image}
                     alt={`${item.name} Feedback`}
                     fill
                     className="object-cover transition-transform duration-1000 ease-in-out group-hover:scale-110"
                   />
-
-                  {/* Hover Overlay - Slower Fade (700ms) */}
                   <div
                     className="absolute inset-0 bg-[#DCBC88] bg-opacity-95 flex items-center justify-center p-6 
                                           opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out"
                   >
-                    {/* Review Text - Updated to exact design specs */}
                     <p
                       className="font-spartan font-normal text-[18px] leading-[34px] tracking-normal text-[#1E1E1E] text-center 
                                             translate-y-4 group-hover:translate-y-0 transition-transform duration-700 ease-out delay-100"
@@ -319,7 +325,6 @@ export default function AboutUs() {
                     </p>
                   </div>
                 </div>
-
                 <h3 className="font-spartan font-bold text-[24px] lg:text-[30px] leading-[34px] text-[#3D550C] text-center">
                   {item.name}
                 </h3>
@@ -329,7 +334,8 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* --- 5. FAQ Section --- */}
+    
+     {/* --- 5. FAQ Section --- */}
       <section className="w-full bg-white py-20 lg:py-24">
         <div className="max-w-[1258px] mx-auto px-6">
           <div className="text-center mb-16">
@@ -359,7 +365,7 @@ export default function AboutUs() {
                           `}
                 >
                   <div className="flex items-center justify-between px-8 py-6 lg:h-[90px]">
-                    <h3 className="font-outfit font-bold text-[18px] lg:text-[24px] leading-[30px] text-[#1E1E1E]">
+                    <h3 className="font-outfit font-medium text-[18px] lg:text-[24px] leading-[30px] text-[#1E1E1E]">
                       {index + 1}. {faq.question}
                     </h3>
                     <div className="shrink-0 ml-4">
@@ -379,7 +385,9 @@ export default function AboutUs() {
                     }`}
                   >
                     <div className="border-t border-[#DCBC88] mb-6 w-full opacity-30"></div>
-                    <p className="font-outfit font-normal text-[18px] lg:text-[24px] leading-[30px] text-[#313638]">
+                    
+                    {/* CHANGED: Reduced text size (text-[16px] lg:text-[20px]) */}
+                    <p className="font-outfit font-normal text-[16px] lg:text-[20px] leading-[30px] text-[#313638]">
                       {faq.answer}
                     </p>
                   </div>
@@ -392,8 +400,6 @@ export default function AboutUs() {
 
       {/* --- 6. Contact Form Section --- */}
       <ContactSection />
-
-
     </main>
   );
 }

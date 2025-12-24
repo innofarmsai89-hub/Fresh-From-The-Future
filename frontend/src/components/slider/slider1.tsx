@@ -27,8 +27,8 @@ const Slider1 = () => {
         {/* Left Side: Text Content */}
         <div className="w-full lg:w-[60%] flex flex-col justify-center">
           
-          <span className="block text-[#DCBC88] font-bold tracking-[0.18em] text-[16px] md:text-[20px] mb-3 uppercase">
-            Beyond Organic • Traceable • Hyper-Local
+          <span className="block text-[#DCBC88] font-bold tracking-[0.18em] text-[16px] md:text-[32px] mb-3 uppercase">
+            Beyond Organic•Traceable•Hyper-Local
           </span>
 
           <h1 className="font-bold text-[36px] md:text-[48px] lg:text-[54px] leading-[1.15] text-white mb-4">
