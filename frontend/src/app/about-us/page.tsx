@@ -6,6 +6,7 @@ import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Link from "next/link";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import ContactSection from "@/components/getInTouch";
 
 export default function AboutUs() {
   // --- State for FAQ Accordion ---
@@ -390,75 +391,9 @@ export default function AboutUs() {
       </section>
 
       {/* --- 6. Contact Form Section --- */}
-      <section className="py-20 max-w-[1440px] mx-auto px-6 mb-20">
-        <div className="bg-white rounded-[60px] shadow-xl p-12 md:p-20 relative border border-gray-100">
-          <div className="text-center mb-10">
-            <h2 className="font-spartan font-bold text-[42px] md:text-[54px] text-[#3D550C] mb-2">
-              Get in Touch
-            </h2>
-            <p className="font-spartan text-xl text-[#1E1E1E]">
-              We’d love to hear from you—whether it’s a question, feedback, or
-              collaboration.
-            </p>
-          </div>
+      <ContactSection />
 
-          <div className="max-w-4xl mx-auto">
-            <h3 className="font-signika font-medium text-[36px] text-[#404A3D] mb-8">
-              Send a message
-            </h3>
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="font-roboto text-[15px] text-[#6C757D] mb-2 block">
-                  Your Name *
-                </label>
-                <input
-                  type="text"
-                  className="w-full h-[58px] border border-[#3D550C] rounded-[10px] px-4"
-                />
-              </div>
-              <div>
-                <label className="font-roboto text-[15px] text-[#6C757D] mb-2 block">
-                  Your Email *
-                </label>
-                <input
-                  type="email"
-                  className="w-full h-[58px] border border-[#3D550C] rounded-[10px] px-4"
-                />
-              </div>
-              <div>
-                <label className="font-roboto text-[15px] text-[#6C757D] mb-2 block">
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  className="w-full h-[58px] border border-[#3D550C] rounded-[10px] px-4"
-                />
-              </div>
-              <div>
-                <label className="font-roboto text-[15px] text-[#6C757D] mb-2 block">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  className="w-full h-[58px] border border-[#3D550C] rounded-[10px] px-4"
-                />
-              </div>
-              <div className="md:col-span-2">
-                <textarea
-                  className="w-full h-[128px] border border-[#3D550C] rounded-[10px] p-4"
-                  placeholder="Message..."
-                ></textarea>
-              </div>
-              <div className="md:col-span-2">
-                <button className="bg-[#3D550C] text-white px-8 py-4 rounded-[30px] font-signika font-medium flex items-center gap-2 hover:bg-[#2e4009] transition-colors">
-                  Submit Now
-                  <span>→</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
+
     </main>
   );
 }

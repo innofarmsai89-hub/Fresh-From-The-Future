@@ -8,6 +8,7 @@ import Slider2 from '@/components/slider/slider2';
 import Slider3 from '@/components/slider/slider3';
 import Slider4 from '@/components/slider/slider4';
 import Slider5 from '@/components/slider/slider5';
+import ContactSection from '@/components/getInTouch';
 
 
 // Ensure this path is correct based on your project structure
@@ -600,55 +601,7 @@ export default function HomePage() {
       </section>
 
       {/* --- Contact Form Section --- */}
-      <section className="py-20 max-w-[1440px] mx-auto px-6 mb-20">
-          <div className="bg-white rounded-[40px] shadow-[0px_4px_30px_rgba(0,0,0,0.05)] p-8 md:p-16 relative border border-[#EAEAEA]">
-             <div className="text-center mb-12">
-                <h2 className="font-bold text-[40px] md:text-[54px] text-[#3D550C] mb-3">Get in Touch</h2>
-                <p className="text-lg md:text-xl text-[#1E1E1E] font-medium">We’d love to hear from you—whether it’s a question, feedback, or collaboration.</p>
-             </div>
-
-             <div className="max-w-5xl mx-auto">
-                 <h3 className="font-bold text-[32px] text-[#404A3D] mb-8">Send a message</h3>
-                 <form className="flex flex-col gap-6">
-                     
-                     {/* Top Row: Name & Email */}
-                     <div className="flex flex-col md:flex-row gap-6 w-full">
-                        <div className="w-full">
-                             <input type="text" placeholder="Your Name *" className="w-full h-[60px] border border-[#8C9E78] rounded-[12px] px-6 text-lg font-medium text-[#404A3D] placeholder-[#404A3D]/60 focus:outline-none focus:border-[#3D550C]" />
-                        </div>
-                        <div className="w-full">
-                             <input type="email" placeholder="Your Email *" className="w-full h-[60px] border border-[#8C9E78] rounded-[12px] px-6 text-lg font-medium text-[#404A3D] placeholder-[#404A3D]/60 focus:outline-none focus:border-[#3D550C]" />
-                        </div>
-                     </div>
-
-                     {/* Middle Row: Subject & Phone */}
-                     <div className="flex flex-col md:flex-row gap-6 w-full">
-                        <div className="w-full">
-                             <input type="text" placeholder="Subject" className="w-full h-[60px] border border-[#8C9E78] rounded-[12px] px-6 text-lg font-medium text-[#404A3D] placeholder-[#404A3D]/60 focus:outline-none focus:border-[#3D550C]" />
-                        </div>
-                        <div className="w-full">
-                             <input type="tel" placeholder="Phone" className="w-full h-[60px] border border-[#8C9E78] rounded-[12px] px-6 text-lg font-medium text-[#404A3D] placeholder-[#404A3D]/60 focus:outline-none focus:border-[#3D550C]" />
-                        </div>
-                     </div>
-
-                     {/* Message Area */}
-                     <div>
-                         <textarea className="w-full h-[150px] border border-[#8C9E78] rounded-[12px] p-6 text-lg font-medium text-[#404A3D] placeholder-[#404A3D]/60 focus:outline-none focus:border-[#3D550C] resize-none" placeholder="Message..."></textarea>
-                     </div>
-
-                     {/* Submit Button */}
-                     <div className="mt-4">
-                        <button className="bg-[#3D550C] text-white px-10 py-4 rounded-[40px] font-bold text-[18px] flex items-center gap-3 hover:bg-[#2e4009] transition-all shadow-lg">
-                            Submit Now
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="stroke-white">
-                                <path d="M1 13L13 1M13 1H3M13 1V11" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                        </button>
-                     </div>
-                 </form>
-             </div>
-          </div>
-      </section>
+      <ContactSection />
       
     </main>
   );

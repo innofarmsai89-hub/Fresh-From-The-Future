@@ -2,8 +2,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 import { League_Spartan } from 'next/font/google';
+import ContactSection from '@/components/getInTouch'; // Ensure this path is correct
 
 // ==========================================
 // 0. CONFIGURATION & HELPERS
@@ -36,60 +36,58 @@ interface ProduceItem {
 // ==========================================
 const ProduceSection = () => {
   return (
-  <section className="relative w-full h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8">
-  {/* Background Image */}
-  <div className="absolute inset-0 w-full h-full">
-    <img
-      src="/images/ourProduce/Op-bg.png"
-      alt="Fresh produce background"
-      className="w-full h-full object-cover"
-    />
-  </div>
+    <section className="relative w-full h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8 mb-10">
+      {/* Background Image */}
+      <div className="absolute inset-0 w-full h-full">
+        <img
+          src="/images/ourProduce/Op-bg.png"
+          alt="Fresh produce background"
+          className="w-full h-full object-cover"
+        />
+      </div>
 
-  {/* Glass Container (Width Increased) */}
-  <div
-    className="relative z-10 w-[95%] max-w-7xl rounded-[30px] px-6 py-16 text-center shadow-lg"
-    style={{
-      background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
-      backdropFilter: 'blur(40px)',
-      WebkitBackdropFilter: 'blur(40px)',
-      backgroundBlendMode: 'overlay, normal',
-      border: '1px solid rgba(255, 255, 255, 0.2)'
-    }}
-  >
-    <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md">
-      Our Produces
-    </h2>
-    <p className="text-[#e8e0b5] text-lg md:text-2xl font-medium tracking-wide drop-shadow-sm">
-      Every crop cultivated with care, freshness, and precision.
-    </p>
-  </div>
+      {/* Glass Container */}
+      <div
+        className="relative z-10 w-[95%] max-w-7xl rounded-[30px] px-6 py-16 text-center shadow-lg"
+        style={{
+          background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
+          backdropFilter: 'blur(40px)',
+          WebkitBackdropFilter: 'blur(40px)',
+          backgroundBlendMode: 'overlay, normal',
+          border: '1px solid rgba(255, 255, 255, 0.2)'
+        }}
+      >
+        <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-md">
+          Our Produces
+        </h2>
+        <p className="text-[#e8e0b5] text-lg md:text-2xl font-medium tracking-wide drop-shadow-sm">
+          Every crop cultivated with care, freshness, and precision.
+        </p>
+      </div>
 
-  {/* Button (Moved Outside & WhatsApp Logic Added) */}
-  <a
-    href="https://wa.me/919220309252?text=Hello%2C%20I%20would%20like%20to%20request%20samples."
-    target="_blank"
-    rel="noopener noreferrer"
-    className="relative z-10 bg-white text-[#1a3c1e] hover:bg-gray-100 transition-colors duration-300 font-semibold py-3 px-8 rounded-full shadow-md text-lg cursor-pointer"
-  >
-    Get Samples
-  </a>
-</section>
+      {/* Button */}
+      <a
+        href="https://wa.me/919220309252?text=Hello%2C%20I%20would%20like%20to%20request%20samples."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative z-10 bg-white text-[#1a3c1e] hover:bg-gray-100 transition-colors duration-300 font-semibold py-3 px-8 rounded-full shadow-md text-lg cursor-pointer"
+      >
+        Get Samples
+      </a>
+    </section>
   );
 };
 
 // ==========================================
-// 2. SHARED CARD COMPONENT (UPDATED)
+// 2. SHARED CARD COMPONENT
 // ==========================================
 const ProduceCard = ({ item }: { item: ProduceItem }) => {
   const slug = generateSlug(item.title);
-  
-  // Logic: Check if the item is the "Specialty Chef’s Mix"
   const isCustomMix = item.title.includes("Specialty Chef’s Mix");
 
   return (
-    <div className="flex-shrink-0 w-[290px] md:w-[320px] h-[500px] relative group select-none snap-start">
-      <div className="w-full bg-[#ede4d3] rounded-[30px] p-5 pb-8 relative h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+    <div className="flex-shrink-0 w-[290px] md:w-[320px] h-[520px] relative group select-none snap-center md:snap-start py-4">
+      <div className="w-full bg-[#ede4d3] rounded-[30px] p-5 pb-8 relative h-full flex flex-col shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
         
         {/* Image */}
         <div className="w-full h-52 flex-shrink-0 rounded-[20px] overflow-hidden mb-6 bg-[#e0d8c8]">
@@ -108,22 +106,22 @@ const ProduceCard = ({ item }: { item: ProduceItem }) => {
               {item.category}
             </span>
           </div>
-          <h3 className="text-[#e06836] text-2xl md:text-3xl font-bold mb-3 leading-tight line-clamp-2">
+          <h3 className="text-[#e06836] text-2xl font-bold mb-3 leading-tight line-clamp-2">
             {item.title}
           </h3>
-          <p className="text-[#6b6b6b] text-base leading-relaxed line-clamp-4">
+          <p className="text-[#6b6b6b] text-base leading-relaxed line-clamp-3">
             {item.description}
           </p>
         </div>
 
-        {/* Nutrition Button - HIDDEN for Custom Mix */}
+        {/* Nutrition Button */}
         {!isCustomMix && (
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 z-20">
-              <Link href={`/nutrients/${slug}`}>
-                <button className="bg-[#e06836] text-white text-sm font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-[#c95b2e] transition-colors whitespace-nowrap">
-                    Nutrition Info
-                </button>
-              </Link>
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 w-full flex justify-center">
+            <Link href={`/nutrients/${slug}`}>
+              <button className="bg-[#e06836] text-white text-sm font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-[#c95b2e] transition-colors whitespace-nowrap">
+                  Nutrition Info
+              </button>
+            </Link>
           </div>
         )}
       </div>
@@ -147,13 +145,11 @@ const CarouselSection = ({ title, subtitle, items, hasTopBorder = false }: Carou
   const [activePage, setActivePage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  // Calculate pages on mount and resize
   useEffect(() => {
     const calculatePages = () => {
       if (scrollRef.current) {
         const containerWidth = scrollRef.current.clientWidth;
-        // Card width (320) + gap (24) = 344px approximately
-        const itemWidth = 344;
+        const itemWidth = 344; // Card + gap
         const itemsPerPage = Math.floor(containerWidth / itemWidth) || 1;
         const pages = Math.ceil(items.length / itemsPerPage);
         setTotalPages(pages);
@@ -165,7 +161,6 @@ const CarouselSection = ({ title, subtitle, items, hasTopBorder = false }: Carou
     return () => window.removeEventListener('resize', calculatePages);
   }, [items.length]);
 
-  // Handle scroll event to update active dot based on scroll position
   const handleScroll = () => {
     if (scrollRef.current) {
       const container = scrollRef.current;
@@ -177,45 +172,43 @@ const CarouselSection = ({ title, subtitle, items, hasTopBorder = false }: Carou
     }
   };
 
-  // Scroll to specific page window when dot is clicked
   const scrollToPage = (pageIndex: number) => {
     if (scrollRef.current) {
       const container = scrollRef.current;
       const targetScroll = pageIndex * container.clientWidth;
-
-      container.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-      });
+      container.scrollTo({ left: targetScroll, behavior: 'smooth' });
       setActivePage(pageIndex);
     }
   };
 
   return (
-    <section className={`w-full ${hasTopBorder ? 'border-t border-gray-100 pt-20' : ''} pb-12`}>
-      <div className="container mx-auto px-4 mb-12 text-center">
-        <h2 className="text-[#3f5f26] text-5xl md:text-6xl font-bold mb-4">
+    <section className={`w-full max-w-[1440px] mx-auto ${hasTopBorder ? 'border-t border-gray-200 pt-16 md:pt-24' : ''} pb-12`}>
+      <div className="container mx-auto px-6 mb-12 text-center">
+        <h2 className="text-[#3f5f26] text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
           {title}
         </h2>
-        <p className="text-[#6b6b6b] text-xl font-light">
+        <p className="text-[#6b6b6b] text-lg md:text-xl font-light max-w-2xl mx-auto">
           {subtitle}
         </p>
       </div>
 
       {/* Scroll Container */}
-      <div 
-        ref={scrollRef}
-        onScroll={handleScroll}
-        className="flex overflow-x-auto gap-6 px-8 md:px-16 pb-12 pt-4 snap-x snap-mandatory scrollbar-none"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {items.map((item) => (
-          <ProduceCard key={item.id} item={item} />
-        ))}
-        <div className="w-8 flex-shrink-0" />
+      <div className="relative w-full">
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-auto gap-6 px-6 md:px-12 pb-8 pt-4 snap-x snap-mandatory scroll-pl-6 scrollbar-none"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {items.map((item) => (
+            <ProduceCard key={item.id} item={item} />
+          ))}
+          {/* Spacer for right padding */}
+          <div className="w-6 flex-shrink-0" />
+        </div>
       </div>
 
-      {/* Dots Navigation (Pages) */}
+      {/* Dots Navigation */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-3 mt-4">
           {Array.from({ length: totalPages }).map((_, index) => (
@@ -224,8 +217,8 @@ const CarouselSection = ({ title, subtitle, items, hasTopBorder = false }: Carou
               onClick={() => scrollToPage(index)}
               className={`transition-all duration-300 rounded-full ${
                 activePage === index 
-                  ? 'w-4 h-4 bg-[#3f5f26]' // Active: Dark Green
-                  : 'w-4 h-4 bg-[#e0e0e0] hover:bg-[#c0c0c0]' // Inactive: Light Gray
+                  ? 'w-4 h-4 bg-[#3f5f26]' 
+                  : 'w-4 h-4 bg-[#e0e0e0] hover:bg-[#c0c0c0]'
               }`}
               aria-label={`Go to page ${index + 1}`}
             />
@@ -237,7 +230,7 @@ const CarouselSection = ({ title, subtitle, items, hasTopBorder = false }: Carou
 };
 
 // ==========================================
-// 4. DATA
+// 4. DATA 
 // ==========================================
 
 const leafyGreensData: ProduceItem[] = [
@@ -282,57 +275,18 @@ const edibleFlowersData: ProduceItem[] = [
 
 const CustomOrderSection = () => {
   return (
-    <section className="w-full border-t border-gray-100 pt-24 pb-12">
-      <div className="container mx-auto px-4 text-center max-w-6xl">
-        <h2 className="text-[#3f5f26] text-5xl md:text-6xl font-bold mb-6">
+    <section className="w-full max-w-[1440px] mx-auto border-t border-gray-200 pt-24 pb-16 px-6">
+      <div className="container mx-auto text-center max-w-4xl">
+        <h2 className="text-[#3f5f26] text-4xl md:text-5xl font-bold mb-6">
           Customized – on special order
         </h2>
         <p className="text-[#6b6b6b] text-xl font-light mb-16">
           Grown with precision for unmatched flavor and quality.
         </p>
-        <p className="text-gray-600 text-xl md:text-2xl leading-relaxed mx-auto max-w-5xl text-justify md:text-center font-light">
-          From cultivation to harvest and delivery, we meticulously grow, hand-pick, and package each order to cater to your unique crop requirements. To facilitate the timely customized production and delivery of your desired varieties of specialty herbs, rare crops, and edible flowers, please provide 15 to 30 days' advance notice of your needs.
-        </p>
-      </div>
-    </section>
-  );
-};
-
-const GetInTouchSection = () => {
-  return (
-    <section className="w-full border-t border-gray-100 pt-24 pb-32">
-      <div className="container mx-auto px-6 max-w-6xl text-center">
-        <h2 className="text-[#3f5f26] text-5xl md:text-6xl font-bold mb-4">
-          Get in Touch
-        </h2>
-        <p className="text-[#6b6b6b] text-xl font-light mb-16">
-          We’d love to hear from you—whether it’s a question, feedback, or collaboration.
-        </p>
-
-        <div className="w-full max-w-5xl mx-auto text-left">
-          <h3 className="text-[#3e4f30] text-3xl font-bold mb-6 pl-1">
-            Send a message
-          </h3>
-          <form className="space-y-6">
-            <div className="w-full">
-              <textarea 
-                rows={6} 
-                className="w-full p-4 border border-[#8c9e78] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3f5f26] resize-none text-gray-700 text-lg"
-              ></textarea>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input type="text" placeholder="Your Name *" className="w-full p-4 border border-[#8c9e78] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3f5f26] text-gray-700 text-lg" />
-              <input type="email" placeholder="Your Email *" className="w-full p-4 border border-[#8c9e78] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3f5f26] text-gray-700 text-lg" />
-              <input type="text" placeholder="Subject" className="w-full p-4 border border-[#8c9e78] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3f5f26] text-gray-700 text-lg" />
-              <input type="tel" placeholder="Phone" className="w-full p-4 border border-[#8c9e78] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3f5f26] text-gray-700 text-lg" />
-            </div>
-            <div className="mt-8">
-              <button type="button" className="bg-[#3f5f26] hover:bg-[#2f471d] text-white text-lg font-semibold py-4 px-8 rounded-full flex items-center gap-2 transition-colors shadow-lg">
-                Submit Now
-                <ArrowUpRight size={20} />
-              </button>
-            </div>
-          </form>
+        <div className="max-w-3xl mx-auto">
+          <p className="text-gray-600 text-lg md:text-xl leading-relaxed text-center font-light">
+            From cultivation to harvest and delivery, we meticulously grow, hand-pick, and package each order to cater to your unique crop requirements. To facilitate the timely customized production and delivery of your desired varieties of specialty herbs, rare crops, and edible flowers, please provide <span className="font-medium text-[#3f5f26]">15 to 30 days' advance notice</span> of your needs.
+          </p>
         </div>
       </div>
     </section>
@@ -344,7 +298,7 @@ const GetInTouchSection = () => {
 // ==========================================
 export default function OurProducePage() {
   return (
-    <div className={`flex flex-col w-full bg-white gap-24 ${spartan.className}`}>
+    <main className={`flex flex-col w-full bg-white ${spartan.className}`}>
       <ProduceSection />
       
       {/* 1. Leafy Greens */}
@@ -381,7 +335,8 @@ export default function OurProducePage() {
         hasTopBorder={true}
       />
 
-      <GetInTouchSection />
-    </div>
+      {/* 5. Contact Form (Imported Component) */}
+      <ContactSection />
+    </main>
   );
 }

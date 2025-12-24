@@ -1,15 +1,71 @@
 "use client";
 
-import React from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
-// Install react-icons if needed: npm install react-icons
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FiMail, FiPhone } from "react-icons/fi";
 import SubscriptionBanner from "@/components/SubscriptionBanner";
-// import Footer from '@/components/footer'; // Ensure these are imported in your layout or here if needed
-// import Navbar from '@/components/navbar';
+
+// --- Types & Interfaces ---
+interface FormData {
+  name: string;
+  email: string;
+  phone: string; // Added to match backend
+  subject: string;
+  message: string;
+}
+
+interface Status {
+  type: 'idle' | 'loading' | 'success' | 'error';
+  message: string;
+}
 
 export default function ContactUsPage() {
+  // --- State Management ---
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+  });
+
+  const [status, setStatus] = useState<Status>({ type: 'idle', message: '' });
+
+  // --- Handlers ---
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus({ type: 'loading', message: 'Sending message...' });
+
+    try {
+      // Ensure your backend is running on port 5000
+      const response = await fetch('http://localhost:5000/api/contact/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus({ type: 'success', message: 'Message sent successfully!' });
+        // Clear form
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      } else {
+        setStatus({ type: 'error', message: data.message || 'Something went wrong.' });
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus({ type: 'error', message: 'Failed to connect to the server.' });
+    }
+  };
+
   return (
     <main className="w-full bg-white overflow-x-hidden">
       {/* --- 1. Hero Section --- */}
@@ -45,7 +101,7 @@ export default function ContactUsPage() {
           </div>
         </div>
 
-        {/* Button - Now wrapped in an anchor tag for WhatsApp */}
+        {/* WhatsApp Button */}
         <a
           href="https://wa.me/919220309252?text=Hello!%20I%20am%20interested%20in%20getting%20some%20samples.%20Could%20you%20please%20assist%20me%20with%20the%20process?"
           target="_blank"
@@ -56,7 +112,7 @@ export default function ContactUsPage() {
         </a>
       </section>
 
-      {/* --- 2. Get In Touch Section --- */}
+      {/* --- 2. Get In Touch Section (Form) --- */}
       <section className="w-full py-20 bg-white">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-[60px]">
           {/* Section Header */}
@@ -91,60 +147,105 @@ export default function ContactUsPage() {
                 <h2 className="font-montserrat font-bold text-[28px] lg:text-[32px] leading-[39px] text-white uppercase">
                   Contact us and tell us how we can assist!
                 </h2>
-                {/* Little white dash */}
                 <div className="w-[30px] h-[4px] bg-white mt-4"></div>
               </div>
 
-              {/* Form Fields */}
-              <form className="flex flex-col gap-8">
+              {/* Functional Form */}
+              <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+                
                 {/* Name */}
                 <div className="flex flex-col gap-2">
-                  <label className="font-open-sans font-normal text-[18px] text-white">
+                  <label htmlFor="name" className="font-open-sans font-normal text-[18px] text-white">
                     Full Name
                   </label>
                   <input
+                    id="name"
+                    name="name"
                     type="text"
-                    className="bg-transparent border-b-[2px] border-white text-white text-[18px] focus:outline-none focus:border-[#DCBC88] pb-1 transition-colors"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="bg-transparent border-b-[2px] border-white text-white text-[18px] focus:outline-none focus:border-[#DCBC88] pb-1 transition-colors placeholder:text-white/50"
                   />
                 </div>
 
                 {/* Email */}
                 <div className="flex flex-col gap-2">
-                  <label className="font-open-sans font-normal text-[18px] text-white">
+                  <label htmlFor="email" className="font-open-sans font-normal text-[18px] text-white">
                     Email
                   </label>
                   <input
+                    id="email"
+                    name="email"
                     type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="bg-transparent border-b-[2px] border-white text-white text-[18px] focus:outline-none focus:border-[#DCBC88] pb-1 transition-colors"
+                  />
+                </div>
+
+                {/* Phone (Added to match backend) */}
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="phone" className="font-open-sans font-normal text-[18px] text-white">
+                    Phone
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
                     className="bg-transparent border-b-[2px] border-white text-white text-[18px] focus:outline-none focus:border-[#DCBC88] pb-1 transition-colors"
                   />
                 </div>
 
                 {/* Subject */}
                 <div className="flex flex-col gap-2">
-                  <label className="font-open-sans font-normal text-[18px] text-white">
+                  <label htmlFor="subject" className="font-open-sans font-normal text-[18px] text-white">
                     Subject
                   </label>
                   <input
+                    id="subject"
+                    name="subject"
                     type="text"
+                    value={formData.subject}
+                    onChange={handleChange}
                     className="bg-transparent border-b-[2px] border-white text-white text-[18px] focus:outline-none focus:border-[#DCBC88] pb-1 transition-colors"
                   />
                 </div>
 
                 {/* Message */}
                 <div className="flex flex-col gap-2">
-                  <label className="font-open-sans font-normal text-[18px] text-white">
+                  <label htmlFor="message" className="font-open-sans font-normal text-[18px] text-white">
                     Tell us your message
                   </label>
                   <textarea
+                    id="message"
+                    name="message"
+                    required
                     rows={1}
+                    value={formData.message}
+                    onChange={handleChange}
                     className="bg-transparent border-b-[2px] border-white text-white text-[18px] focus:outline-none focus:border-[#DCBC88] pb-1 resize-none transition-colors"
                   ></textarea>
                 </div>
 
                 {/* Submit Button */}
-                <button className="w-full bg-[#DCBC88] h-[60px] rounded-[10px] mt-6 flex items-center justify-center font-montserrat font-bold text-[18px] text-[#1E1E1E] hover:bg-[#cbb082] transition-colors">
-                  Let’s get started!
+                <button 
+                  type="submit"
+                  disabled={status.type === 'loading'}
+                  className="w-full bg-[#DCBC88] h-[60px] rounded-[10px] mt-6 flex items-center justify-center font-montserrat font-bold text-[18px] text-[#1E1E1E] hover:bg-[#cbb082] transition-colors disabled:opacity-80 disabled:cursor-not-allowed"
+                >
+                  {status.type === 'loading' ? 'Sending...' : 'Let’s get started!'}
                 </button>
+
+                {/* Status Message */}
+                {status.message && (
+                  <p className={`text-center text-[16px] font-bold ${status.type === 'error' ? 'text-red-300' : 'text-[#DCBC88]'}`}>
+                    {status.message}
+                  </p>
+                )}
               </form>
             </div>
           </div>
@@ -227,7 +328,6 @@ export default function ContactUsPage() {
       </section>
 
       {/* --- 4. Subscribe Section --- */}
-      {/* Wrapped in a section to maintain correct page padding and alignment */}
       <section className="w-full pb-20 px-6">
         <div className="max-w-[1440px] mx-auto">
           <SubscriptionBanner />
