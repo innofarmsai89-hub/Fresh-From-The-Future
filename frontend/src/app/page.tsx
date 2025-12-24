@@ -1,18 +1,24 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'; // Imported hooks
+
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { League_Spartan, Signika } from 'next/font/google';
+
+// Sliders
 import Slider1 from '@/components/slider/slider1';
 import Slider2 from '@/components/slider/slider2';
 import Slider3 from '@/components/slider/slider3';
 import Slider4 from '@/components/slider/slider4';
 import Slider5 from '@/components/slider/slider5';
+
+// Components
 import ContactSection from '@/components/getInTouch';
-
-
-// Ensure this path is correct based on your project structure
 import SubscriptionBanner from '@/components/SubscriptionBanner'; 
+
+// ==========================================
+// 0. CONFIGURATION
+// ==========================================
 
 const spartan = League_Spartan({
   subsets: ['latin'],
@@ -21,39 +27,40 @@ const spartan = League_Spartan({
   variable: '--font-spartan',
 });
 
-// 2. Configure Signika
 const signika = Signika({
   subsets: ['latin'],
-  weight: ['500'], // Medium
+  weight: ['500'],
   variable: '--font-signika',
 });
 
-// --- Data Constants ---
-// ... (trends, features, testimonials arrays remain the same)
+// ==========================================
+// 1. DATA CONSTANTS
+// ==========================================
+
 const trends = [
   {
     category: "LEAFY GREENS",
     title: "Green Leaf Lettuce",
     image: "/images/home/leaf-lettuce.png", 
-    link: "#"
+    link: "/our-produces#leafy-greens"
   },
   {
     category: "BABY GREENS",
     title: "Spinach",
     image: "/images/home/spinach.png", 
-    link: "#"
+    link: "/our-produces#baby-greens"
   },
   {
     category: "MICROGREENS",
     title: "Arugula",
     image: "/images/home/arugula.png", 
-    link: "#"
+    link: "/our-produces#leafy-greens" // Mapping to closest category
   },
   {
     category: "SPECIALTY HERBS & RARE CROPS",
     title: "Thai Basil",
     image: "/images/home/thai-basil.png", 
-    link: "#"
+    link: "/our-produces#specialty-herbs"
   }
 ];
 
@@ -108,10 +115,14 @@ const testimonials = [
     }
 ];
 
-// --- Helper Components (ProductCard, StepCard, TechCard remain the same) ---
-function ProductCard({ title, image }: { title: string, image: string }) {
+// ==========================================
+// 2. HELPER COMPONENTS
+// ==========================================
+
+// UPDATED: Added 'link' prop to accept specific hash URLs
+function ProductCard({ title, image, link }: { title: string, image: string, link: string }) {
     return (
-        <div className="relative w-[280px] h-[388px] group">
+       <div className="relative w-[280px] h-[388px] group">
             <div className="absolute top-0 left-0 w-[280px] h-[364px] bg-[#FFF9F1] border border-[rgba(249,192,106,0.42)] rounded-[10px] box-border overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-[271px] rounded-t-[10px] overflow-hidden">
                      <Image
@@ -127,9 +138,14 @@ function ProductCard({ title, image }: { title: string, image: string }) {
                     </h3>
                 </div>
             </div>
-            <button className="absolute top-[340px] left-1/2 -translate-x-1/2 w-[134px] h-[48px] bg-[#3D550C] rounded-[10px] shadow-[0px_6px_12px_rgba(249,192,106,0.22)] flex items-center justify-center text-white font-bold text-[16px] transition-all hover:bg-[#2e4009] hover:shadow-lg z-10">
+            
+            {/* Dynamic Link used here */}
+            <Link 
+                href={link} 
+                className="absolute top-[340px] left-1/2 -translate-x-1/2 w-[134px] h-[48px] bg-[#3D550C] rounded-[10px] shadow-[0px_6px_12px_rgba(249,192,106,0.22)] flex items-center justify-center text-white font-bold text-[16px] transition-all hover:bg-[#2e4009] hover:shadow-lg z-10"
+            >
                 View Now
-            </button>
+            </Link>
         </div>
     )
 }
@@ -167,11 +183,9 @@ function StepCard({ number, text, image }: { number: string, text: string, image
 function TechCard({ feature }: { feature: { icon: string, title: string, subtitle: string, desc: string } }) {
   return (
     <div className="bg-[#EFE6D5] rounded-[20px] p-8 min-h-[240px] flex flex-col items-start text-left hover:shadow-lg transition-shadow duration-300 font-spartan">
-      {/* Header: Icon + Title */}
       <div className="flex items-center gap-4 mb-5">
         <div className="w-[54px] h-[54px] bg-[#3D550C] rounded-full flex items-center justify-center shrink-0 shadow-sm">
           <div className="relative w-[28px] h-[28px]">
-             {/* Using standard img for icons to allow filter inversion easily */}
              {/* eslint-disable-next-line @next/next/no-img-element */}
              <img 
                 src={feature.icon} 
@@ -185,7 +199,6 @@ function TechCard({ feature }: { feature: { icon: string, title: string, subtitl
         </h3>
       </div>
 
-      {/* Content Block */}
       <div className="flex flex-col gap-2">
           <h4 className="font-bold text-[18px] text-[#1E1E1E] leading-tight">
             {feature.subtitle}
@@ -199,14 +212,16 @@ function TechCard({ feature }: { feature: { icon: string, title: string, subtitl
   );
 }
 
-// --- Main Page Component ---
+// ==========================================
+// 3. MAIN PAGE COMPONENT
+// ==========================================
 
 export default function HomePage() {
   // --- Slider State & Logic ---
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [Slider1, Slider2, Slider3, Slider4, Slider5];
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const delay = 5000; // 5 seconds
+  const delay = 5000;
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -216,7 +231,6 @@ export default function HomePage() {
 
   useEffect(() => {
     resetTimeout();
-    // Set timer to auto-advance slide
     timeoutRef.current = setTimeout(() => {
       setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));
     }, delay);
@@ -226,7 +240,6 @@ export default function HomePage() {
     };
   }, [currentSlide, slides.length]);
 
-  // Function to handle manual click on dots
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
   };
@@ -234,12 +247,10 @@ export default function HomePage() {
   return (
     <main className={`${spartan.variable} font-spartan w-full overflow-x-hidden bg-white`}>
     
-     {/* --- HERO SECTION WITH SLIDER & PAGINATION --- */}
+     {/* --- HERO SECTION WITH SLIDER --- */}
      <section className="relative w-full h-auto">
-        {/* Render the current slide component dynamically */}
         {React.createElement(slides[currentSlide])}
 
-        {/* Pagination Dots (Button Slider Component) */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
           {slides.map((_, index) => (
             <button
@@ -248,18 +259,16 @@ export default function HomePage() {
               aria-label={`Go to slide ${index + 1}`}
               className={`rounded-full transition-all duration-300 ease-in-out ${
                 index === currentSlide
-                  ? 'w-4 h-4 bg-[#3D550C] scale-110' // Active dot style (dark green, slightly larger)
-                  : 'w-4 h-4 bg-[#EAEAEA] hover:bg-[#d1d1d1]' // Inactive dot style (light gray)
+                  ? 'w-4 h-4 bg-[#3D550C] scale-110' 
+                  : 'w-4 h-4 bg-[#EAEAEA] hover:bg-[#d1d1d1]'
               }`}
             ></button>
           ))}
         </div>
       </section>
 
-    {/* --- Why Are We Different Section --- */}
-    {/* ... (Rest of the page content remains exactly the same) ... */}
+    {/* --- Why Are We Different --- */}
     <section className="py-24 max-w-[1440px] mx-auto px-6 font-spartan">
-      
       <div className="text-center mb-20">
         <h2 className="font-bold text-[40px] md:text-[54px] text-[#3D550C] mb-6 leading-none">
           Why are we different?
@@ -270,7 +279,6 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-        {/* Card 1 */}
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="w-[130px] h-[130px] mb-8 relative">
             <Image src="/images/home/coffee-beans.png" alt="Non GMO" fill className="object-contain" />
@@ -283,7 +291,6 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Card 2 */}
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="w-[130px] h-[130px] mb-8 relative">
             <Image src="/images/home/badge.png" alt="Standard" fill className="object-contain" />
@@ -296,7 +303,6 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Card 3 */}
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="w-[130px] h-[130px] mb-8 relative">
             <Image src="/images/home/hyper-local.png" alt="Hyper Local" fill className="object-contain" />
@@ -309,7 +315,6 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Card 4 */}
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="w-[130px] h-[130px] mb-8 relative">
             <Image src="/images/home/con-qual.png" alt="Quality" fill className="object-contain" />
@@ -324,7 +329,6 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1100px] mx-auto">
-        {/* Card 5 */}
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="mb-8 w-[130px] h-[130px] relative">
             <Image src="/images/home/traceability.png" alt="Traceability" fill className="object-contain" />
@@ -337,7 +341,6 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Card 6 */}
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="mb-8 w-[130px] h-[130px] relative">
             <Image src="/images/home/custom-crop.png" alt="Custom Crop" fill className="object-contain" />
@@ -350,7 +353,6 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Card 7 */}
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="mb-8 w-[130px] h-[130px] relative">
             <Image src="/images/home/no-middlemen.png" alt="No Middlemen" fill className="object-contain" />
@@ -410,7 +412,6 @@ export default function HomePage() {
         </div>
       </section> 
 
-     
       {/* --- Testimonials Section --- */}
       <section className="py-20 bg-[#FDFDFD]">
           <div className="text-center mb-16">
@@ -425,19 +426,13 @@ export default function HomePage() {
           <div className="max-w-[1440px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((item, index) => (
                 <div key={index} className="flex flex-col items-center group cursor-pointer">
-                  
-                  {/* Image Container */}
                   <div className="w-full max-w-[393px] h-[220px] bg-gray-200 rounded-[16px] mb-6 relative overflow-hidden shadow-md">
-                    
-                    {/* Image */}
                     <Image 
                       src={item.image} 
                       alt={item.name} 
                       fill 
                       className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
                     />
-
-                    {/* Review Card */}
                     <div className="absolute inset-0 bg-[#dfc490] flex items-center justify-center p-6 
                                     translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100
                                     transition-all duration-500 ease-in-out">
@@ -445,10 +440,7 @@ export default function HomePage() {
                         {item.text}
                       </p>
                     </div>
-
                   </div>
-
-                  {/* Name */}
                   <h3 className="font-bold text-[24px] text-[#3D550C] group-hover:text-[#dfc490] transition-colors duration-300">
                     {item.name}
                   </h3>
@@ -487,8 +479,6 @@ export default function HomePage() {
 
       {/* --- Trace Your Crop’s Journey --- */}
       <section className="py-20 max-w-[1440px] mx-auto px-6 bg-white font-spartan">
-        
-        {/* Header */}
         <div className="text-center mb-12">
           <h2 className="font-bold text-[40px] md:text-[54px] text-[#3D550C] mb-4">
             Trace Your Crop’s Journey
@@ -498,9 +488,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Image Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Image 1 */}
           <div className="relative w-full h-[380px] rounded-[30px] overflow-hidden group">
             <Image 
               src="/images/home/trace-1.png" 
@@ -509,7 +497,6 @@ export default function HomePage() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          {/* Image 2 */}
           <div className="relative w-full h-[380px] rounded-[30px] overflow-hidden group">
             <Image 
               src="/images/home/trace-2.png" 
@@ -518,7 +505,6 @@ export default function HomePage() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-          {/* Image 3 */}
           <div className="relative w-full h-[380px] rounded-[30px] overflow-hidden group">
              <Image 
               src="/images/home/trace-3.png" 
@@ -529,7 +515,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Description Text */}
         <div className="w-full text-left">
           <p className="font-normal text-[20px] leading-[34px] tracking-[0] text-[#1E1E1E] mb-6 font-spartan">
             Your Crop Box comes with a QR code designed for complete transparency. Once scanned, it takes you to a dynamic Traceability Page where you can follow the crop’s lifecycle—from planting conditions and farm specifics to crop monitoring data, sustainability certifications, and harvest information.
@@ -538,14 +523,12 @@ export default function HomePage() {
             Explore a live impact snapshot, check product descriptions, and view every milestone of the crop journey. With one quick scan, you gain full access to the story behind your produce, backed by real-time farm insights.
           </p>
         </div>
-
       </section>
 
-
-      {/* --- Our Produce Categories --- */}
+      {/* --- Our Produce Categories (UPDATED LINKS) --- */}
       <section className="py-20 max-w-[1440px] mx-auto px-6">
           <div className="text-center mb-16">
-              <Link href="/produce">
+              <Link href="/our-produces">
                 <h3 className="font-bold text-[#404A3D] mb-4 sm:mb-5 md:mb-6 uppercase tracking-wider text-[16px] xs:text-[17px] sm:text-[18px] cursor-pointer hover:opacity-75 transition-opacity">
                     Our Produce
                 </h3>
@@ -555,15 +538,17 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-8">
-              <ProductCard title="Leafy Greens" image="/images/home/leafy-greens.png" />
-              <ProductCard title="Baby Greens" image="/images/home/baby-greens.png" />
-              <ProductCard title="Microgreens" image="/images/home/micro-greens.png" />
-              <ProductCard title="Specialty Herbs" image="/images/home/speciality-herbs.png" />
-              <ProductCard title="Edible Flowers" image="/images/home/edible-flowers.png" />
-              <ProductCard title="Customized" image="/images/home/customized.png" />
+              {/* These now point to specific sections via hash links */}
+              <ProductCard title="Leafy Greens" image="/images/home/leafy-greens.png" link="/our-produces#leafy-greens" />
+              <ProductCard title="Baby Greens" image="/images/home/baby-greens.png" link="/our-produces#baby-greens" />
+              <ProductCard title="Specialty Herbs" image="/images/home/speciality-herbs.png" link="/our-produces#specialty-herbs" />
+              <ProductCard title="Edible Flowers" image="/images/home/edible-flowers.png" link="/our-produces#edible-flowers" />
+              
+              {/* These link to the main page or general sections */}
+              <ProductCard title="Microgreens" image="/images/home/micro-greens.png" link="/our-produces" />
+              <ProductCard title="Customized" image="/images/home/customized.png" link="/our-produces" />
           </div>
       </section>
-
 
       {/* --- How You Get Our Greens --- */}
       <section className="py-20 max-w-[1440px] mx-auto px-6">
@@ -600,7 +585,6 @@ export default function HomePage() {
           </div>
       </section>
 
-      {/* --- Contact Form Section --- */}
       <ContactSection />
       
     </main>

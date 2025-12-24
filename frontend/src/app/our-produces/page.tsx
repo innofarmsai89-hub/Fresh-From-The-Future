@@ -138,9 +138,10 @@ interface CarouselSectionProps {
   subtitle: string;
   items: ProduceItem[];
   hasTopBorder?: boolean;
+  id?: string; // ADDED: Optional ID prop for linking
 }
 
-const CarouselSection = ({ title, subtitle, items, hasTopBorder = false }: CarouselSectionProps) => {
+const CarouselSection = ({ title, subtitle, items, hasTopBorder = false, id }: CarouselSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activePage, setActivePage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -182,7 +183,11 @@ const CarouselSection = ({ title, subtitle, items, hasTopBorder = false }: Carou
   };
 
   return (
-    <section className={`w-full max-w-[1440px] mx-auto ${hasTopBorder ? 'border-t border-gray-200 pt-16 md:pt-24' : ''} pb-12`}>
+    <section 
+      id={id} // ADDED: ID for scroll target
+      className={`w-full max-w-[1440px] mx-auto ${hasTopBorder ? 'border-t border-gray-200 pt-16 md:pt-24' : ''} pb-12 scroll-mt-32`}
+      // scroll-mt-32 ensures the header doesn't cover the title when linking
+    >
       <div className="container mx-auto px-6 mb-12 text-center">
         <h2 className="text-[#3f5f26] text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
           {title}
@@ -301,8 +306,9 @@ export default function OurProducePage() {
     <main className={`flex flex-col w-full bg-white ${spartan.className}`}>
       <ProduceSection />
       
-      {/* 1. Leafy Greens */}
+      {/* 1. Leafy Greens - ID added here */}
       <CarouselSection 
+        id="leafy-greens"
         title="Leafy Greens"
         subtitle="Grown with precision for unmatched flavor and quality."
         items={leafyGreensData}
@@ -311,6 +317,7 @@ export default function OurProducePage() {
 
       {/* 2. Baby Greens */}
       <CarouselSection 
+        id="baby-greens"
         title="Baby Greens"
         subtitle="Grown with precision for unmatched flavor and quality."
         items={babyGreensData}
@@ -321,6 +328,7 @@ export default function OurProducePage() {
 
       {/* 3. Specialty Herbs */}
       <CarouselSection 
+        id="specialty-herbs"
         title="Specialty Herbs & Rare Crops"
         subtitle="Grown with precision for unmatched flavor and quality."
         items={specialtyHerbsData}
@@ -329,6 +337,7 @@ export default function OurProducePage() {
 
       {/* 4. Edible Flowers */}
       <CarouselSection 
+        id="edible-flowers"
         title="Edible Flowers"
         subtitle="Grown with precision for unmatched flavor and quality."
         items={edibleFlowersData}

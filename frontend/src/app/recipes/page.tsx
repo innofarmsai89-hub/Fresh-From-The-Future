@@ -1,7 +1,10 @@
+// src/app/recipes/page.tsx
 import React from 'react';
 import Image from 'next/image';
 import { League_Spartan } from 'next/font/google';
 import Link from "next/link";
+// IMPORT the shared data so slugs match perfectly
+import { recipeData } from '@/data/recipeData'; 
 
 // --- Font Configuration ---
 const spartan = League_Spartan({
@@ -10,53 +13,7 @@ const spartan = League_Spartan({
   variable: '--font-spartan',
 });
 
-// --- Sample Data for Recipes ---
-const recipeData = [
-  {
-    id: 1,
-    image: '/images/recipes/rp-1.png', 
-    title: 'Kale Caesar Salad',
-    description: 'A fresh and hearty salad made with tender massaged kale, tossed in a tangy Caesar-style dressing.',
-    meta: '10 MIN • EASY PREP • 2-3 SERVES',
-  },
-  {
-    id: 2,
-    image: '/images/recipes/rp-2.png',
-    title: 'Lettuce Wraps with Chicken',
-    description: 'Light, crisp lettuce leaves filled with savory chicken and colorful vegetables.',
-    meta: '15 MIN • EASY PREP • 2-3 SERVES',
-  },
-  {
-    id: 3,
-    image: '/images/recipes/rp-2.png', 
-    title: 'Garlic Stir-Fried Bok Choy',
-    description: 'A simple yet flavorful dish where bok choy is quickly stir-fried with garlic for a warm, savory finish.',
-    meta: '7 MIN • EASY PREP • 2-3 SERVES',
-  },
-  {
-    id: 4,
-    image: '/images/recipes/rp-1.png',
-    title: 'Garlic Sautéed Spinach',
-    description: 'A simple and nourishing dish where fresh spinach is lightly sautéed with garlic and olive oil.',
-    meta: '5 MIN • EASY PREP • 2 SERVES',
-  },
-  {
-    id: 5,
-    image: '/images/recipes/rp-2.png',
-    title: 'Arugula Lemon Parmesan Salad',
-    description: 'A fresh and zesty salad made with peppery arugula, bright lemon dressing.',
-    meta: '8 MIN • EASY PREP • 2 SERVES',
-  },
-  {
-    id: 6,
-    image: '/images/recipes/rp-2.png',
-    title: 'Viola Garden Salad',
-    description: 'A visually stunning salad featuring delicate viola flowers paired with fresh greens and a light honey-lemon dressing.',
-    meta: '10 MIN • EASY PREP • 2-3 SERVES',
-  },
-];
-
-// --- Component: Recipe Grid Section (Glassmorphism Added) ---
+// --- Component: Recipe Grid Section ---
 const RecipeGridSection = () => {
   return (
     <section className="relative w-full py-16 md:py-24 px-6 overflow-hidden">
@@ -133,19 +90,22 @@ const RecipeGridSection = () => {
                   
                   {/* Left: Meta Info */}
                   <span className="text-[10px] md:text-[11px] font-bold tracking-wider text-[#1a1a1a] uppercase opacity-80">
-                    {recipe.meta}
+                    {recipe.meta.time} • {recipe.meta.prep}
                   </span>
                   
                   {/* Right: View Recipe Button */}
-                  <button className="
-                    border border-[#1a1a1a] rounded-full px-6 py-2 
-                    text-[11px] md:text-xs font-bold tracking-widest uppercase
-                    text-[#1a1a1a] 
-                    hover:bg-[#1a1a1a] hover:text-[#F3E9D2] 
-                    transition-colors
-                  ">
-                    View Recipe
-                  </button>
+                  <Link href={`/recipeDetail/${recipe.slug}`}>
+                    <button className="
+                      border border-[#1a1a1a] rounded-full px-6 py-2 
+                      text-[11px] md:text-xs font-bold tracking-widest uppercase
+                      text-[#1a1a1a] 
+                      hover:bg-[#1a1a1a] hover:text-[#F3E9D2] 
+                      transition-colors
+                      cursor-pointer
+                    ">
+                      View Recipe
+                    </button>
+                  </Link>
 
                 </div>
               </div>
@@ -243,7 +203,6 @@ const RecipesPage = () => {
     <main className={`w-full min-h-screen bg-white ${spartan.variable} font-spartan`}>
       
       {/* --- Section 1: Hero Banner --- */}
-      {/* Update: Added flex-col and gap-8 to stack card and button */}
       <div className="relative w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8">
         
         {/* Background Image */}
@@ -276,8 +235,7 @@ const RecipesPage = () => {
           </p>
         </div>
 
-        {/* Button - MOVED OUTSIDE THE CARD */}
-        {/* Removed absolute positioning, kept relative z-index for stacking context */}
+        {/* Button */}
         <div className="relative z-10">
           <Link 
             href="/our-produces"
