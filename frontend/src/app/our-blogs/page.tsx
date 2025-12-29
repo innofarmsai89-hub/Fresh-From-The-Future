@@ -20,18 +20,21 @@ const blogPosts = [
       image: '/images/blog/blog-01.png', 
       date: '15TH SEPTEMBER 2025',
       title: 'INNOFarms.AI Launches GrowSmartRobotics at GVF 2025 Dubai',
+      url: 'https://www.linkedin.com/feed/update/urn:li:activity:7389654887459979265',
     },
     {
       id: 2,
       image: '/images/blog/blog-02.png', 
       date: '18TH DECEMBER 2025',
-      title: 'INNOFarms.AI’s integrated agri-tech ecosystem aims to revolutionise sustainable food production',
+      title: 'INNOFarms.AI\'s integrated agri-tech ecosystem aims to revolutionise sustainable food production',
+      url: 'https://igrownews.com/innofarms-ai-latest-news/',
     },
     {
       id: 3,
       image: '/images/blog/blog-03.png', 
       date: '18TH AUGUST 2025',
       title: 'From Crop Planning to Retail Shelf: Closing the Loop in Indoor Vertical Farming.',
+      url: 'https://www.linkedin.com/feed/update/urn:li:activity:7363147900987572225',
     },
 ];
 
@@ -82,10 +85,15 @@ const LatestFeatureSection = () => {
             </div>
             
             {/* Button */}
-            <button className="flex items-center gap-2 bg-[#3D550C] hover:bg-[#2e3b09] text-white font-semibold px-8 py-4 rounded-full transition-all mt-4 group">
+            <a 
+              href="https://www.linkedin.com/feed/update/urn:li:activity:7389654887459979265" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#3D550C] hover:bg-[#2e3b09] text-white font-semibold px-8 py-4 rounded-full transition-all mt-4 group"
+            >
               Learn More 
               <ArrowUpRight size={20} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"/>
-            </button>
+            </a>
           </div>
 
         </div>
@@ -103,7 +111,13 @@ const BlogGridSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {blogPosts.map((post) => (
-            <div key={post.id} className="group flex flex-col gap-6 cursor-pointer">
+            <a
+              key={post.id}
+              href={post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-6 cursor-pointer"
+            >
               
               {/* Card Image Container */}
               <div className="relative w-full h-[300px] md:h-[340px] rounded-[24px] overflow-hidden bg-gray-100">
@@ -136,7 +150,7 @@ const BlogGridSection = () => {
                 </h3>
               </div>
 
-            </div>
+            </a>
           ))}
         </div>
 
