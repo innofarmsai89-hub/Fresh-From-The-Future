@@ -280,7 +280,7 @@ export default function ContactUsPage() {
               <div className="text-center font-outfit font-normal text-[16px] md:text-[18px] text-black leading-tight space-y-1">
                 <p>Orders@FreshfromtheFuture.com (To Order)</p>
                 <p>Chefs@FreshfromtheFuture.com (For Chefs Connect)</p>
-                <p>Hello@FreshfromtheFuture.com (For Support)</p>
+                <p>Businnes@FreshfromtheFuture.com (For Support)</p>
               </div>
             </div>
 

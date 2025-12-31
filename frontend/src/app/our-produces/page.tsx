@@ -247,8 +247,7 @@ const leafyGreensData: ProduceItem[] = [
   { id: 6, category: "LEAFY GREENS", title: "Basil", description: "Aromatic herb with a sweet, peppery fragrance and vibrant flavor.", image: "/images/ourProduce/Lg-basil.png" },
   { id: 7, category: "LEAFY GREENS", title: "Butter Head Lettuce", description: "A soft, tender leafy green with a mild, buttery flavor, perfect for fresh salads and wraps.", image: "/images/ourProduce/Lg-butterhead.png" },
   { id: 8, category: "LEAFY GREENS", title: "Bok Choy", description: "A crisp, nutritious leafy green with juicy stalks and tender leaves, commonly used in stir-fries and soups.", image: "/images/ourProduce/Lg-bokChoy.png" },
-  { id: 9, category: "LEAFY GREENS", title: "Arugula", description: "Peppery, distinctive leaves that add a spicy kick to salads.", image: "/images/ourProduce/Lg-mix.png" },
-  { id: 10, category: "LEAFY GREENS", title: "Swiss Chard", description: "Large, tender leaves with colorful stalks and a mild, sweet flavor.", image: "/images/ourProduce/Lg-kale.png" }
+  { id: 9, category: "LEAFY GREENS", title: "Swiss Chard", description: "Large, tender leaves with colorful stalks and a mild, sweet flavor.", image: "/images/ourProduce/Lg-kale.png" }
 ];
 
 const babyGreensData: ProduceItem[] = [

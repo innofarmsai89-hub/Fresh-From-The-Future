@@ -95,7 +95,7 @@ export default function Footer() {
                 className="font-medium text-white tracking-wide break-all sm:break-normal
                       text-[13px] xs:text-[14px] sm:text-[15px]"
               >
-                Hello@FreshfromtheFuture.com
+                Businnes@FreshfromtheFuture.com
               </span>
             </div>
           </div>
