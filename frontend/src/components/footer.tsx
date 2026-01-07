@@ -13,9 +13,9 @@ const spartan = League_Spartan({
 
 export default function Footer() {
   const socialLinks = [
-    { Icon: FaFacebookF, href: "#" },
-    { Icon: FaLinkedinIn, href: "#" },
-    { Icon: FaInstagram, href: "#" },
+    { Icon: FaFacebookF, href: "https://www.facebook.com/profile.php?id=61584884643468" },
+    { Icon: FaLinkedinIn, href: "https://www.linkedin.com/company/fresh-from-the-future/" },
+    { Icon: FaInstagram, href: "https://www.instagram.com/fresh.from.the.future/" },
   ];
 
   return (
