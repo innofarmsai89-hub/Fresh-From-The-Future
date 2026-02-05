@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Geist, Geist_Mono, League_Spartan, Outfit } from "next/font/google";
 import Navbar from "@/components/navbar";
@@ -38,6 +39,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+    <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Z7JDQGBBK4"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-Z7JDQGBBK4', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spartan.variable} ${outfit.variable} antialiased flex flex-col min-h-screen`}
       >
