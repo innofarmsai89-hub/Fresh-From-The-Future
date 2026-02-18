@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { MdEmail, MdError, MdLanguage, MdPhone } from 'react-icons/md';
 
@@ -85,7 +85,7 @@ function LoadingState() {
   );
 }
 
-export default function DisplayDataPage() {
+function DisplayDataContent() {
   const searchParams = useSearchParams();
   const [value, setValue] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -412,5 +412,13 @@ export default function DisplayDataPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function DisplayDataPage() {
+  return (
+    <Suspense fallback={<LoadingState />}>
+      <DisplayDataContent />
+    </Suspense>
   );
 }
