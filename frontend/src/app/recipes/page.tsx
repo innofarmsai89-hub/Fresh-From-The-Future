@@ -6,6 +6,17 @@ import Link from "next/link";
 // IMPORT the shared data so slugs match perfectly
 import { recipeData } from '@/data/recipeData'; 
 
+const IMAGE_BASE_URL = "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture";
+
+const getImageUrl = (path: string) => {
+  if (!path) return path;
+  if (path.startsWith("/images/")) {
+    const cleanedPath = path.replace("/images", "");
+    return `${IMAGE_BASE_URL}${cleanedPath}`;
+  }
+  return path;
+};
+
 // --- Font Configuration ---
 const spartan = League_Spartan({
   subsets: ['latin'],
@@ -21,7 +32,7 @@ const RecipeGridSection = () => {
       {/* Background Image for the Section */}
       <div className="absolute inset-0 -z-10">
          <Image 
-            src="/images/recipes/r-bg.png"
+            src={getImageUrl("/images/recipes/r-bg.png")}
             alt="Background" 
             fill 
             className="object-cover opacity-20"
@@ -65,7 +76,7 @@ const RecipeGridSection = () => {
               {/* Card Image */}
               <div className="relative w-full h-[250px] md:h-[280px] overflow-hidden">
                 <Image
-                  src={recipe.image}
+                  src={getImageUrl(recipe.image)}
                   alt={recipe.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -158,7 +169,7 @@ const ChefAdvisorySection = () => {
           {/* Right Column: Image */}
           <div className="relative w-full h-[350px] md:h-[400px] rounded-[20px] overflow-hidden shadow-lg">
             <Image
-              src="/images/recipes/chef-council.jpg"
+              src={getImageUrl("/images/recipes/chef-council.jpg")}
               alt="Chef Advisory Council"
               fill
               className="object-cover"
@@ -208,7 +219,7 @@ const RecipesPage = () => {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/recipes/r-bg.png"
+            src={getImageUrl("/images/recipes/r-bg.png")}
             alt="Recipes Background"
             fill
             className="object-cover"

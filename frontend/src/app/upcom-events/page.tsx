@@ -10,11 +10,22 @@ const spartan = League_Spartan({
   variable: '--font-spartan',
 });
 
+const IMAGE_BASE_URL = "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture";
+
+const getImageUrl = (path: string) => {
+  if (!path) return path;
+  if (path.startsWith("/images/")) {
+    const cleanedPath = path.replace("/images", "");
+    return `${IMAGE_BASE_URL}${cleanedPath}`;
+  }
+  return path;
+};
+
 // --- Data for Event Images ---
 const eventImages = [
-  '/images/upcom/f-1.png',
-  '/images/upcom/f-2.png',
-  '/images/upcom/f-3.png',
+  getImageUrl('/images/upcom/f-1.png'),
+  getImageUrl('/images/upcom/f-2.png'),
+  getImageUrl('/images/upcom/f-3.png'),
 ];
 
 const UpcomingEventsPage = () => {
@@ -28,7 +39,7 @@ const UpcomingEventsPage = () => {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/upcom/bg.png" // Purple flowers background
+            src={getImageUrl("/images/upcom/bg.png")} // Purple flowers background
             alt="Upcoming Events Background"
             fill
             className="object-cover"

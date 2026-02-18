@@ -38,6 +38,17 @@ const blogPosts = [
     },
 ];
 
+const IMAGE_BASE_URL = "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture";
+
+const getImageUrl = (path: string) => {
+  if (!path) return path;
+  if (path.startsWith("/images/")) {
+    const cleanedPath = path.replace("/images", "");
+    return `${IMAGE_BASE_URL}${cleanedPath}`;
+  }
+  return path;
+};
+
 // --- Component: Section Heading ---
 // --- Component: Section Heading ---
 const SectionHeading = () => (
@@ -62,7 +73,7 @@ const LatestFeatureSection = () => {
           {/* Left: Image */}
           <div className="relative w-full h-[400px] md:h-[550px] rounded-[30px] overflow-hidden shadow-sm">
             <Image
-              src="/images/blog/blog.png" 
+              src={getImageUrl("/images/blog/blog.png")} 
               alt="Revolutionizing AgriTech"
               fill
               className="object-cover"
@@ -122,7 +133,7 @@ const BlogGridSection = () => {
               {/* Card Image Container */}
               <div className="relative w-full h-[300px] md:h-[340px] rounded-[24px] overflow-hidden bg-gray-100">
                 <Image
-                  src={post.image}
+                  src={getImageUrl(post.image)}
                   alt={post.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -170,7 +181,7 @@ const BlogPage = () => {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/blog/blog-bg.png"
+            src={getImageUrl("/images/blog/blog-bg.png")}
             alt="Red lettuce background"
             fill
             className="object-cover"

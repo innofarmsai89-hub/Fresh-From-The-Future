@@ -31,6 +31,17 @@ interface ProduceItem {
   category: string;
 }
 
+const IMAGE_BASE_URL = "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture";
+
+const getImageUrl = (path: string) => {
+  if (!path) return path;
+  if (path.startsWith("/images/")) {
+    const cleanedPath = path.replace("/images", "");
+    return `${IMAGE_BASE_URL}${cleanedPath}`;
+  }
+  return path;
+};
+
 // ==========================================
 // 1. HERO SECTION
 // ==========================================
@@ -40,7 +51,7 @@ const ProduceSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <img
-          src="/images/ourProduce/Op-bg.png"
+          src={getImageUrl("/images/ourProduce/Op-bg.png")}
           alt="Fresh produce background"
           className="w-full h-full object-cover"
         />
@@ -92,7 +103,7 @@ const ProduceCard = ({ item }: { item: ProduceItem }) => {
         {/* Image */}
         <div className="w-full h-52 flex-shrink-0 rounded-[20px] overflow-hidden mb-6 bg-[#e0d8c8]">
           <img 
-            src={item.image} 
+            src={getImageUrl(item.image)} 
             alt={item.title} 
             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
           />

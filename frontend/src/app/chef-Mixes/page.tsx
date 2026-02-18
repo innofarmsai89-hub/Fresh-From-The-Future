@@ -19,7 +19,7 @@ const ChefMixesPage = () => {
   {/* Background Image */}
   <div className="absolute inset-0 z-0">
     <Image
-      src="/images/chef-mixes/chef-mixes-bg.png"
+      src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/chef-mixes/chef-mixes-bg.png"
       alt="Chef Mixes Background - Kale and leafy greens"
       fill
       className="object-cover"

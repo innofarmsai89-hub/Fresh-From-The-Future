@@ -11,11 +11,23 @@ const spartan = League_Spartan({
   variable: '--font-spartan',
 });
 
+
 const openSans = Open_Sans({
   subsets: ['latin'],
   weight: ['400', '600'],
   variable: '--font-open-sans',
 });
+
+const IMAGE_BASE_URL = "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture";
+
+const getImageUrl = (path: string) => {
+  if (!path) return path;
+  if (path.startsWith("/images/")) {
+    const cleanedPath = path.replace("/images", "");
+    return `${IMAGE_BASE_URL}${cleanedPath}`;
+  }
+  return path;
+};
 
 // --- Component 1: Subscription Banner (Hero) ---
 const Subscription = () => {
@@ -25,7 +37,7 @@ const Subscription = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/subscription/subs-bg.png" 
+          src={getImageUrl("/images/subscription/subs-bg.png")}
           alt="Fresh arugula leaves background"
           fill
           priority 
@@ -150,7 +162,7 @@ const SubscriptionForm = () => {
           <div className="relative w-full flex justify-center md:justify-end">
             <div className="relative w-full max-w-[650px] aspect-[4/3]">
                 <Image 
-                  src="/images/subscription/laptop.png" 
+                  src={getImageUrl("/images/subscription/laptop.png")}
                   alt="Subscription Form on Laptop" 
                   fill
                   className="object-contain drop-shadow-2xl" 
@@ -206,7 +218,7 @@ const SubscriptionBanner = () => {
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <Image 
-            src="/images/contact/subscribe-bg.png" 
+            src={getImageUrl("/images/contact/subscribe-bg.png")}
             alt="Subscription Background" 
             fill 
             className="object-cover" 
@@ -221,7 +233,7 @@ const SubscriptionBanner = () => {
         <div className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] bg-[#d8bc8f] rounded-full flex items-center justify-center shrink-0 shadow-md border border-[#c5a675] transition-transform duration-300 group-hover:scale-105">
             <div className="relative w-[45px] h-[45px] md:w-[64px] md:h-[64px]">
                 <Image 
-                    src="/images/home/Vector.png" 
+                    src={getImageUrl("/images/home/Vector.png")}
                     alt="Hand with plant icon" 
                     fill 
                     className="object-contain"

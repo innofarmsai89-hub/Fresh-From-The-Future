@@ -51,7 +51,7 @@ const JoinCouncilContent = () => {
           {/* Right Column: Chefs Image */}
           <div className="relative w-full h-[400px] md:h-[600px] rounded-[30px] overflow-hidden shadow-xl">
             <Image
-              src="/images/chef-adv/comm.png" 
+              src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/chef-adv/comm.png"
               alt="Chefs collaborating in a kitchen"
               fill
               className="object-cover"
@@ -105,7 +105,7 @@ const ChefAdvisoryCouncilPage = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/chef-adv/chef-adv-bg.png"
+          src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/chef-adv/chef-adv-bg.png"
           alt="Chef Advisory Council Background"
           fill
           className="object-cover"

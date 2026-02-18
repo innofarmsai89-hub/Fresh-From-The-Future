@@ -12,7 +12,19 @@ import {
   Heart,
   ArrowLeft
 } from 'lucide-react';
+
 import { produceData } from '@/data/produceData';
+
+const IMAGE_BASE_URL = "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture";
+
+const getImageUrl = (path: string) => {
+  if (!path) return path;
+  if (path.startsWith("/images/")) {
+    const cleanedPath = path.replace("/images", "");
+    return `${IMAGE_BASE_URL}${cleanedPath}`;
+  }
+  return path;
+};
 
 const spartan = League_Spartan({
   subsets: ['latin'],
@@ -100,7 +112,7 @@ export default async function NutrientDetailPage({ params }: { params: Promise<{
           <div className="w-full lg:w-[40%]">
             <div className="rounded-[40px] overflow-hidden shadow-2xl border border-gray-100 aspect-[4/3] relative">
               <img 
-                src={product.image} 
+                src={getImageUrl(product.image)} 
                 alt={product.title} 
                 className="w-full h-full object-cover"
               />
@@ -150,7 +162,7 @@ export default async function NutrientDetailPage({ params }: { params: Promise<{
                   <div className="relative">
                     <div className="w-full h-64 rounded-[24px] overflow-hidden bg-gray-100 shadow-lg">
                       <img 
-                        src={related.image} 
+                        src={getImageUrl(related.image)} 
                         alt={related.title} 
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       />

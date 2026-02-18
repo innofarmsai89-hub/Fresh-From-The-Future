@@ -18,6 +18,17 @@ const openSans = Open_Sans({
   variable: '--font-open-sans',
 });
 
+const IMAGE_BASE_URL = "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture";
+
+const getImageUrl = (path: string) => {
+  if (!path) return path;
+  if (path.startsWith("/images/")) {
+    const cleanedPath = path.replace("/images", "");
+    return `${IMAGE_BASE_URL}${cleanedPath}`;
+  }
+  return path;
+};
+
 // --- Component 1: Traceability Banner (Glass Effect) ---
 const TraceabilityBanner = () => {
   return (
@@ -26,7 +37,7 @@ const TraceabilityBanner = () => {
   {/* Background Image */}
   <div className="absolute inset-0 z-0">
     <Image
-      src="/images/traceability/trace-bg.png"
+      src={getImageUrl("/images/traceability/trace-bg.png")}
       alt="Traceability Background"
       fill
       className="object-cover"
@@ -67,9 +78,9 @@ const TraceabilityBanner = () => {
 // --- Component 2: Scan to Explore (Image Grid) ---
 const ScanToExplore = () => {
   const images = [
-    '/images/traceability/scan-1.png',
-    '/images/traceability/scan-2.png',
-    '/images/traceability/scan-3.png',
+    getImageUrl('/images/traceability/scan-1.png'),
+    getImageUrl('/images/traceability/scan-2.png'),
+    getImageUrl('/images/traceability/scan-3.png'),
   ];
 
   return (
@@ -182,7 +193,7 @@ const UnlockTransparency = () => {
                   loop 
                   playsInline
                 >
-                  <source src="/images/traceability/DemoVideo.webm" type="video/webm" />
+                  <source src={getImageUrl("/images/traceability/DemoVideo.webm")} type="video/webm" />
                   Your browser does not support the video tag.
                 </video>
 

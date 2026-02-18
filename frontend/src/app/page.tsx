@@ -34,6 +34,20 @@ const signika = Signika({
 });
 
 // ==========================================
+// CDN IMAGE HELPER
+// ==========================================
+const IMAGE_BASE_URL = "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture";
+
+const getImageUrl = (path: string) => {
+  if (!path) return path;
+  if (path.startsWith("/images/")) {
+    const cleanedPath = path.replace("/images", "");
+    return `${IMAGE_BASE_URL}${cleanedPath}`;
+  }
+  return path;
+};
+
+// ==========================================
 // 1. DATA CONSTANTS
 // ==========================================
 
@@ -100,17 +114,17 @@ const features = [
 const testimonials = [
     {
       name: "Bricks and Beans",
-      image: "/images/home/bricks&beans.png",
+    image: "/images/home/bricks&beans.png",
       text: "Exceptional greens! noticeably fresher, brighter, and better textured than whatever we’ve used before."
     },
     {
       name: "The Big Tree",
-      image: "/images/home/thebigtree.png",
+    image: "/images/home/thebigtree.png",
       text: "The leaf quality is outstanding. Stays crisp longer, plates beautifully, and tastes incredibly clean."
     },
     {
       name: "Wine Company",
-      image: "/images/home/wine-company.png",
+    image: "/images/home/wine-company.png",
       text: "These are the freshest, best-tasting greens I’ve ever received from any vendor. The traceability is next-level — it shows the whole crop journey and even the environmental impact."
     }
 ];
@@ -126,7 +140,7 @@ function ProductCard({ title, image, link }: { title: string, image: string, lin
             <div className="absolute top-0 left-0 w-[280px] h-[364px] bg-[#FFF9F1] border border-[rgba(249,192,106,0.42)] rounded-[10px] box-border overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-[271px] rounded-t-[10px] overflow-hidden">
                      <Image
-                        src={image}
+                        src={getImageUrl(image)}
                         alt={title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -162,7 +176,7 @@ function StepCard({ number, text, image }: { number: string, text: string, image
                 {/* Image Area */}
                 <div className="w-full h-[220px] relative shrink-0">
                     <Image 
-                        src={image} 
+                        src={getImageUrl(image)} 
                         alt={`Step ${number}`} 
                         fill 
                         className="object-cover" 
@@ -188,7 +202,7 @@ function TechCard({ feature }: { feature: { icon: string, title: string, subtitl
           <div className="relative w-[28px] h-[28px]">
              {/* eslint-disable-next-line @next/next/no-img-element */}
              <img 
-                src={feature.icon} 
+                src={getImageUrl(feature.icon)} 
                 alt={feature.title} 
                 className="w-full h-full object-contain invert brightness-0 filter" 
              />
@@ -281,7 +295,7 @@ export default function HomePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="w-[130px] h-[130px] mb-8 relative">
-            <Image src="/images/home/coffee-beans.png" alt="Non GMO" fill className="object-contain" />
+            <Image src={getImageUrl("/images/home/coffee-beans.png")} alt="Non GMO" fill className="object-contain" />
           </div>
           <h3 className="font-bold text-[32px] text-[#3D550C] mb-4 leading-[1.1]">
             Non GMO & <br />Pesticide Free
@@ -293,7 +307,7 @@ export default function HomePage() {
 
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="w-[130px] h-[130px] mb-8 relative">
-            <Image src="/images/home/badge.png" alt="Standard" fill className="object-contain" />
+            <Image src={getImageUrl("/images/home/badge.png")} alt="Standard" fill className="object-contain" />
           </div>
           <h3 className="font-bold text-[32px] text-[#3D550C] mb-4 leading-[1.1]">
             UAE & Singapore<br />Grade Farming
@@ -305,7 +319,7 @@ export default function HomePage() {
 
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="w-[130px] h-[130px] mb-8 relative">
-            <Image src="/images/home/hyper-local.png" alt="Hyper Local" fill className="object-contain" />
+            <Image src={getImageUrl("/images/home/hyper-local.png")} alt="Hyper Local" fill className="object-contain" />
           </div>
           <h3 className="font-bold text-[32px] text-[#3D550C] mb-4 leading-[1.1]">
             Hyper-Local
@@ -317,7 +331,7 @@ export default function HomePage() {
 
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="w-[130px] h-[130px] mb-8 relative">
-            <Image src="/images/home/con-qual.png" alt="Quality" fill className="object-contain" />
+            <Image src={getImageUrl("/images/home/con-qual.png")} alt="Quality" fill className="object-contain" />
           </div>
           <h3 className="font-bold text-[32px] text-[#3D550C] mb-4 leading-[1.1]">
             Consistent Quality
@@ -331,7 +345,7 @@ export default function HomePage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1100px] mx-auto">
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="mb-8 w-[130px] h-[130px] relative">
-            <Image src="/images/home/traceability.png" alt="Traceability" fill className="object-contain" />
+            <Image src={getImageUrl("/images/home/traceability.png")} alt="Traceability" fill className="object-contain" />
           </div>
           <h3 className="font-bold text-[32px] text-[#3D550C] mb-4 leading-[1.1]">
             Traceability
@@ -343,7 +357,7 @@ export default function HomePage() {
 
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="mb-8 w-[130px] h-[130px] relative">
-            <Image src="/images/home/custom-crop.png" alt="Custom Crop" fill className="object-contain" />
+            <Image src={getImageUrl("/images/home/custom-crop.png")} alt="Custom Crop" fill className="object-contain" />
           </div>
           <h3 className="font-bold text-[32px] text-[#3D550C] mb-4 leading-[1.1]">
             Custom Crop<br />Requests
@@ -355,7 +369,7 @@ export default function HomePage() {
 
         <div className="bg-[#FFF9F1] border border-[#F9C06A]/40 rounded-[30px] p-8 flex flex-col items-center text-center min-h-[420px] justify-center transition-all duration-300 hover:brightness-95 hover:shadow-xl cursor-pointer">
           <div className="mb-8 w-[130px] h-[130px] relative">
-            <Image src="/images/home/no-middlemen.png" alt="No Middlemen" fill className="object-contain" />
+            <Image src={getImageUrl("/images/home/no-middlemen.png")} alt="No Middlemen" fill className="object-contain" />
           </div>
           <h3 className="font-bold text-[32px] text-[#3D550C] mb-4 leading-[1.1]">
             No Middlemen
@@ -388,7 +402,7 @@ export default function HomePage() {
            <div key={index} className="flex flex-col group cursor-pointer">
               <div className="relative w-full aspect-[3/4] rounded-[30px] overflow-hidden mb-6 bg-gray-100">
                 <Image
-                  src={item.image}
+                  src={getImageUrl(item.image)}
                   alt={item.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -428,7 +442,7 @@ export default function HomePage() {
                 <div key={index} className="flex flex-col items-center group cursor-pointer">
                   <div className="w-full max-w-[393px] h-[220px] bg-gray-200 rounded-[16px] mb-6 relative overflow-hidden shadow-md">
                     <Image 
-                      src={item.image} 
+                      src={getImageUrl(item.image)} 
                       alt={item.name} 
                       fill 
                       className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
@@ -491,7 +505,7 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div className="relative w-full h-[380px] rounded-[30px] overflow-hidden group">
             <Image 
-              src="/images/home/trace-1.png" 
+              src={getImageUrl("/images/home/trace-1.png")} 
               alt="Hydroponic Farm Rows" 
               fill 
               className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -499,7 +513,7 @@ export default function HomePage() {
           </div>
           <div className="relative w-full h-[380px] rounded-[30px] overflow-hidden group">
             <Image 
-              src="/images/home/trace-2.png" 
+              src={getImageUrl("/images/home/trace-2.png")} 
               alt="Chef Scanning QR Code" 
               fill 
               className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -507,7 +521,7 @@ export default function HomePage() {
           </div>
           <div className="relative w-full h-[380px] rounded-[30px] overflow-hidden group">
              <Image 
-              src="/images/home/trace-3.png" 
+              src={getImageUrl("/images/home/trace-3.png")} 
               alt="Traceability App View" 
               fill 
               className="object-cover transition-transform duration-700 group-hover:scale-105"

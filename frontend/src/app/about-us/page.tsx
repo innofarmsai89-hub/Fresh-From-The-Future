@@ -28,37 +28,37 @@ export default function AboutUs() {
   const feedbacks = [
     {
       name: "Bricks and Beans",
-      image: "/images/about/feedback-1.png",
+      image: "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/feedback-1.png",
       review:
         "Exceptional greens! Noticeably fresher, brighter, and better textured than whatever we've used before.",
     },
     {
       name: "The Big Tree",
-      image: "/images/about/feedback-2.png",
+      image: "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/feedback-2.png",
       review:
         "The leaf quality is outstanding. Stays crisp longer, plates beautifully, and tastes incredibly clean.",
     },
     {
       name: "Wine Company",
-      image: "/images/about/feedback-3.png",
+      image: "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/feedback-3.png",
       review:
         "These are the freshest, best-tasting greens I've ever received. The traceability is next-level — it shows the whole crop journey and even the environmental impact.",
     },
     {
       name: "Cafe Soul Garden",
-      image: "/images/about/feedback-4.png",
+      image: "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/feedback-4.png",
       review:
         "These greens elevate our pizzas, visually stunning and full of freshness that stands out even after baking.",
     },
     {
       name: "Laidback Cafe",
-      image: "/images/about/feedback-5.png",
+      image: "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/feedback-5.png",
       review:
         "Excellent freshness and quality - these greens clearly stand above regular suppliers.",
     },
     {
       name: "Le Meridien",
-      image: "/images/about/feedback-6.png",
+      image: "https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/feedback-6.png",
       review:
         "Consistently superior quality that meets our high standards. Visual appeal and texture that delights our guests.",
     },
@@ -100,7 +100,7 @@ export default function AboutUs() {
       <section className="relative w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/about/about-bg.png"
+            src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/about-bg.png"
             alt="About Us Leafy Background"
             fill
             className="object-cover"
@@ -174,7 +174,7 @@ export default function AboutUs() {
             {/* UPDATED: Height reduced to 600px to tighten space */}
             <div className="relative w-full h-[400px] lg:h-[600px] rounded-[30px] overflow-hidden shadow-xl order-1 lg:order-2">
               <Image
-                src="/images/about/about-2.png"
+                src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/about-2.png"
                 alt="Chef Plating Fresh Greens"
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
@@ -191,7 +191,7 @@ export default function AboutUs() {
               {/* UPDATED: Height reduced from 1000px to 750px to remove top whitespace */}
               <div className="relative w-full h-[500px] lg:h-[750px]">
                 <Image
-                  src="/images/about/about-3.png"
+                  src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/about-3.png"
                   alt="INNOGrowPod AI Farming Unit"
                   fill
                   className="object-contain scale-125" 
@@ -247,7 +247,7 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="relative w-full h-[300px] lg:h-[400px] rounded-[30px] overflow-hidden shadow-lg group">
               <Image
-                src="/images/about/inside-1.png"
+                src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/inside-1.png"
                 alt="Glass Lab"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -255,7 +255,7 @@ export default function AboutUs() {
             </div>
             <div className="relative w-full h-[300px] lg:h-[400px] rounded-[30px] overflow-hidden shadow-lg group">
               <Image
-                src="/images/about/inside-2.png"
+                src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/inside-2.png"
                 alt="Top Down Greens"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -263,7 +263,7 @@ export default function AboutUs() {
             </div>
             <div className="relative w-full h-[300px] lg:h-[400px] rounded-[30px] overflow-hidden shadow-lg group">
               <Image
-                src="/images/about/inside-3.png"
+                src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/about/inside-3.png"
                 alt="Grow Shelves"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

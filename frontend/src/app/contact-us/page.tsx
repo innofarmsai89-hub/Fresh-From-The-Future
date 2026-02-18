@@ -72,7 +72,7 @@ export default function ContactUsPage() {
       <section className="relative w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center overflow-hidden gap-10">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/contact/contact-bg.png"
+            src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/contact/contact-bg.png"
             alt="Contact Us Leafy Background"
             fill
             className="object-cover"
@@ -130,7 +130,7 @@ export default function ContactUsPage() {
             {/* Left Side: Image */}
             <div className="lg:w-[45%] h-[500px] lg:h-auto relative">
               <Image
-                src="/images/contact/git-1.png"
+                src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/contact/git-1.png"
                 alt="Burrata Caprese"
                 fill
                 className="object-cover"
