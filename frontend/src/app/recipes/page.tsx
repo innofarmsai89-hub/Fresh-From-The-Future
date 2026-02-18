@@ -76,7 +76,7 @@ const RecipeGridSection = () => {
               {/* Card Image */}
               <div className="relative w-full h-[250px] md:h-[280px] overflow-hidden">
                 <Image
-                  src={getImageUrl(recipe.image)}
+                  src={typeof recipe.image === 'string' ? getImageUrl(recipe.image) : recipe.image}
                   alt={recipe.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
