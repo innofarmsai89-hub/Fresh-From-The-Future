@@ -277,12 +277,25 @@ const specialtyHerbsData: ProduceItem[] = [
   { id: 6, category: "SPECIALTY HERBS", title: "Italian Basil", description: "A classic specialty herb with sweet, aromatic leaves, essential in Italian and Mediterranean dishes.", image: "/images/ourProduce/Sp-italian.png" },
 ];
 
+const microgreensData: ProduceItem[] = [
+  { id: 1, category: "MICROGREENS", title: "Specialty Chef\u2019s Mix (Custom)", description: "A fresh, colorful mix of nutrient-packed microgreens with mild to zesty flavors.", image: "/images/ourProduce/Mg-mix.png" },
+  { id: 2, category: "MICROGREENS", title: "Basil", description: "Aromatic leaves with a sweet, peppery fragrance and bold flavor.", image: "/images/ourProduce/Mg-basil.png" },
+  { id: 3, category: "MICROGREENS", title: "Kale", description: "Hearty, nutrient-dense leaves with a rich, earthy taste.", image: "/images/ourProduce/Mg-kale.png" },
+  { id: 4, category: "MICROGREENS", title: "Arugula", description: "Peppery, zesty greens with a sharp, fresh bite.", image: "/images/ourProduce/Mg-Arugula.png" },
+  { id: 5, category: "MICROGREENS", title: "Red Cabbage", description: "Crisp purple leaves with a slightly sweet, crunchy flavor.", image: "/images/ourProduce/Mg-redCabbage.png" },
+  { id: 6, category: "MICROGREENS", title: "Red Radish", description: "Crunchy, vibrant slices with a sharp, peppery kick.", image: "/images/ourProduce/Mg-redRadish.png" },
+  { id: 7, category: "MICROGREENS", title: "Red Amaranthus", description: "Tender, vibrant red leaves with a mild, earthy flavor.", image: "/images/ourProduce/Mg-redAmaranthus.png" },
+  { id: 8, category: "MICROGREENS", title: "Mizuna", description: "Delicate, feathery greens with a light peppery taste.", image: "/images/ourProduce/Mg-Mizuna.png" }
+];
+
 const edibleFlowersData: ProduceItem[] = [
   { id: 1, category: "EDIBLE FLOWERS", title: "Specialty Chef’s Mix (Custom)", description: "Vibrant edible flowers with delicate, tangy, and slightly sweet flavors.", image: "/images/ourProduce/Ef-mix.png" },
   { id: 2, category: "EDIBLE FLOWERS", title: "Nasturtium", description: "Bright, peppery edible flowers with a spicy, tangy taste, perfect for salads and garnishes.", image: "/images/ourProduce/Ef-nasturtium.png" },
   { id: 3, category: "EDIBLE FLOWERS", title: "Viola", description: "Delicate edible flowers with a mild, slightly sweet flavor, often used for garnishes and desserts.", image: "/images/ourProduce/Ef-viola.png" },
   { id: 4, category: "EDIBLE FLOWERS", title: "Marigold Petals", description: "Colorful edible petals with a slightly citrusy, mildly bitter flavor, ideal for decoration and flavoring dishes.", image: "/images/ourProduce/Ef-mari.png" }
 ];
+
+
 
 // ==========================================
 // 5. STATIC SECTIONS
@@ -345,7 +358,16 @@ export default function OurProducePage() {
         hasTopBorder={true}
       />
 
-      {/* 4. Edible Flowers */}
+      {/* 4. Microgreens */}
+      <CarouselSection 
+        id="microgreens"
+        title="Microgreens (cut mix or punnet options)"
+        subtitle="Grown with precision for unmatched flavor and quality."
+        items={microgreensData}
+        hasTopBorder={true}
+      />
+
+      {/* 5. Edible Flowers */}
       <CarouselSection 
         id="edible-flowers"
         title="Edible Flowers"
@@ -354,7 +376,7 @@ export default function OurProducePage() {
         hasTopBorder={true}
       />
 
-      {/* 5. Contact Form (Imported Component) */}
+      {/* 6. Contact Form (Imported Component) */}
       <ContactSection />
     </main>
   );

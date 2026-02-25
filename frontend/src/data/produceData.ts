@@ -55,22 +55,22 @@ export const produceData: ProduceItem[] = [
       folate: "34% DV",
     }
   },
-  {
-    id: 3,
-    category: "LEAFY GREENS",
-    title: "Kale",
-    description: "Nutrient-dense leafy green with a hearty, earthy taste.",
-    image: "/images/ourProduce/Lg-kale.png",
-    slug: generateSlug("Kale"),
-    nutrition: {
-      calories: "35 kcal",
-      protein: "2.9g",
-      fiber: "4.1g",
-      vitaminA: "206% DV",
-      vitaminK: "684% DV",
-      folate: "15% DV",
-    }
-  },
+  // {
+  //   id: 3,
+  //   category: "LEAFY GREENS",
+  //   title: "Kale",
+  //   description: "Nutrient-dense leafy green with a hearty, earthy taste.",
+  //   image: "/images/ourProduce/Lg-kale.png",
+  //   slug: generateSlug("Kale"),
+  //   nutrition: {
+  //     calories: "35 kcal",
+  //     protein: "2.9g",
+  //     fiber: "4.1g",
+  //     vitaminA: "206% DV",
+  //     vitaminK: "684% DV",
+  //     folate: "15% DV",
+  //   }
+  // },
   {
     id: 4,
     category: "LEAFY GREENS",
@@ -272,5 +272,128 @@ export const produceData: ProduceItem[] = [
     description: "Colorful edible petals with a slightly citrusy, mildly bitter flavor.", 
     image: "/images/ourProduce/Ef-mari.png", 
     slug: generateSlug("Marigold Petals")
+  },
+
+  // --- MICROGREENS ---
+  {
+    id: 20,
+    category: "MICROGREENS",
+    title: "Specialty Chef's Mix (Custom)",
+    description: "A fresh, colorful mix of nutrient-packed microgreens with mild to zesty flavors.",
+    image: "/images/ourProduce/Mg-mix.png",
+    slug: generateSlug("Specialty Chef's Mix (Custom)"),
+    // No specific nutrition for custom mix
+  },
+  {
+    id: 21,
+    category: "MICROGREENS",
+    title: "Basil",
+    description: "Aromatic leaves with a sweet, peppery fragrance and bold flavor.",
+    image: "/images/ourProduce/Mg-basil.png",
+    slug: generateSlug("Basil"),
+    nutrition: {
+      calories: "28 kcal",
+      protein: "3.2g",
+      fiber: "1.8g",
+      vitaminA: "70% DV",
+      vitaminK: "160% DV",
+      folate: "25% DV",
+    }
+  },
+  {
+    id: 22,
+    category: "MICROGREENS",
+    title: "Kale",
+    description: "Hearty, nutrient-dense leaves with a rich, earthy taste.",
+    image: "/images/ourProduce/Mg-kale.png",
+    slug: generateSlug("Kale"),
+    nutrition: {
+      calories: "35 kcal",
+      protein: "4.0g",
+      fiber: "3.0g",
+      vitaminA: "160% DV",
+      vitaminK: "420% DV",
+      folate: "45% DV",
+    }
+  },
+  {
+    id: 23,
+    category: "MICROGREENS",
+    title: "Arugula",
+    description: "Peppery, zesty greens with a sharp, fresh bite.",
+    image: "/images/ourProduce/Mg-Arugula.png",
+    slug: generateSlug("Arugula"),
+    nutrition: {
+      calories: "25 kcal",
+      protein: "2.6g",
+      fiber: "1.6g",
+      vitaminA: "45% DV",
+      vitaminK: "90% DV",
+      folate: "25% DV",
+    }
+  },
+  {
+    id: 24,
+    category: "MICROGREENS",
+    title: "Red Cabbage",
+    description: "Crisp purple leaves with a slightly sweet, crunchy flavor.",
+    image: "/images/ourProduce/Mg-redCabbage.png",
+    slug: generateSlug("Red Cabbage"),
+    nutrition: {
+      calories: "28 kcal",
+      protein: "3.2g",
+      fiber: "2.5g",
+      vitaminA: "60% DV",
+      vitaminK: "120% DV",
+      folate: "25% DV",
+    }
+  },
+  {
+    id: 25,
+    category: "MICROGREENS",
+    title: "Red Radish",
+    description: "Crunchy, vibrant slices with a sharp, peppery kick.",
+    image: "/images/ourProduce/Mg-redRadish.png",
+    slug: generateSlug("Red Radish"),
+    nutrition: {
+      calories: "32 kcal",
+      protein: "3.8g",
+      fiber: "2.5g",
+      vitaminA: "60% DV",
+      vitaminK: "110% DV",
+      folate: "20% DV",
+    }
+  },
+  {
+    id: 26,
+    category: "MICROGREENS",
+    title: "Red Amaranthus",
+    description: "Tender, vibrant red leaves with a mild, earthy flavor.",
+    image: "/images/ourProduce/Mg-redAmaranthus.png",
+    slug: generateSlug("Red Amaranthus"),
+    nutrition: {
+      calories: "29 kcal",
+      protein: "3.7g",
+      fiber: "2.3g",
+      vitaminA: "90% DV",
+      vitaminK: "120% DV",
+      folate: "40% DV",
+    }
+  },
+  {
+    id: 27,
+    category: "MICROGREENS",
+    title: "Mizuna",
+    description: "Delicate, feathery greens with a light peppery taste.",
+    image: "/images/ourProduce/Mg-Mizuna.png",
+    slug: generateSlug("Mizuna"),
+    nutrition: {
+      calories: "27 kcal",
+      protein: "2.8g",
+      fiber: "1.9g",
+      vitaminA: "95% DV",
+      vitaminK: "180% DV",
+      folate: "30% DV",
+    }
   },
 ];

@@ -65,7 +65,7 @@ const FarmInformation: FunctionComponent = () => {
             <div className="col-span-5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="./fresh/Labs.png"
+                src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh/Labs.png"
                 alt="Farm Photo"
                 className="w-full h-full max-h-[120px] rounded-[8px] object-cover border"
                 style={{ borderColor: '#e0e0e0' }}

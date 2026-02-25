@@ -357,31 +357,31 @@ function DisplayDataContent() {
               </a>
 
               <a
-                href="mailto:Business@INNOFarms.AI"
+                href="mailto:Business@FreshfromtheFuture.com"
                 className="flex items-center gap-2 no-underline"
               >
                 <MdEmail className="text-[14px]" style={{ color: '#FF5722' }} />
                 <span className="text-[10px] font-medium text-black" style={{ fontFamily: 'Poppins' }}>
-                  Business@INNOFarms.AI
+                Business@FreshfromtheFuture.com
                 </span>
               </a>
 
               <a
-                href="https://www.innofarms.ai"
+                href="https://www.freshfromthefuture.com/"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 no-underline"
               >
                 <MdLanguage className="text-[14px]" style={{ color: '#FF5722' }} />
                 <span className="text-[10px] font-medium text-black" style={{ fontFamily: 'Poppins' }}>
-                  www.innofarms.ai
+                www.freshfromthefuture.com
                 </span>
               </a>
             </div>
 
             <div className="flex flex-row items-center gap-4 shrink-0">
               <a
-                href="https://www.linkedin.com/company/innofarms-ai/"
+                href="https://www.linkedin.com/company/fresh-from-the-future/"
                 target="_blank"
                 rel="noreferrer"
                 className="text-center no-underline"
