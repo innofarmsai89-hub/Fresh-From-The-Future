@@ -8,55 +8,88 @@ interface Props {
 }
 
 const PredictedTransplant: FunctionComponent<Props> = ({ data, displayDate }) => {
+  const mainInfo = [
+    {
+      icon: <MdCalendarToday className="text-[14px]" style={{ color: '#3D550C' }} />,
+      label: 'Predicted Transplant Date:',
+      value: displayDate
+    },
+    {
+      icon: <MdAccessTime className="text-[14px]" style={{ color: '#3D550C' }} />,
+      label: 'Predicted Transplant Time:',
+      value: '10:00 AM'
+    },
+  ];
+
   return (
     <div className="w-full">
-      <div className="border border-[#3D550C] rounded-[6px]">
-        <div className="p-3">
-          <div
-            className="text-[12px] font-semibold mb-3"
+      {!data.items && (
+        <div className="border border-[#3D550C] rounded-[12px] p-5 mb-6">
+          <h2
+            className="text-[24px] font-bold mb-5"
             style={{ color: '#3D550C', fontFamily: 'Poppins' }}
           >
             Predicted Transplant
-          </div>
-          <div className="grid grid-cols-12 gap-3">
-            <div className="col-span-7">
-              <div className="flex flex-col gap-3">
-                <div className="flex items-start gap-2">
-                  <MdCalendarToday className="text-[14px] mt-[2px]" style={{ color: '#3D550C' }} />
-                  <div>
-                    <div className="text-[10px] font-semibold text-black mb-1" style={{ fontFamily: 'Poppins' }}>
-                      Predicted Transplant Date:
+          </h2>
+          <div className="flex flex-row justify-between items-start gap-4">
+            <div className="flex-1 grid grid-cols-1 gap-y-4">
+              {mainInfo.map((info, idx) => (
+                <div key={idx} className="flex items-start gap-2">
+                  <div className="mt-1 flex-shrink-0 w-2 h-2 mr-1 ">{info.icon}</div>
+                  <div className="overflow-hidden">
+                    <div
+                      className="text-[9px] font-bold text-black whitespace-nowrap"
+                      style={{ fontFamily: 'Poppins' }}
+                    >
+                      {info.label}
                     </div>
-                    <div className="text-[11px] text-[#1E1E1E]" style={{ fontFamily: 'Poppins', fontWeight: 400 }}>
-                      {displayDate}
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2">
-                  <MdAccessTime className="text-[14px] mt-[2px]" style={{ color: '#3D550C' }} />
-                  <div>
-                    <div className="text-[10px] font-semibold text-black mb-1" style={{ fontFamily: 'Poppins' }}>
-                      Predicted Transplant Time:
-                    </div>
-                    <div className="text-[11px] text-[#1E1E1E]" style={{ fontFamily: 'Poppins', fontWeight: 400 }}>
-                      10:00 AM
+                    <div
+                      className="text-[9px] text-[#4F4F4F] truncate"
+                      style={{ fontFamily: 'Poppins' }}
+                    >
+                      {info.value}
                     </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-            <div className="col-span-5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div className="flex-shrink-0">
               <img
-                src={data.image}
-                alt="Predicted Transplant"
-                className="w-full h-full min-h-[120px] max-h-[150px] rounded-[8px] object-cover border"
-                style={{ borderColor: '#e0e0e0' }}
+                src='/images/display-page/SaladMixMicrogreens.jpeg'
+                alt="Transplant Facility"
+                className="w-[120px] h-[95px] rounded-[14px] object-cover"
               />
             </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {data.items && (
+        <div className="grid grid-cols-2 gap-4">
+          {data.items.map((item, idx) => (
+            <div
+              key={idx}
+              className="flex items-stretch bg-[#F4F8EC] rounded-[10px] overflow-hidden border border-[#E0E0E0]/30 shadow-sm"
+              style={{ borderLeft: '6px solid #3D550C' }}
+            >
+              <div className="p-3.5 flex flex-col justify-center">
+                <div
+                  className="text-[12px] font-bold uppercase mb-1"
+                  style={{ color: '#3D550C', fontFamily: 'Poppins' }}
+                >
+                  {item.name}
+                </div>
+                <div
+                  className="text-[11px]"
+                  style={{ color: '#4F4F4F', fontFamily: 'Poppins' }}
+                >
+                  Predicted Transplant Date: <span className="font-semibold" style={{ color: '#FF6600' }}>{item.date}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

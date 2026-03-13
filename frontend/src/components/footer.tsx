@@ -23,7 +23,7 @@ export default function Footer() {
       className={`w-full bg-white relative ${spartan.variable} font-spartan`}
     >
       {/* --- Top Green Bar --- */}
-      <div
+      {/* <div
         className="relative lg:absolute top-0 left-0 w-full 
         h-auto lg:h-[80px] xl:h-[100px] 
         bg-[#3D550C] z-10 
@@ -35,7 +35,7 @@ export default function Footer() {
           h-full flex flex-col lg:flex-row items-center justify-between 
           gap-3 sm:gap-4 md:gap-5 lg:gap-0"
         >
-          {/* Tagline */}
+        
           <div
             className="font-bold 
               text-[14px] xs:text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] 
@@ -44,9 +44,9 @@ export default function Footer() {
             BEYOND ORGANIC • TRACEABLE • HYPER-LOCAL
           </div>
 
-          {/* Contact Details */}
+
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 xl:gap-12 items-center">
-            {/* Phone */}
+        
             <div className="flex items-center gap-2 sm:gap-3">
               <div
                 className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] lg:w-[40px] lg:h-[40px]
@@ -72,7 +72,7 @@ export default function Footer() {
               </span>
             </div>
 
-            {/* Email */}
+           
             <div className="flex items-center gap-2 sm:gap-3">
               <div
                 className="w-[32px] h-[32px] sm:w-[36px] sm:h-[36px] lg:w-[40px] lg:h-[40px]
@@ -100,7 +100,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* --- Main Content Area --- */}
       <div

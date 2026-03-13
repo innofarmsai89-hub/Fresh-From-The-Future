@@ -96,48 +96,76 @@ function DisplayDataContent() {
   const [qrHarvest, setQrHarvest] = useState<string | null>(null);
   const [qrSeeding, setQrSeeding] = useState<string | null>(null);
   const [qrTransplant, setQrTransplant] = useState<string | null>(null);
+  const [qrPkgDate, setQrPkgDate] = useState<string | null>(null);
+  const [qrBatch, setQrBatch] = useState<string | null>(null);
+  const [qrFssai, setQrFssai] = useState<string | null>(null);
   const [urlCrop, setUrlCrop] = useState<string | null>(null);
+  const [mixCropsState, setMixCropsState] = useState<any[] | null>(null);
 
   // EFFECT: Decode URL parameters - prioritize localStorage (same device), fallback to URL params (cross-device)
   useEffect(() => {
     try {
       const shortId = searchParams?.get('id');
-      
+
       // Strategy 1: Try localStorage first (works on same device - fast, clean)
       if (shortId && typeof window !== 'undefined') {
         const storedData = localStorage.getItem(`qr_${shortId}`);
-        
+
         if (storedData) {
           const data = JSON.parse(storedData);
-          
+
           // Set the decoded values (note: using short keys c, h, s, t)
           setUrlCrop(data.c || null);
           setQrHarvest(data.h || null);
           setQrSeeding(data.s || null);
           setQrTransplant(data.t || null);
-          
+          setQrPkgDate(data.pd || null);
+          setQrBatch(data.bn || null);
+          setQrFssai(data.fs || null);
+          setMixCropsState(data.mix || null);
+
           console.log('🔓 Data from localStorage (same device):', shortId, data);
           return; // Success, exit early
         }
       }
-      
+
       // Strategy 2: Fallback to URL parameters (works across devices - phone, different browser, etc.)
       const urlCropParam = searchParams?.get('crop');
       const urlHarvestParam = searchParams?.get('harvest');
       const urlSeedingParam = searchParams?.get('seeded');
       const urlTransplantParam = searchParams?.get('transplant');
-      
-      if (urlCropParam || urlHarvestParam || urlSeedingParam || urlTransplantParam) {
+      const urlPkgDateParam = searchParams?.get('pkgDate');
+      const urlBatchParam = searchParams?.get('batch');
+      const urlMixParam = searchParams?.get('sm');
+
+      if (urlCropParam || urlHarvestParam || urlSeedingParam || urlTransplantParam || urlPkgDateParam || urlBatchParam || urlMixParam) {
         setUrlCrop(urlCropParam || null);
         setQrHarvest(urlHarvestParam || null);
         setQrSeeding(urlSeedingParam || null);
         setQrTransplant(urlTransplantParam || null);
-        
+        setQrPkgDate(urlPkgDateParam || null);
+        setQrBatch(urlBatchParam || null);
+        setQrFssai(searchParams?.get('fssai') || null);
+
+        if (urlMixParam) {
+          // Parse sm=name:s:t|name:s:t
+          try {
+            const parsedMix = urlMixParam.split('|').map(item => {
+              const [name, sowing, transplant] = item.split(':');
+              return { name, sowing, transplant };
+            });
+            setMixCropsState(parsedMix);
+          } catch (e) {
+            console.error('Error parsing sm param:', e);
+          }
+        }
+
         console.log('🔓 Data from URL parameters (cross-device):', {
           crop: urlCropParam,
           harvest: urlHarvestParam,
           seeded: urlSeedingParam,
-          transplant: urlTransplantParam
+          transplant: urlTransplantParam,
+          mix: urlMixParam
         });
       } else if (shortId) {
         console.warn('⚠️ No data found in localStorage or URL params for ID:', shortId);
@@ -149,6 +177,9 @@ function DisplayDataContent() {
       setQrHarvest(searchParams?.get('harvest') || null);
       setQrSeeding(searchParams?.get('seeded') || null);
       setQrTransplant(searchParams?.get('transplant') || null);
+      setQrPkgDate(searchParams?.get('pkgDate') || null);
+      setQrBatch(searchParams?.get('batch') || null);
+      setQrFssai(searchParams?.get('fssai') || null);
     }
   }, [searchParams]);
 
@@ -159,7 +190,7 @@ function DisplayDataContent() {
       setError(null);
 
       const cropToLoad = urlCrop || selectedCrop;
-      
+
       if (!cropToLoad) {
         setError('No crop specified.');
         setIsLoading(false);
@@ -167,15 +198,62 @@ function DisplayDataContent() {
       }
 
       const slug = cropToLoad.toLowerCase().replace(/\s+/g, '-');
-      const data = CROPS_DATA[slug] || CROPS_DATA[cropToLoad] || null;
+      const baseData = CROPS_DATA[slug] || CROPS_DATA[cropToLoad] || null;
 
-      if (!data) {
+      if (!baseData) {
         console.warn(`Crop data not found for: ${cropToLoad}, ${slug}`);
         setCropData(CROPS_DATA['default'] || null);
         if (!CROPS_DATA['default']) {
           setError(`Crop "${cropToLoad}" not found in database.`);
         }
       } else {
+        // Create a deep copy to avoid mutating original CROPS_DATA
+        const data = JSON.parse(JSON.stringify(baseData));
+
+        // Apply single crop overrides
+        if (qrSeeding && data.milestones?.sowing) {
+          data.milestones.sowing.defaultDate = qrSeeding;
+        }
+        if (qrTransplant && data.milestones?.transplant) {
+          data.milestones.transplant.defaultDate = qrTransplant;
+        }
+        if (qrHarvest && data.milestones?.harvest) {
+          data.milestones.harvest.defaultDate = qrHarvest;
+        }
+
+        // Apply product description overrides
+        if (qrPkgDate && data.productDescription) {
+          // Format YYYY-MM-DD to DD/MM/YYYY if needed
+          let formattedDate = qrPkgDate;
+          if (qrPkgDate.includes('-')) {
+            const [y, m, d] = qrPkgDate.split('-');
+            if (y && m && d) formattedDate = `${d}/${m}/${y}`;
+          }
+          data.productDescription.packagingDate = formattedDate;
+        }
+        if (qrBatch && data.productDescription) {
+          data.productDescription.batchNumber = qrBatch;
+        }
+        if (qrFssai && data.productDescription) {
+          data.productDescription.fssaiNumber = qrFssai;
+        }
+
+        // Apply mix overrides
+        if (mixCropsState && data.milestones) {
+          if (data.milestones.sowing?.items) {
+            data.milestones.sowing.items = data.milestones.sowing.items.map((item: any) => {
+              const custom = mixCropsState.find((m: any) => m.name === item.name);
+              return custom && custom.sowing ? { ...item, date: custom.sowing } : item;
+            });
+          }
+          if (data.milestones.transplant?.items) {
+            data.milestones.transplant.items = data.milestones.transplant.items.map((item: any) => {
+              const custom = mixCropsState.find((m: any) => m.name === item.name);
+              return custom && custom.transplant ? { ...item, date: custom.transplant } : item;
+            });
+          }
+        }
+
         setCropData(data);
       }
 
@@ -185,7 +263,7 @@ function DisplayDataContent() {
       setError(err instanceof Error ? err.message : 'Failed to load crop information');
       setIsLoading(false);
     }
-  }, [selectedCrop, urlCrop]);
+  }, [selectedCrop, urlCrop, qrHarvest, qrSeeding, qrTransplant, qrPkgDate, qrBatch, qrFssai, mixCropsState]);
 
   const handleChange = (newValue: number) => setValue(newValue);
 
@@ -256,44 +334,24 @@ function DisplayDataContent() {
       )}
 
       <div className="bg-white overflow-hidden">
-        <div className="p-4">
-          <h1
-            className="text-center font-semibold text-[18px] mb-3"
-            style={{ color: '#3D550C', fontFamily: 'Poppins' }}
-          >
-            {cropData?.name || 'Crop Information'}
-          </h1>
+        <div className="relative w-full h-[250px] overflow-hidden flex items-center justify-center shadow-md">
+          <img
+            src="/images/display-page/banner.jpg"
+            alt="Farm Banner"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/10" /> {/* Subtle dark overlay for better text contrast if needed */}
 
           <div
-            className="relative w-full overflow-hidden flex items-center justify-center"
-            style={{
-              borderRadius: '6px',
-              backgroundColor: '#f5f5f5',
-              minHeight: '200px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
-            }}
+            className="relative z-10 px-8 py-6 rounded-[20px] backdrop-blur-xs shadow-xl flex items-center justify-center max-w-[90%]"
+            style={{ backgroundColor: 'rgba(61, 85, 12, 0.85)' }}
           >
-            {cropData?.heroImage ? (
-              <img
-                src={cropData.heroImage}
-                alt={cropData?.name || 'Crop'}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-                className="block w-full h-[200px] object-cover"
-              />
-            ) : (
-              <p style={{ color: '#999', fontFamily: 'Poppins' }}>No image available</p>
-            )}
-
-            <img
-              src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/logo.png"
-              alt="Fresh from the Future"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-              className="absolute left-1/2 top-1/2 h-auto w-[60%] max-w-[400px] -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 ease-in-out hover:scale-105"
-            />
+            <h1
+              className="text-center font-bold text-[24px] text-white leading-tight"
+              style={{ fontFamily: 'Poppins' }}
+            >
+              {cropData?.productDescription?.type || cropData?.name || 'Crop Information'}
+            </h1>
           </div>
         </div>
 
@@ -336,77 +394,86 @@ function DisplayDataContent() {
           </div>
         ))}
 
-        <div className="px-4 py-6">
-          <h2
-            className="text-[18px] font-bold mb-4"
-            style={{ color: '#3D550C', fontFamily: 'Poppins' }}
-          >
-            Contact Us
-          </h2>
-
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-[10px]" style={{ backgroundColor: '#c4c9b5' }}>
-            <div className="flex flex-col gap-[12px] w-full sm:flex-1">
-              <a
-                href="tel:+919220309252"
-                className="flex items-center gap-2 no-underline"
+        <div className="px-4 py-8">
+          <div className="rounded-[20px] p-6 shadow-lg relative overflow-hidden" style={{ backgroundColor: '#2d3a1a' }}>
+            <div className="flex justify-between items-start mb-8">
+              <h2
+                className="text-[32px] font-bold text-white"
+                style={{ fontFamily: 'Poppins' }}
               >
-                <MdPhone className="text-[14px]" style={{ color: '#FF5722' }} />
-                <span className="text-[9px] font-medium text-black" style={{ fontFamily: 'Poppins' }}>
-                  +91 9220309252 / +91 9220346184
-                </span>
-              </a>
+                Contact Us
+              </h2>
+              <div className="flex gap-3">
+                {[
+                  { icon: '/images/display-page/facebook.png', url: '#' },
+                  { icon: '/images/display-page/lnkin.png', url: 'https://www.linkedin.com/company/fresh-from-the-future/' },
+                  { icon: '/images/display-page/Instagram.png', url: 'https://www.instagram.com/p/DRCe3cGAbmU/' }
+                ].map((social, i) => (
+                  <a
+                    key={i}
+                    href={social.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-[45px] h-[45px] rounded-full bg-[#4a5a3a] flex items-center justify-center border border-white/10 hover:bg-[#5a6a4a] transition-colors overflow-hidden p-2.5"
+                  >
+                    <img src={social.icon} alt="Social" className="w-full h-full object-contain filter brightness-200" />
+                  </a>
+                ))}
+              </div>
+            </div>
 
-              <a
-                href="mailto:Business@FreshfromtheFuture.com"
-                className="flex items-center gap-2 no-underline"
-              >
-                <MdEmail className="text-[14px]" style={{ color: '#FF5722' }} />
-                <span className="text-[10px] font-medium text-black" style={{ fontFamily: 'Poppins' }}>
-                Business@FreshfromtheFuture.com
-                </span>
-              </a>
-
+            <div className="flex flex-col gap-6 mb-12">
               <a
                 href="https://www.freshfromthefuture.com/"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 no-underline"
+                className="flex items-center gap-4 no-underline group"
               >
-                <MdLanguage className="text-[14px]" style={{ color: '#FF5722' }} />
-                <span className="text-[10px] font-medium text-black" style={{ fontFamily: 'Poppins' }}>
-                www.freshfromthefuture.com
+                <div className="w-[32px] h-[32px] flex items-center justify-center shrink-0">
+                  <MdLanguage className="text-[28px] text-[#FF6600]" />
+                </div>
+                <span className="text-[16px] font-medium text-[#e0e0e0] group-hover:text-white transition-colors" style={{ fontFamily: 'Poppins' }}>
+                  www.freshfromthefuture.com
                 </span>
               </a>
+
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                <a
+                  href="mailto:Businnes@FreshfromtheFuture.com"
+                  className="flex items-center gap-4 no-underline group"
+                >
+                  <div className="w-[32px] h-[32px] flex items-center justify-center shrink-0">
+                    <MdEmail className="text-[28px] text-[#FF6600]" />
+                  </div>
+                  <span className="text-[16px] font-medium text-[#e0e0e0] group-hover:text-white transition-colors" style={{ fontFamily: 'Poppins' }}>
+                    Businnes@FreshfromtheFuture.com
+                  </span>
+                </a>
+
+                <a
+                  href="tel:+919220309252"
+                  className="flex items-center gap-4 no-underline group"
+                >
+                  <div className="w-[32px] h-[32px] flex items-center justify-center shrink-0">
+                    <MdPhone className="text-[28px] text-[#FF6600]" />
+                  </div>
+                  <span className="text-[16px] font-bold text-[#e0e0e0] group-hover:text-white transition-colors" style={{ fontFamily: 'Poppins' }}>
+                    +91 92203 09252
+                  </span>
+                </a>
+              </div>
             </div>
 
-            <div className="flex flex-row items-center gap-4 shrink-0">
-              <a
-                href="https://www.linkedin.com/company/fresh-from-the-future/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-center no-underline"
+            <div className="mt-4 flex justify-center opacity-30 select-none pointer-events-none">
+              <h3
+                className="text-[48px] font-black uppercase tracking-tight text-transparent leading-none"
+                style={{
+                  fontFamily: 'Poppins',
+                  WebkitTextStroke: '2px rgba(255, 255, 255, 1)',
+                }}
               >
-                <div className="w-10 h-10 bg-white rounded-[6px] flex items-center justify-center mb-1 border-2 border-white">
-                  <img src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh/Linkedin.png" alt="LinkedIn" className="w-full h-full object-contain" />
-                </div>
-                <div className="text-[10px] font-medium text-black" style={{ fontFamily: 'Poppins' }}>
-                  LinkedIn
-                </div>
-              </a>
-
-              <a
-                href="https://www.instagram.com/p/DRCe3cGAbmU/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-center no-underline"
-              >
-                <div className="w-10 h-10 bg-white rounded-[6px] flex items-center justify-center mb-1 border-2 border-white">
-                  <img src="https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh/Instagram.jpg" alt="Instagram" className="w-full h-full object-contain" />
-                </div>
-                <div className="text-[10px] font-medium text-black" style={{ fontFamily: 'Poppins' }}>
-                  Instagram
-                </div>
-              </a>
+                beyond organic
+              </h3>
             </div>
           </div>
         </div>
