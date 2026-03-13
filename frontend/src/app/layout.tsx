@@ -4,6 +4,7 @@ import "./globals.css";
 import { Geist, Geist_Mono, League_Spartan, Outfit } from "next/font/google";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const spartan = League_Spartan({
   subsets: ["latin"],
@@ -75,6 +76,7 @@ export default function RootLayout({
         {/* 3. Footer */}
         <Footer />
       </body>
+      <GoogleTagManager gtmId="GTM-WVLHXKFZ" />
     </html>
   );
 }
