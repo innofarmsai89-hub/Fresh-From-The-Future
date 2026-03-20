@@ -94,11 +94,11 @@ export const CROPS_DATA: Record<string, CropData> = {
         'Do not freeze',
         'Best consumed within 5 days of packing'
       ],
-      image: '/images/display-page/SaladMixMicrogreens.jpeg',
-      mrp: 'Rs.179/-',
+      image: '/images/display-page/Microgreen.jpg',
+      mrp: 'Rs.195/-',
       brandName: 'Fresh From The Future',
       batchNumber: 'FFTFSMMG090326',
-      fssaiNumber: '5577869658763',
+      fssaiNumber: '10826005000480',
       packagingDate: '09/03/2026',
       companyAddress: 'Fresh From The Future Pvt. Ltd., 4378 P, Sector 23, Palam Vihar, Gurgaon, Haryana-122017',
       packComposition: [
@@ -181,7 +181,7 @@ export const CROPS_DATA: Record<string, CropData> = {
       nutrients: 'AI-adjusted ECM and pH'
     }
   },
-
+  
   'salad-mix-cherry-tomatoes': {
     id: 'salad-mix-cherry-tomatoes',
     name: 'Salad Mix with Cherry Tomatoes',
@@ -210,11 +210,11 @@ export const CROPS_DATA: Record<string, CropData> = {
         'Do not freeze',
         'Best consumed within 4 days of packing'
       ],
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/SaladMixCherryTomatoesDes.png',
-      mrp: 'Rs.179/-',
+      image: '/images/display-page/cherry.jpg',
+      mrp: 'Rs.195/-',
       brandName: 'Fresh From The Future',
       batchNumber: 'FFTFSMCT090326',
-      fssaiNumber: '5577869658763',
+      fssaiNumber: '10826005000480',
       packagingDate: '09/03/2026',
       companyAddress: 'Fresh From The Future Pvt. Ltd., 4378 P, Sector 23, Palam Vihar, Gurgaon, Haryana-122017',
       packComposition: [
@@ -244,7 +244,7 @@ export const CROPS_DATA: Record<string, CropData> = {
       water: '2752.68',
       energy: '1610.76',
       health: '92.6',
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/SaladMixCherryTomatoesImpact.png'
+      image: '/images/display-page/cherry.jpg'
     },
     milestones: {
       sowing: {
@@ -323,11 +323,11 @@ export const CROPS_DATA: Record<string, CropData> = {
         'Do not freeze',
         'Best consumed within 4–5 days of packing'
       ],
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/LettuceMixDes.png',
+      image: '/images/display-page/Letuce.png',
       mrp: 'Rs.179/-',
       brandName: 'Fresh From The Future',
       batchNumber: 'FFTFLM090326',
-      fssaiNumber: '5577869658763',
+      fssaiNumber: '10826005000480',
       packagingDate: '09/03/2026',
       companyAddress: 'Fresh From The Future Pvt. Ltd., 4378 P, Sector 23, Palam Vihar, Gurgaon, Haryana-122017',
       packComposition: [
@@ -353,7 +353,7 @@ export const CROPS_DATA: Record<string, CropData> = {
       water: '2600.00',
       energy: '1550.00',
       health: '94.0',
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/LettuceMixImpact.png'
+      image: '/images/display-page/Letuce.png'
     },
     milestones: {
       sowing: {
@@ -425,11 +425,11 @@ export const CROPS_DATA: Record<string, CropData> = {
         'Wash gently before consumption',
         'Best consumed within 4–5 days of packing'
       ],
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/MicrogreenMixDes.png',
+      image: '/images/display-page/micro.jpg',
       mrp: 'Rs.225/-',
       brandName: 'Fresh From The Future',
       batchNumber: 'FFTFMGM090326',
-      fssaiNumber: '5577869658763',
+      fssaiNumber: '10826005000480',
       packagingDate: '09/03/2026',
       companyAddress: 'Fresh From The Future Pvt. Ltd., 4378 P, Sector 23, Palam Vihar, Gurgaon, Haryana-122017',
       packComposition: [
@@ -453,7 +453,7 @@ export const CROPS_DATA: Record<string, CropData> = {
       water: '2400.00',
       energy: '1450.00',
       health: '96.0',
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/MicrogreenMixImpact.png'
+      image: '/images/display-page/micro.jpg'
     },
     milestones: {
       sowing: {
@@ -494,7 +494,7 @@ export const CROPS_DATA: Record<string, CropData> = {
     heroImage: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/Italian-Basil (1).png',
     productDescription: {
       type: 'Microgreens - Basil Italian',
-      weight: '5-10 g per box',
+      weight: '25-30 g per box',
       shelfLife: '3-4 days (refrigerated)',
       bestBefore: '5 days from the date of harvest',
       description: `Basil is one of the most popular CEA crops due to its continuous harvest potential and high market demand. It responds well to hydroponics with optimal yields under consistent light and warm temperatures, supplying fresh herbs to culinary and medicinal markets. \n\nFrom a buyer's perspective, basil is valued for its vibrant aroma and shelf-ready quality. The assurance of pesticide-free production and reliable year-round harvests makes it a top choice for restaurants, retail chains, and health-conscious consumers.`,
@@ -772,32 +772,10 @@ export const CROPS_DATA: Record<string, CropData> = {
       mrp: 'Rs.179/-',
       brandName: 'Fresh From The Future',
       batchNumber: 'FFTFSMMD090326',
-      fssaiNumber: '5577869658763',
+      fssaiNumber: '10826005000480',
       packagingDate: '09/03/2026',
       companyAddress: 'Fresh From The Future Pvt. Ltd., 4378 P, Sector 23, Palam Vihar, Gurgaon, Haryana-122017',
-      packComposition: [
-        { item: 'Lollo Bionda Lettuce', weight: '20g' },
-        { item: 'Lollo Rosso Lettuce', weight: '25g' },
-        { item: 'Romaine Lettuce', weight: '25g' },
-        { item: 'Frisée Lettuce', weight: '10g' },
-        { item: 'Kale', weight: '20g' },
-        { item: 'Red Vein Sorrel', weight: '5g' },
-        { item: 'Swiss Chard', weight: '10g' },
-        { item: 'Bok Choy', weight: '10g' },
-        { item: 'Red Amaranthus Microgreens', weight: '5g' },
-        { item: 'Red Radish Microgreens', weight: '5g' },
-        { item: 'Red Cabbage Microgreens', weight: '5g' },
-        { item: 'Basil Microgreens', weight: '5g' },
-      ],
-      howToUse: [
-        'Toss directly into a bowl for a fresh, ready-to-eat salad',
-        'Add olive oil, lemon juice, or your favorite dressing',
-        'Use as a base for protein bowls with chicken, tofu, or paneer',
-        'Add into wraps, sandwiches, or burgers for extra crunch',
-        'Garnish pizzas, pastas, and gourmet dishes',
-        'Blend into smoothies for added nutrition',
-        'Pair with fruits, nuts, and cheese for a wholesome salad'
-      ]
+  
     },
     liveImpact: {
       score: '98.14',
@@ -1216,7 +1194,7 @@ Grown pesticide-free under carefully regulated conditions, Frisée delivers cons
     heroImage: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/BokChoy/BokchoyMainPage.png',
     productDescription: {
       type: 'BokChoy -Premium Hydroponic',
-      weight: '150 g',
+      weight: '300 g',
       shelfLife: '5 to 7 days if stored in 2-3 Degree Celsius temperature',
       bestBefore: '09/03/2026',
       description: 'Our Bok Choy – Premium Hydroponic (1 kg) is grown under carefully controlled conditions to ensure clean, crisp, and nutrient-rich produce. Each plant is cultivated with precision and harvested at peak freshness, resulting in tender stems and vibrant green leaves with a mild, slightly sweet flavor.\n\nBok choy is a versatile leafy green widely used in Asian and continental cuisines. Its crunchy stalks and delicate leaves make it perfect for stir-fries, soups, salads, and sautéed dishes. Fresh, wholesome, and ready to use, this bok choy delivers both great taste and high nutritional value.',
@@ -1240,10 +1218,10 @@ Grown pesticide-free under carefully regulated conditions, Frisée delivers cons
         'Best consumed within 5–5 days of purchase'
       ],
       image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/BokChoy/BokchoyDescriptionimage.png',
-      mrp: 'Rs.569/-',
+      mrp: 'Rs.235/-',
       brandName: 'Fresh From The Future',
       batchNumber: 'FFTFBC090326',
-      fssaiNumber: '5577869658763',
+      fssaiNumber: '10826005000480',
       packagingDate: '09/03/2026',
       companyAddress: 'Fresh From The Future Pvt. Ltd., 4378 P, Sector 23, Palam Vihar, Gurgaon, Haryana-122017',
       howToUse: [
@@ -1294,14 +1272,14 @@ Grown pesticide-free under carefully regulated conditions, Frisée delivers cons
 
   'curly-kale': {
     id: 'curly-kale',
-    name: 'Curly Kale',
+    name: 'Kale',
     heroImage: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/CurlyKale/CurlyKaleMain.png',
     productDescription: {
-      type: 'Curly Kale',
-      weight: '150–200g per head',
+      type: 'Kale',
+      weight: '100g per pack',
       shelfLife: '5–7 days (refrigerated)',
       bestBefore: '7 days from the date of harvest',
-      description: `Our hydroponic Curly Kale is cultivated in a precision-controlled vertical farming system with optimized light intensity, temperature, humidity, and nutrient delivery. The tightly ruffled, deep green leaves offer a robust texture and slightly peppery, earthy flavor. Ideal for salads, smoothies, sautéing, baking as kale chips, and gourmet plating. Grown pesticide-free in water-efficient hydroponic systems, ensuring superior cleanliness, consistency, and year-round premium quality.`,
+      description: `Our hydroponic Kale is cultivated in a precision-controlled vertical farming system with optimized light intensity, temperature, humidity, and nutrient delivery. The tightly ruffled, deep green leaves offer a robust texture and slightly peppery, earthy flavor. Ideal for salads, smoothies, sautéing, baking as kale chips, and gourmet plating. Grown pesticide-free in water-efficient hydroponic systems, ensuring superior cleanliness, consistency, and year-round premium quality.`,
       features: [
         '100% Pesticide-Free',
         'Hydroponically Grown',

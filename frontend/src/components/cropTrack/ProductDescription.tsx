@@ -78,7 +78,7 @@ const ProductDescription: FunctionComponent<Props> = ({ data }) => {
             {[
               { label: 'Brand name', value: data.brandName || 'Fresh From The Future' },
               { label: 'Batch Number', value: data.batchNumber || 'FFTFSMMD090326' },
-              { label: 'FSSAI Number', value: data.fssaiNumber || '5577869658763' },
+              { label: 'Price', value: data.mrp || 'Rs.179/-' },
               { label: 'Packaging Date', value: data.packagingDate || '09/03/2026' },
             ].map((item, i) => (
               <div key={i} className="text-[10px] leading-tight">
@@ -108,25 +108,25 @@ const ProductDescription: FunctionComponent<Props> = ({ data }) => {
         </div>
 
         {/* Pack Composition */}
-        <div className="mb-6">
-          <h2 className="text-[16px] font-bold mb-2" style={{ color: '#111', fontFamily: 'Poppins' }}>
-            Pack Composition ({data.weight || '150g'})
-          </h2>
-          <div className="p-3 rounded-[8px] border-[1px] border-[#3D550C]" style={{ backgroundColor: '#dadfce' }}>
-            <div className="text-[9px] text-[#555] italic mb-2">
-              The quantities mentioned below are approximate <span className="text-[8px]">*actual grams may vary</span>
-            </div>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-0.5">
-              {data.packComposition?.map((comp, i) => (
-                <div key={i} className="text-[10px] font-medium text-[#333]">
-                  • {comp.item} – {comp.weight}
-                </div>
-              )) || (
-                  <div className="text-[10px] text-[#333]">Not specified</div>
-                )}
+        {data.packComposition && data.packComposition.length > 0 ? (
+          <div className="mb-6">
+            <h2 className="text-[16px] font-bold mb-2" style={{ color: '#111', fontFamily: 'Poppins' }}>
+              Pack Composition ({data.weight || '150g'})
+            </h2>
+            <div className="p-3 rounded-[8px] border-[1px] border-[#3D550C]" style={{ backgroundColor: '#dadfce' }}>
+              <div className="text-[9px] text-[#555] italic mb-2">
+                The quantities mentioned below are approximate <span className="text-[8px]">*actual grams may vary</span>
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-0.5">
+                {data.packComposition.map((comp, i) => (
+                  <div key={i} className="text-[10px] font-medium text-[#333]">
+                    • {comp.item} – {comp.weight}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
 
         {/* Nutritional Information */}
         <div className="mb-2">

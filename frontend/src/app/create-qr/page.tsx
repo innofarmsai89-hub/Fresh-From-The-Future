@@ -55,7 +55,7 @@ export default function LabelGenerator() {
     transplantDate: '',
     packagingDate: '',
     batchNumber: '',
-    fssaiNumber: '',
+    price: '',
     cropType: 'romaine-lettuce'
   });
 
@@ -126,7 +126,7 @@ export default function LabelGenerator() {
         t: formData.transplantDate,
         pd: formData.packagingDate,
         bn: formData.batchNumber,
-        fs: formData.fssaiNumber,
+        pr: formData.price,
         mix: mixCrops.length > 0 ? mixCrops : undefined
       };
 
@@ -144,7 +144,7 @@ export default function LabelGenerator() {
       if (formData.transplantDate) params.append('transplant', formData.transplantDate);
       if (formData.packagingDate) params.append('pkgDate', formData.packagingDate);
       if (formData.batchNumber) params.append('batch', formData.batchNumber);
-      if (formData.fssaiNumber) params.append('fssai', formData.fssaiNumber);
+      if (formData.price) params.append('price', formData.price);
 
       // Add mix data to URL as compressed string if possible, or just rely on shortId/localStorage
       // For cross-device/no-localStorage, we can encode mix as: name:s:t|name:s:t
@@ -435,7 +435,7 @@ export default function LabelGenerator() {
               />
             </div>
 
-            {/* FSSAI Number */}
+            {/* Price */}
             <div style={{ marginBottom: '16px' }}>
               <label style={{
                 display: 'block',
@@ -444,13 +444,13 @@ export default function LabelGenerator() {
                 color: '#000000',
                 marginBottom: '8px'
               }}>
-                FSSAI Number
+                Price
               </label>
               <input
                 type="text"
-                name="fssaiNumber"
-                placeholder="e.g. 5577869658763"
-                value={formData.fssaiNumber}
+                name="price"
+                placeholder="e.g. Rs.195/-"
+                value={formData.price}
                 onChange={handleChange}
                 style={{
                   width: '100%',
@@ -494,7 +494,7 @@ export default function LabelGenerator() {
                           <input
                             type="date"
                             value={crop.transplant}
-                            onChange={(e) => handleMixCropChange(idx, 'transplant', e.target.value)}
+                            onChange={(e) => handleMixCropChange(idx, 'transplant', e.target.value)} 
                             style={{ width: '100%', padding: '8px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '12px', color: '#000000', backgroundColor: '#ffffff', colorScheme: 'light' }}
                           />
                         </div>
@@ -629,8 +629,8 @@ export default function LabelGenerator() {
                     paddingTop: '8px',
                     fontSize: '14px'
                   }}>
-                    <span style={{ color: '#000000', fontWeight: '600' }}>FSSAI:</span>
-                    <strong style={{ color: '#000000' }}>{formData.fssaiNumber || '-'}</strong>
+                    <span style={{ color: '#000000', fontWeight: '600' }}>Price:</span>
+                    <strong style={{ color: '#000000' }}>{formData.price || '-'}</strong>
                   </div>
                 </div>
 

@@ -98,7 +98,7 @@ function DisplayDataContent() {
   const [qrTransplant, setQrTransplant] = useState<string | null>(null);
   const [qrPkgDate, setQrPkgDate] = useState<string | null>(null);
   const [qrBatch, setQrBatch] = useState<string | null>(null);
-  const [qrFssai, setQrFssai] = useState<string | null>(null);
+  const [qrPrice, setQrPrice] = useState<string | null>(null);
   const [urlCrop, setUrlCrop] = useState<string | null>(null);
   const [mixCropsState, setMixCropsState] = useState<any[] | null>(null);
 
@@ -121,7 +121,7 @@ function DisplayDataContent() {
           setQrTransplant(data.t || null);
           setQrPkgDate(data.pd || null);
           setQrBatch(data.bn || null);
-          setQrFssai(data.fs || null);
+          setQrPrice(data.pr || null);
           setMixCropsState(data.mix || null);
 
           console.log('🔓 Data from localStorage (same device):', shortId, data);
@@ -145,7 +145,7 @@ function DisplayDataContent() {
         setQrTransplant(urlTransplantParam || null);
         setQrPkgDate(urlPkgDateParam || null);
         setQrBatch(urlBatchParam || null);
-        setQrFssai(searchParams?.get('fssai') || null);
+        setQrPrice(searchParams?.get('price') || null);
 
         if (urlMixParam) {
           // Parse sm=name:s:t|name:s:t
@@ -179,7 +179,7 @@ function DisplayDataContent() {
       setQrTransplant(searchParams?.get('transplant') || null);
       setQrPkgDate(searchParams?.get('pkgDate') || null);
       setQrBatch(searchParams?.get('batch') || null);
-      setQrFssai(searchParams?.get('fssai') || null);
+      setQrPrice(searchParams?.get('price') || null);
     }
   }, [searchParams]);
 
@@ -234,8 +234,8 @@ function DisplayDataContent() {
         if (qrBatch && data.productDescription) {
           data.productDescription.batchNumber = qrBatch;
         }
-        if (qrFssai && data.productDescription) {
-          data.productDescription.fssaiNumber = qrFssai;
+        if (qrPrice && data.productDescription) {
+          data.productDescription.mrp = qrPrice;
         }
 
         // Apply mix overrides
@@ -263,7 +263,7 @@ function DisplayDataContent() {
       setError(err instanceof Error ? err.message : 'Failed to load crop information');
       setIsLoading(false);
     }
-  }, [selectedCrop, urlCrop, qrHarvest, qrSeeding, qrTransplant, qrPkgDate, qrBatch, qrFssai, mixCropsState]);
+  }, [selectedCrop, urlCrop, qrHarvest, qrSeeding, qrTransplant, qrPkgDate, qrBatch, qrPrice, mixCropsState]);
 
   const handleChange = (newValue: number) => setValue(newValue);
 
@@ -350,7 +350,7 @@ function DisplayDataContent() {
               className="text-center font-bold text-[24px] text-white leading-tight"
               style={{ fontFamily: 'Poppins' }}
             >
-              {cropData?.productDescription?.type || cropData?.name || 'Crop Information'}
+              {cropData?.name || cropData?.productDescription?.type || 'Crop Information'}
             </h1>
           </div>
         </div>

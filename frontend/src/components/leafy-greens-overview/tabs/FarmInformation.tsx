@@ -3,34 +3,34 @@ import { MdBugReport, MdCheckCircle, MdRestaurant } from 'react-icons/md';
 
 const FarmInformation: FunctionComponent = () => {
   const farmDetails = [
-    { label: 'Farm Name:', value: 'INNOFarms.AI- Singapore & UAE Model Farm' },
-    { label: 'Location:', value: 'Udyog Vihar, Sector 23, Gurugram' },
+    { label: 'Farm Name:', value: 'Fresh From The Future' },
+    { label: 'Location:', value: 'Palam Vihar, Sector 23, Gurugram' },
     { label: 'Farm Type:', value: 'Indoor AI-powered vertical farm' },
     { label: 'Started In:', value: '2024' },
     { label: 'Farm Size:', value: '1,200 m² growing area (One GrowZone)' },
   ];
 
   const certifications = [
-    {
-      icon: '/images/display-page/check.png',
-      title: 'HACCP Certified',
-      description: 'Hazard Analysis and Critical Control Points certification ensures food safety'
-    },
-    {
-      icon: '/images/display-page/fblike.png',
-      title: 'GAP (Good Agricultural Practices)',
-      description: 'Certified sustainable and responsible farming practices'
-    },
-    {
-      icon: '/images/display-page/coackroach.png',
-      title: 'Pesticide-Free Verified',
-      description: '100% pesticide-free produce guaranteed'
-    },
-    {
-      icon: '/images/display-page/sprout.png',
-      title: 'Beyond Organic',
-      description: 'Meets international organic farming standards'
-    },
+    // {
+    //   icon: '/images/display-page/check.png',
+    //   title: 'HACCP Certified',
+    //   description: 'Hazard Analysis and Critical Control Points certification ensures food safety'
+    // },
+    // {
+    //   icon: '/images/display-page/fblike.png',
+    //   title: 'GAP (Good Agricultural Practices)',
+    //   description: 'Certified sustainable and responsible farming practices'
+    // },
+    // {
+    //   icon: '/images/display-page/coackroach.png',
+    //   title: 'Pesticide-Free Verified',
+    //   description: '100% pesticide-free produce guaranteed'
+    // },
+    // {
+    //   icon: '/images/display-page/sprout.png',
+    //   title: 'Beyond Organic',
+    //   description: 'Meets international organic farming standards'
+    // },
     {
       icon: '/images/display-page/vegan.png',
       title: 'Food Safety Certified',
