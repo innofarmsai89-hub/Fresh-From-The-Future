@@ -513,7 +513,16 @@ export const CROPS_DATA: Record<string, CropData> = {
         'Wash just before consumption',
         'Best consumed within 7-10 days of purchase'
       ],
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/Italian-Basil (11).png'
+      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/Italian-Basil (11).png',
+      howToUse: [
+        'Add fresh leaves to salads for aroma and flavour',
+        'Use in pasta, pizzas, and Italian dishes',
+        'Blend into pesto sauces and dips',
+        'Garnish soups, curries, and main courses',
+        'Infuse in oils, dressings, or beverages',
+        'Pair with tomatoes, mozzarella, and olive oil',
+        'Use in sandwiches, wraps, and gourmet dishes'
+      ]
     },
     liveImpact: {
       score: '98.14',
@@ -697,7 +706,16 @@ export const CROPS_DATA: Record<string, CropData> = {
         { nutrient: 'Antioxidants', value: 'Rich', per: '100g' }
       ],
       storageTips: ['Keep Refrigerated at 2-4°C', 'Wash before use', 'Seal bag tightly'],
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/logo.png'
+      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/logo.png',
+      howToUse: [
+        'Use as a base for fresh green salads',
+        'Add to sandwiches, burgers, and wraps for crunch',
+        'Mix into grain bowls or rice bowls',
+        'Use whole leaves for lettuce wraps or rolls',
+        'Pair with light dressings, vinaigrettes, and citrus',
+        'Combine with other greens for texture and volume',
+        'Serve as a fresh side with grilled dishes'
+      ]
     },
     liveImpact: {
       score: '96.5',
@@ -775,7 +793,15 @@ export const CROPS_DATA: Record<string, CropData> = {
       fssaiNumber: '10826005000480',
       packagingDate: '09/03/2026',
       companyAddress: 'Fresh From The Future Pvt. Ltd., 4378 P, Sector 23, Palam Vihar, Gurgaon, Haryana-122017',
-  
+      howToUse: [
+        'Use as a base for Caesar and classic salads',
+        'Add to wraps, burgers, and sandwiches',
+        'Chop into grain bowls or rice bowls',
+        'Grill lightly for a smoky flavour',
+        'Pair with parmesan, chicken, or seafood',
+        'Use as lettuce cups for healthy wraps',
+        'Add crunch to tacos or bowls'
+      ]
     },
     liveImpact: {
       score: '98.14',
@@ -1303,7 +1329,16 @@ Grown pesticide-free under carefully regulated conditions, Frisée delivers cons
         'Wash just before use',
         'Consume within 5–7 days'
       ],
-      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/CurlyKale/CurlyKaleDescription.png'
+      image: 'https://d135lqli3q4imp.cloudfront.net/FreshFromTheFuture/fresh2/CurlyKale/CurlyKaleDescription.png',
+      howToUse: [
+        'Chop and add to salads (massage for better texture)',
+        'Blend into smoothies for added nutrition',
+        'Sauté with garlic and olive oil as a side dish',
+        'Add to soups, stews, and curries',
+        'Bake into crispy kale chips',
+        'Mix into pasta or grain bowls',
+        'Pair with eggs, chicken, or roasted vegetables'
+      ]
     },
     liveImpact: {
       score: '97.3',
