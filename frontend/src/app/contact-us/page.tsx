@@ -152,7 +152,7 @@ export default function ContactUsPage() {
 
               {/* Functional Form */}
               <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-                
+
                 {/* Name */}
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="font-open-sans font-normal text-[18px] text-white">
@@ -232,7 +232,7 @@ export default function ContactUsPage() {
                 </div>
 
                 {/* Submit Button */}
-                <button 
+                <button
                   type="submit"
                   disabled={status.type === 'loading'}
                   className="w-full bg-[#DCBC88] h-[60px] rounded-[10px] mt-6 flex items-center justify-center font-montserrat font-bold text-[18px] text-[#1E1E1E] hover:bg-[#cbb082] transition-colors disabled:opacity-80 disabled:cursor-not-allowed"
@@ -293,18 +293,28 @@ export default function ContactUsPage() {
                 Social Network
               </h3>
               <div className="flex items-center justify-center gap-8">
-                <div className="flex items-center gap-2">
+                <a
+                  href="https://www.instagram.com/fresh.from.the.future/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:opacity-75 transition-opacity"
+                >
                   <FaInstagram className="w-6 h-6 text-[#3D550C]" />
                   <span className="font-outfit text-[24px] text-black">
                     Instagram
                   </span>
-                </div>
-                <div className="flex items-center gap-2">
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/fresh-from-the-future/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:opacity-75 transition-opacity"
+                >
                   <FaLinkedinIn className="w-6 h-6 text-[#3D550C]" />
                   <span className="font-outfit text-[24px] text-black">
-                    linkedin
+                    LinkedIn
                   </span>
-                </div>
+                </a>
               </div>
             </div>
 
