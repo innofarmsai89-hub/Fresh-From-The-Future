@@ -11,6 +11,8 @@ import Slider2 from '@/components/slider/slider2';
 import Slider3 from '@/components/slider/slider3';
 import Slider4 from '@/components/slider/slider4';
 import Slider5 from '@/components/slider/slider5';
+import Slider6 from '@/components/slider/slider6';
+import Slider7 from '@/components/slider/slider7';
 
 // Components
 import ContactSection from '@/components/getInTouch';
@@ -233,7 +235,7 @@ function TechCard({ feature }: { feature: { icon: string, title: string, subtitl
 export default function HomePage() {
   // --- Slider State & Logic ---
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = [Slider1, Slider2, Slider3, Slider4, Slider5];
+  const slides = [Slider6, Slider7, Slider1, Slider2, Slider3, Slider4, Slider5];
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const delay = 5000;
 

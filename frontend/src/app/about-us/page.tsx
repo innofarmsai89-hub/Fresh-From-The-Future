@@ -580,39 +580,7 @@ export default function AboutUs() {
       {/* --- 6. Le Marche & Soul Foods Sections --- */}
       {projectsData.map((project: ProjectData) => (
         <div key={project.id} className="w-full">
-          {/* Hero Section */}
-          <section className="relative w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center overflow-hidden gap-8">
-            <div className="absolute inset-0 z-0">
-              <Image
-                src={project.hero.bgImage}
-                alt={`${project.id} Hero`}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div
-              className="relative z-10 w-[90%] max-w-[1277px] min-h-[180px] rounded-[30px] flex flex-col items-center justify-center text-center px-6 py-10"
-              style={{
-                background: `radial-gradient(90.16% 143.01% at 15.32% 21.04%, rgba(165, 239, 255, 0.2) 0%, rgba(110, 191, 244, 0.0447917) 77.08%, rgba(70, 144, 213, 0) 100%)`,
-                backdropFilter: "blur(40px)",
-                WebkitBackdropFilter: "blur(40px)",
-                backgroundBlendMode: "overlay, normal",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
-              }}
-            >
-              <h1 className="font-spartan font-bold text-[36px] md:text-[64px] leading-[1.1] text-white mb-2 drop-shadow-lg max-w-[900px]">
-                {project.hero.title}
-              </h1>
-            </div>
-            <Link
-              href={`#${project.id}-collection`}
-              className="relative z-10 bg-white text-[#3D550C] font-outfit font-medium text-[16px] md:text-[18px] px-10 py-4 rounded-full hover:bg-gray-100 transition-all shadow-xl hover:scale-105 active:scale-95"
-            >
-              {project.hero.buttonText}
-            </Link>
-          </section>
+
 
           {/* Intro Section */}
           <section className="w-full bg-white py-20">
