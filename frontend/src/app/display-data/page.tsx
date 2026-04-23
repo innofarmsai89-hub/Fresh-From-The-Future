@@ -100,7 +100,7 @@ function DisplayDataContent() {
   const [qrBatch, setQrBatch] = useState<string | null>(null);
   const [qrPrice, setQrPrice] = useState<string | null>(null);
   const [urlCrop, setUrlCrop] = useState<string | null>(null);
-  const [mixCropsState, setMixCropsState] = useState<any[] | null>(null);
+
 
   // EFFECT: Decode URL parameters - prioritize localStorage (same device), fallback to URL params (cross-device)
   useEffect(() => {
@@ -122,7 +122,7 @@ function DisplayDataContent() {
           setQrPkgDate(data.pd || null);
           setQrBatch(data.bn || null);
           setQrPrice(data.pr || null);
-          setMixCropsState(data.mix || null);
+
 
           console.log('🔓 Data from localStorage (same device):', shortId, data);
           return; // Success, exit early
@@ -136,9 +136,9 @@ function DisplayDataContent() {
       const urlTransplantParam = searchParams?.get('transplant');
       const urlPkgDateParam = searchParams?.get('pkgDate');
       const urlBatchParam = searchParams?.get('batch');
-      const urlMixParam = searchParams?.get('sm');
 
-      if (urlCropParam || urlHarvestParam || urlSeedingParam || urlTransplantParam || urlPkgDateParam || urlBatchParam || urlMixParam) {
+
+      if (urlCropParam || urlHarvestParam || urlSeedingParam || urlTransplantParam || urlPkgDateParam || urlBatchParam) {
         setUrlCrop(urlCropParam || null);
         setQrHarvest(urlHarvestParam || null);
         setQrSeeding(urlSeedingParam || null);
@@ -146,26 +146,10 @@ function DisplayDataContent() {
         setQrPkgDate(urlPkgDateParam || null);
         setQrBatch(urlBatchParam || null);
         setQrPrice(searchParams?.get('price') || null);
-
-        if (urlMixParam) {
-          // Parse sm=name:s:t|name:s:t
-          try {
-            const parsedMix = urlMixParam.split('|').map(item => {
-              const [name, sowing, transplant] = item.split(':');
-              return { name, sowing, transplant };
-            });
-            setMixCropsState(parsedMix);
-          } catch (e) {
-            console.error('Error parsing sm param:', e);
-          }
-        }
-
         console.log('🔓 Data from URL parameters (cross-device):', {
-          crop: urlCropParam,
-          harvest: urlHarvestParam,
+          crop: urlCropParam,          harvest: urlHarvestParam,
           seeded: urlSeedingParam,
-          transplant: urlTransplantParam,
-          mix: urlMixParam
+          transplant: urlTransplantParam
         });
       } else if (shortId) {
         console.warn('⚠️ No data found in localStorage or URL params for ID:', shortId);
@@ -238,21 +222,7 @@ function DisplayDataContent() {
           data.productDescription.mrp = qrPrice;
         }
 
-        // Apply mix overrides
-        if (mixCropsState && data.milestones) {
-          if (data.milestones.sowing?.items) {
-            data.milestones.sowing.items = data.milestones.sowing.items.map((item: any) => {
-              const custom = mixCropsState.find((m: any) => m.name === item.name);
-              return custom && custom.sowing ? { ...item, date: custom.sowing } : item;
-            });
-          }
-          if (data.milestones.transplant?.items) {
-            data.milestones.transplant.items = data.milestones.transplant.items.map((item: any) => {
-              const custom = mixCropsState.find((m: any) => m.name === item.name);
-              return custom && custom.transplant ? { ...item, date: custom.transplant } : item;
-            });
-          }
-        }
+
 
         setCropData(data);
       }
@@ -263,7 +233,7 @@ function DisplayDataContent() {
       setError(err instanceof Error ? err.message : 'Failed to load crop information');
       setIsLoading(false);
     }
-  }, [selectedCrop, urlCrop, qrHarvest, qrSeeding, qrTransplant, qrPkgDate, qrBatch, qrPrice, mixCropsState]);
+  }, [selectedCrop, urlCrop, qrHarvest, qrSeeding, qrTransplant, qrPkgDate, qrBatch, qrPrice]);
 
   const handleChange = (newValue: number) => setValue(newValue);
 

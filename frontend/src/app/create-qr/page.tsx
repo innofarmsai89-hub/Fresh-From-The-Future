@@ -59,7 +59,6 @@ export default function LabelGenerator() {
     cropType: 'romaine-lettuce'
   });
 
-  const [mixCrops, setMixCrops] = useState<MixCropItem[]>([]);
   const [generatedUrl, setGeneratedUrl] = useState<string>('');
   const [qrCodeUrl, setQrCodeUrl] = useState<string>('');
   const [isDesktop, setIsDesktop] = useState(false);
@@ -79,21 +78,7 @@ export default function LabelGenerator() {
     };
   }, []);
 
-  // Update mixCrops when cropType changes
-  useEffect(() => {
-    if (MIX_CROP_IDS.includes(formData.cropType)) {
-      const selectedCropData = CROPS_DATA[formData.cropType];
-      if (selectedCropData?.milestones?.sowing?.items) {
-        setMixCrops(selectedCropData.milestones.sowing.items.map(item => ({
-          name: item.name,
-          sowing: formData.seedingDate, // Default to main seeding date
-          transplant: formData.transplantDate // Default to main transplant date
-        })));
-      }
-    } else {
-      setMixCrops([]);
-    }
-  }, [formData.cropType]);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -106,19 +91,12 @@ export default function LabelGenerator() {
     // Actually, it's better to let user customize individually.
   };
 
-  const handleMixCropChange = (index: number, field: 'sowing' | 'transplant', value: string) => {
-    setMixCrops(prev => {
-      const updated = [...prev];
-      updated[index] = { ...updated[index], [field]: value };
-      return updated;
-    });
-  };
+
 
   const handleGenerate = () => {
     try {
       const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://innofarms.ai';
 
-      // 2. Create data object
       const data = {
         c: formData.cropType,
         h: formData.harvestDate,
@@ -126,8 +104,7 @@ export default function LabelGenerator() {
         t: formData.transplantDate,
         pd: formData.packagingDate,
         bn: formData.batchNumber,
-        pr: formData.price,
-        mix: mixCrops.length > 0 ? mixCrops : undefined
+        pr: formData.price
       };
 
       const shortId = generateShortId(data);
@@ -146,12 +123,7 @@ export default function LabelGenerator() {
       if (formData.batchNumber) params.append('batch', formData.batchNumber);
       if (formData.price) params.append('price', formData.price);
 
-      // Add mix data to URL as compressed string if possible, or just rely on shortId/localStorage
-      // For cross-device/no-localStorage, we can encode mix as: name:s:t|name:s:t
-      if (mixCrops.length > 0) {
-        const encodedMix = mixCrops.map(m => `${m.name}:${m.sowing}:${m.transplant}`).join('|');
-        params.append('sm', encodedMix);
-      }
+
 
       const targetUrl = `${baseUrl}/display-data?${params.toString()}`;
       setGeneratedUrl(targetUrl);
@@ -467,43 +439,7 @@ export default function LabelGenerator() {
               />
             </div>
 
-            {/* Mix Component Dates */}
-            {mixCrops.length > 0 && (
-              <div style={{ marginTop: '24px', padding: '16px', backgroundColor: '#f9fafb', borderRadius: '16px', border: '1px solid #e5e7eb' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#1f2937', marginBottom: '12px' }}>
-                  Individual Crop Dates (Mix)
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {mixCrops.map((crop, idx) => (
-                    <div key={idx} style={{ paddingBottom: '12px', borderBottom: idx < mixCrops.length - 1 ? '1px solid #e5e7eb' : 'none' }}>
-                      <p style={{ fontSize: '14px', fontWeight: 'bold', color: '#3D550C', marginBottom: '8px' }}>
-                        {crop.name}
-                      </p>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                        <div>
-                          <label style={{ display: 'block', fontSize: '11px', color: '#6b7280', marginBottom: '4px' }}>Sowing</label>
-                          <input
-                            type="date"
-                            value={crop.sowing}
-                            onChange={(e) => handleMixCropChange(idx, 'sowing', e.target.value)}
-                            style={{ width: '100%', padding: '8px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '12px', color: '#000000', backgroundColor: '#ffffff', colorScheme: 'light' }}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ display: 'block', fontSize: '11px', color: '#6b7280', marginBottom: '4px' }}>Transplant</label>
-                          <input
-                            type="date"
-                            value={crop.transplant}
-                            onChange={(e) => handleMixCropChange(idx, 'transplant', e.target.value)} 
-                            style={{ width: '100%', padding: '8px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '12px', color: '#000000', backgroundColor: '#ffffff', colorScheme: 'light' }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+
 
 
             {/* Generate Button */}

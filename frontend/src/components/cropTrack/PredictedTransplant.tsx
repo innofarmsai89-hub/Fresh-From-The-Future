@@ -23,73 +23,44 @@ const PredictedTransplant: FunctionComponent<Props> = ({ data, displayDate }) =>
 
   return (
     <div className="w-full">
-      {!data.items && (
-        <div className="border border-[#3D550C] rounded-[12px] p-5 mb-6">
-          <h2
-            className="text-[24px] font-bold mb-5"
-            style={{ color: '#3D550C', fontFamily: 'Poppins' }}
-          >
-            Predicted Transplant
-          </h2>
-          <div className="flex flex-row justify-between items-start gap-4">
-            <div className="flex-1 grid grid-cols-1 gap-y-4">
-              {mainInfo.map((info, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <div className="mt-1 flex-shrink-0 w-2 h-2 mr-1 ">{info.icon}</div>
-                  <div className="overflow-hidden">
-                    <div
-                      className="text-[9px] font-bold text-black whitespace-nowrap"
-                      style={{ fontFamily: 'Poppins' }}
-                    >
-                      {info.label}
-                    </div>
-                    <div
-                      className="text-[9px] text-[#4F4F4F] truncate"
-                      style={{ fontFamily: 'Poppins' }}
-                    >
-                      {info.value}
-                    </div>
+      <div className="border border-[#3D550C] rounded-[12px] p-5 mb-6">
+        <h2
+          className="text-[24px] font-bold mb-5"
+          style={{ color: '#3D550C', fontFamily: 'Poppins' }}
+        >
+          Predicted Transplant
+        </h2>
+        <div className="flex flex-row justify-between items-start gap-4">
+          <div className="flex-1 grid grid-cols-1 gap-y-4">
+            {mainInfo.map((info, idx) => (
+              <div key={idx} className="flex items-start gap-2">
+                <div className="mt-1 flex-shrink-0 w-2 h-2 mr-1 ">{info.icon}</div>
+                <div className="overflow-hidden">
+                  <div
+                    className="text-[9px] font-bold text-black whitespace-nowrap"
+                    style={{ fontFamily: 'Poppins' }}
+                  >
+                    {info.label}
+                  </div>
+                  <div
+                    className="text-[9px] text-[#4F4F4F] truncate"
+                    style={{ fontFamily: 'Poppins' }}
+                  >
+                    {info.value}
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="flex-shrink-0">
-              <img
-                src='/images/display-page/SaladMixMicrogreens.jpeg'
-                alt="Transplant Facility"
-                className="w-[120px] h-[95px] rounded-[14px] object-cover"
-              />
-            </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex-shrink-0">
+            <img
+              src='/images/display-page/SaladMixMicrogreens.jpeg'
+              alt="Transplant Facility"
+              className="w-[120px] h-[95px] rounded-[14px] object-cover"
+            />
           </div>
         </div>
-      )}
-
-      {data.items && (
-        <div className="grid grid-cols-2 gap-4">
-          {data.items.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex items-stretch bg-[#F4F8EC] rounded-[10px] overflow-hidden border border-[#E0E0E0]/30 shadow-sm"
-              style={{ borderLeft: '6px solid #3D550C' }}
-            >
-              <div className="p-3.5 flex flex-col justify-center">
-                <div
-                  className="text-[12px] font-bold uppercase mb-1"
-                  style={{ color: '#3D550C', fontFamily: 'Poppins' }}
-                >
-                  {item.name}
-                </div>
-                <div
-                  className="text-[11px]"
-                  style={{ color: '#4F4F4F', fontFamily: 'Poppins' }}
-                >
-                  Predicted Transplant Date: <span className="font-semibold" style={{ color: '#FF6600' }}>{item.date}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      </div>
     </div>
   );
 };
