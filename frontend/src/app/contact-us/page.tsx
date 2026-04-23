@@ -297,7 +297,7 @@ export default function ContactUsPage() {
                   href="https://www.instagram.com/fresh.from.the.future/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  className="flex items-center gap-2 hover:opacity-75 transition-opacity"
                 >
                   <FaInstagram className="w-6 h-6 text-[#3D550C]" />
                   <span className="font-outfit text-[24px] text-black">
@@ -308,7 +308,7 @@ export default function ContactUsPage() {
                   href="https://www.linkedin.com/company/fresh-from-the-future/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  className="flex items-center gap-2 hover:opacity-75 transition-opacity"
                 >
                   <FaLinkedinIn className="w-6 h-6 text-[#3D550C]" />
                   <span className="font-outfit text-[24px] text-black">
